@@ -7,6 +7,19 @@ export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
 export const GET_EXPERIENCE = "GET_EXPERIENCE";
 export const MODIFY_EXPERIENCE = "GET_EXPERIENCE";
 export const DELETE_EXPERIENCE = "GET_EXPERIENCE";
+export const POST_LIST = "POST_LIST";
+export const NEW_POST = "NEW_POST";
+export const GET_POST = "GET_POST";
+export const MODIFY_POST = "MODIFY_POST";
+export const DELETE_POST = "DELETE_POST";
+export const JOBS_LIST = "JOBS_LIST";
+export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
+export const SEARCH_BY_COMPANY = "SEARCH_BY_COMPANY";
+export const SEARCH_BY_CATEGORY = "SEARCH_BY_CATEGORY";
+
+export const QUERY = "QUERY";
+export const COMPANY = "COMPANY";
+export const CATEGORY = "CATEGORY";
 
 const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZmRkMWM1NWU3ZTAwMThmODNjMTciLCJpYXQiOjE2OTk4NzIyMDksImV4cCI6MTcwMTA4MTgwOX0.CEioZrDUaNceaNFzixFssH01uUo-q0MlvWhg9uzuxc0`;
 
@@ -269,6 +282,185 @@ export const deleteExperienceAction = (userId, expId) => {
         dispatch({
           type: DELETE_EXPERIENCE,
           // payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const postListAction = () => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: POST_LIST,
+          payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const newPostAction = (post) => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: NEW_POST,
+          payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const getPostAction = (postId) => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + postId, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: GET_POST,
+          payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const modifyPostAction = (postId, post) => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + postId, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: MODIFY_POST,
+          payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const deletePostAction = (postId) => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + postId, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: DELETE_POST,
+          // payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+// export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
+export const searchAction = (type, query) => {
+  return async (dispatch) => {
+    let url = "https://strive-benchmark.herokuapp.com/api/jobs?";
+    let action = "";
+
+    switch (type) {
+      case QUERY:
+        url += "search=";
+        action = SEARCH_BY_QUERY;
+        break;
+      case COMPANY:
+        url += "company=";
+        action = SEARCH_BY_COMPANY;
+        break;
+      case CATEGORY:
+        url += "category=";
+        action = SEARCH_BY_CATEGORY;
+        break;
+      default:
+        return;
+    }
+
+    fetch(url + query, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: action,
+          payolad: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
