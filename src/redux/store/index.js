@@ -1,10 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-// import songsSearchReducer from "../reducers/songs_search";
-// import songReducer from "../reducers/song";
+import profileReducer from "../reducers/profile-reducer";
 
 const bigReducer = combineReducers({
-  //   search: songsSearchReducer,
-  //   song: songReducer,
+  profile: profileReducer,
 });
 
 const store = configureStore({
