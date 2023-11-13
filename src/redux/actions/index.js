@@ -1,4 +1,3 @@
-
 export const ALL_PROFILES = "ALL_PROFILES";
 export const MY_PROFILE = "MY_PROFILE";
 export const USER_PROFILE = "USER_PROFILE";
@@ -26,6 +25,33 @@ export const allProfilesAction = () => {
         console.log(data);
         dispatch({
           type: ALL_PROFILES,
+          payolad: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const myProfileAction = () => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch({
+          type: MY_PROFILE,
           payolad: data,
         });
       })
