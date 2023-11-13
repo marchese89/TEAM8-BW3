@@ -3,6 +3,7 @@ import profileReducer from "../reducers/profile-reducer";
 
 const bigReducer = combineReducers({
   profile: profileReducer,
+
 });
 
 const store = configureStore({

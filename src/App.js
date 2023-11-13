@@ -1,12 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import SidePart from "./components/SidePart";
+import MidSection from "./components/ProvaConMidSection";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <BrowserRouter>
-      <SidePart />
+        <NavBar/>
+        <MidSection/>
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index />

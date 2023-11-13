@@ -1,3 +1,5 @@
+import {useDispatch} from "react-redux";
+
 export const ALL_PROFILES = "ALL_PROFILES";
 export const MY_PROFILE = "MY_PROFILE";
 export const USER_PROFILE = "USER_PROFILE";
@@ -58,3 +60,5 @@ export const myProfileAction = () => {
       .catch((err) => console.log("ERRORE!", err));
   };
 };
+
+
