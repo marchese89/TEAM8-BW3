@@ -43,6 +43,8 @@ const Home = () => {
     return data.toLocaleDateString('it-IT', options);
   }
 
+  const [selected, setSelected] = useState(false);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -60,10 +62,12 @@ const Home = () => {
             <p style={{ fontSize: 0.7 + 'em' }}>ID: {post._id}</p>
             <hr />
             <div className='d-flex flex-wrap'  >
-              <p className='align-items-start align-text-center me-3'><HandThumbsUp className='align-center me-1' />Consiglia</p> {/* Stato per mettere like */}
-              <p className='align-items-start align-text-center me-3'><ChatText className='align-center me-1' />Commenta</p> {/* Stato per aprire sezione commenti  */}
-              <NavLink className='align-items-start align-text-center me-3'><Share className='align-center me-1' />Diffondi il post</NavLink>
-              <NavLink className='align-items-start align-text-center'><SendFill className='align-center me-1' />Invia</NavLink>
+              <p className='align-items-start align-text-center me-3 interazioni p-1 pb-1'><HandThumbsUp className='align-center me-1' />Consiglia</p> {/* Stato per mettere like */}
+              <p onClick={() => setSelected(!selected)}
+                // *DA FIXARE* Apreire solamente commenti del post selezionato 
+                style={{ border: selected ? /*Aggiungere componente  */ '3px solid red' : 'none' }} className='align-items-start align-text-center me-3 interazioni p-1 pb-1'><ChatText className='align-center me-1' />Commenta</p>
+              <p className='align-items-start align-text-center me-3 interazioni p-1 pb-1 '><Share className='align-center me-1' />Diffondi il post</p>
+              <p className='align-items-start align-text-center interazioni p-1 pb-1'><SendFill className='align-center me-1' />Invia</p>
             </div>
           </Col >
         </Row >
