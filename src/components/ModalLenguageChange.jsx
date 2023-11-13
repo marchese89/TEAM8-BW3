@@ -1,23 +1,40 @@
 import styled from "styled-components";
-import {Col, Container} from "react-bootstrap";
+import {Col, Container, FormControl, FormGroup, Modal, Row} from "react-bootstrap";
 import {Plus} from "react-bootstrap-icons";
+import {useState} from "react";
+
 
 const StyledP=styled.p`
 font-size: 0.8em;
 `
 const StyledDiv=styled.div`
   background: rgba(220, 241, 245, 0.24);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.37);
+`
 
+const StyledButton=styled.button`
+  :hover {
+    background: rgba(0, 255, 255, 0.37);
+  }
 `
 
 
 
 const ModalLanguage = ()=>{
+    const [show, setShow]=useState(true)
+    const [secondCol, setSecondCol]=useState(false)
+    const [selected, setSelected]=useState(true)
+    const [showChange, setShowChange]=useState(false)
+    const showLan=()=>{
+        setShow(false)
+        setSecondCol(true)
+    }
 
 
-
-
-
+    const hidePage = () => {
+      setSelected(false)
+        setShowChange(true)
+    }
 
     return(
         <div
@@ -54,9 +71,47 @@ const ModalLanguage = ()=>{
                         </Col>
                     </StyledDiv>
                     <Container className="modal-body">
-                        <h4>Language</h4>
-                        <button className={'btn rounded-pill border-dark py-1 px-3 mx-1'}>Italiano</button>
-                        <button className={'btn rounded-pill border-dark py-1 px-3 mx-1'}>Add Language <span><Plus/></span></button>
+                        <h4 className={'mb-4'}>Language</h4>
+                        {show &&(<Col className={'d-flex mb-3'}>
+                            <button className={'btn rounded-pill border-dark py-1 px-3 mx-1'}>Italiano</button>
+                            <button className={'btn rounded-pill border-dark py-1 px-3 mx-1'} id={'btnBlue'} onClick={
+                                showLan
+                            }>Add Language <span><Plus/></span></button>
+                        </Col>)}
+                        {
+                            secondCol && (
+                                <Row className={'d-flex'}>
+                                    {selected && (
+                                        <Col xl={6}>
+                                        <select onChange={hidePage} className="form-select"
+                                                 aria-label="Default select example">
+                                            <option selected>Open this select menu</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </Col>)
+                                    }
+                                        {
+                                            showChange && (
+                                               <Modal.Body className={'col-12'}>
+                                                <h5 className={'fs-6'}>Inizia a compilare il tuo profilo in Serbo</h5>
+                                                   <Col xl={12}>
+                                                   <FormGroup className={'d-flex'}>
+                                                       <FormControl placeholder={'name'}/>
+                                                       <FormControl placeholder={'Surname'}/>
+                                                       <div>
+
+                                                       </div>
+                                                   </FormGroup>
+                                                   </Col>
+                                               </Modal.Body>
+                                            )
+                                        }
+
+                                </Row>
+                            )
+                        }
                     </Container>
 
 
