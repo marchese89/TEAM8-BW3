@@ -25,7 +25,7 @@ export const allProfilesAction = () => {
         console.log(data);
         dispatch({
           type: ALL_PROFILES,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -52,7 +52,7 @@ export const myProfileAction = () => {
         console.log(data);
         dispatch({
           type: MY_PROFILE,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
