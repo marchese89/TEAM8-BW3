@@ -58,10 +58,12 @@ const AddComment = ({ postId }) => {
             });
         }
     }, [postId._id, comment]);
-
+    console.log(postId.image)
     return (
         <>
             <div className="my-3">
+
+
                 <Form onSubmit={sendComment}>
                     <Form.Group className="mb-2">
                         <Form.Label>Recensione</Form.Label>

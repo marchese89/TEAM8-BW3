@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 // import styled from 'styled-components';
 import { HandThumbsUp, ChatText, Share, SendFill } from 'react-bootstrap-icons';
-import CommentArea from './CommentArea';
+import AddComment from './AddComment';
 // import { useDispatch } from 'react-redux';
 // const StyledButton = styled.div
 
@@ -68,7 +68,7 @@ const Home = () => {
         < Row className='justify-content-center ' key={post._id}>
           <Col className=' d-sm border mb-2 mt-2 bg-white rounded col-md-6  pt-2' >
             {/* Avatar + Nome Utente  */}
-            <p style={{ fontSize: 1 + 'em', fontWeight: 'bold', margin: 0.2 + 'em' }}> <img src={post.user.image} className='rounded-circle' alt="avatar" width={20 + 'px'} /> {post.username}</p>
+            <p style={{ fontSize: 1 + 'em', fontWeight: 'bold', margin: 0.2 + 'em' }}> <img src={post.user.image} className='rounded-circle' alt="avatar" width={45 + 'px'} /> {post.username}</p>
 
             {/* Data di creazione del post con funzione per trasformare la stringa della data */}
             <p style={{ fontSize: 0.7 + 'em' }}>Creazione: {formatData(post.createdAt)}</p>
@@ -106,7 +106,7 @@ const Home = () => {
                 <div>
                   <img src={post.user.image} className='rounded-circle' alt="avatar" width={20 + 'px'} />
                 </div>
-                <CommentArea postId={selectedPostId} />
+                <AddComment postId={selectedPostId} />
               </>
             )}
           </Col >
