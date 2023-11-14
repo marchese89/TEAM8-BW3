@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { FormControl } from "react-bootstrap";
 import imguno from "../img/LogoLinkedin.jpg";
 import imgdue from "../img/icona-utente.jpg";
-import React, { useState } from "react";
+import styled from "styled-components";
 
 import {
   HouseDoorFill,
@@ -12,11 +12,14 @@ import {
   BellFill,
   Grid3x3GapFill,
   CaretDownFill,
+  Search,
 } from "react-bootstrap-icons";
 
 function NavBar() {
   const FormConrolStyle = {
-    maxWidth: "150px",
+    maxWidth: "250px",
+    color: "#EDF3F8",
+    marginRight: "100px",
   };
 
   const navItemStyle = {
@@ -25,17 +28,22 @@ function NavBar() {
     alignItems: "center",
     justifyContent: "center",
     marginLeft: "10px",
-    marginRight: "20px",
+    marginRight: "35px",
   };
-  const [isHovered, setIsHovered] = useState(false);
+  const iconSize = "25px";
 
-  const iconStyle = {
-    fontSize: "20px", // Imposta la dimensione delle icone
-    color: isHovered ? "black" : "gray", //Cambio colore
-  };
+  const StyledDiv = styled.div`
+    color: #666666;
+    font-size: ${iconSize};
+
+    &:hover {
+      cursor: pointer !important;
+      color: black !important;
+    }
+  `;
 
   const textStyle = {
-    fontSize: "15px", // Imposta la dimensione del testo
+    fontSize: "12px", // Imposta la dimensione del testo
   };
 
   return (
@@ -44,89 +52,77 @@ function NavBar() {
         <img
           src={imguno}
           alt="Logo Linkedin"
-          width="30"
-          height="30"
+          width="35"
+          height="35"
           style={{ marginLeft: "20px" }}
         />
       </Navbar.Brand>
-
       <FormControl
         type="search"
         placeholder="Cerca"
         className="serch"
         aria-label="Search"
-        style={FormConrolStyle}
+        style={{ ...FormConrolStyle, backgroundColor: "#EDF3F8" }}
       />
 
-      <Nav className="me-auto">
+      <Nav className="d-flex justify-content-center">
         <div className="d-flex">
           <div style={navItemStyle}>
-            <HouseDoorFill
-              style={iconStyle}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            />
+            <StyledDiv>
+              <HouseDoorFill />
+            </StyledDiv>
             <span style={textStyle}>Home</span>
           </div>
+
           <div style={navItemStyle}>
-            <PeopleFill
-              style={iconStyle}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            />
+            <StyledDiv>
+              <PeopleFill />
+            </StyledDiv>
             <span style={textStyle}>Rete</span>
           </div>
           <div style={navItemStyle}>
-            <i
-              className="fas fa-suitcase"
-              style={{ ...iconStyle, fontSize: "20px" }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            ></i>
+            <StyledDiv>
+              <i className="fas fa-suitcase"></i>
+            </StyledDiv>
             <span style={textStyle}>Lavoro</span>
           </div>
-          <div
-            style={navItemStyle}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <ChatRightDotsFill style={iconStyle} />
+          <div style={navItemStyle}>
+            <StyledDiv>
+              <ChatRightDotsFill />
+            </StyledDiv>
+
             <span style={textStyle}>Messagistica</span>
           </div>
-          <div
-            style={navItemStyle}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <BellFill style={iconStyle} />
+          <div style={navItemStyle}>
+            <StyledDiv>
+              <BellFill />
+            </StyledDiv>
+
             <span style={textStyle}>Notifiche</span>
           </div>
-          <div
-            style={navItemStyle}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <img src={imgdue} alt="Utente" width="28" height="28" />
+          <div style={navItemStyle}>
+            <img src={imgdue} alt="Utente" width="30" height="30" />
             <span style={textStyle}>
               Tu <CaretDownFill />
             </span>
           </div>
           <div style={navItemStyle}>
-            <Grid3x3GapFill
-              style={iconStyle}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            />
+            <StyledDiv>
+              <Grid3x3GapFill />
+            </StyledDiv>
+
             <span style={textStyle}>
               Per le aziende <CaretDownFill />
             </span>
           </div>
-          <div
-            style={navItemStyle}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <span style={textStyle}>
+          <div style={navItemStyle}>
+            <span
+              style={{
+                color: "#915907",
+                fontSize: "12px",
+                textDecoration: "underline",
+              }}
+            >
               Prova Premium per <br />0 EUR{" "}
             </span>
           </div>
