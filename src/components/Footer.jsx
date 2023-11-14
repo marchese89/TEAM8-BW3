@@ -5,6 +5,7 @@ import {
   GearFill,
   ShieldShaded,
 } from "react-bootstrap-icons";
+import Form from "react-bootstrap/Form";
 
 const Footer = () => {
   return (
@@ -52,6 +53,19 @@ const Footer = () => {
             Trasparenza sui contenuti consigliati <br /> Scopri di più sui
             contenuti consigliati
           </p>
+        </div>
+        <div className="footer-content ms-4">
+          <p>Seleziona lingua</p>
+          <Form.Select aria-label="Default select example">
+            <option>Italiano (Italiano)</option>
+            <option value="1">Italiano</option>
+            <option value="2">Inglese</option>
+            <option value="3">Francese</option>
+            <option value="3">Russo</option>
+            <option value="3">Spagnolo</option>
+            <option value="3">Portoghese</option>
+            <option value="3">Cinese</option>
+          </Form.Select>
         </div>
       </div>
     </footer>
