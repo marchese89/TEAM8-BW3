@@ -1,11 +1,11 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ProfiloTemp from "./components/ProfiloTemp";
+import Profile from "./components/Profile";
 
 
 function App() {
   return (
-    < ProfiloTemp />
+    < Profile />
   );
 }
 
