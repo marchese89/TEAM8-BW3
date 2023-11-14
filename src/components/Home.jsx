@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import styled from 'styled-components';
-import { HandThumbsUp, HandThumbsUpFill, ChatText, Share, SendFill } from 'react-bootstrap-icons';
+// import styled from 'styled-components';
+import { HandThumbsUp, ChatText, Share, SendFill } from 'react-bootstrap-icons';
 import CommentArea from './CommentArea';
-import { useDispatch } from 'react-redux';
-const StyledButton = styled.div
+// import { useDispatch } from 'react-redux';
+// const StyledButton = styled.div
 
 
 const Home = () => {
   const [postData, setPostData] = useState([]);
   const [selectedPostId, setSelectedPostId] = useState(false);
   const [liked, setLiked] = useState(false);
-  const [commentComponent, setCommentComponent] = useState(null);
+  // const [commentComponent, setCommentComponent] = useState(null);
 
   const fetchData = async () => {
     try {
