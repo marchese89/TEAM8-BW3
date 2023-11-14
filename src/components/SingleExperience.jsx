@@ -1,5 +1,6 @@
+import { differenceInMonths, format } from "date-fns";
 import styled from "styled-components";
-
+import { it } from "date-fns/locale";
 const SytledExperiece = styled.div`
   padding: 1em;
 `;
@@ -17,7 +18,34 @@ export default function SingleExperience({ handleShow, exp }) {
           </div>
           <div>{exp.company}</div>
           <div>
-            {exp.startDate} - {exp.endDate} - durata complessiva
+            {format(new Date(exp.startDate), "MMM yyyy", { locale: it })} -{" "}
+            {format(new Date(exp.endDate), "MMM yyyy", { locale: it })} -{" "}
+            {Math.floor(
+              differenceInMonths(
+                new Date(exp.endDate),
+                new Date(exp.startDate)
+              ) / 12
+            ) > 0
+              ? Math.floor(
+                  differenceInMonths(
+                    new Date(exp.endDate),
+                    new Date(exp.startDate)
+                  ) / 12
+                ) + " anni e"
+              : ""}{" "}
+            {differenceInMonths(
+              new Date(exp.endDate),
+              new Date(exp.startDate)
+            ) %
+              12 >
+            0
+              ? (differenceInMonths(
+                  new Date(exp.endDate),
+                  new Date(exp.startDate)
+                ) %
+                  12) +
+                " mesi"
+              : ""}
           </div>
         </div>
         <div>

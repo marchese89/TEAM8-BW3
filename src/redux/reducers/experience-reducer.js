@@ -17,19 +17,13 @@ export default function experiencesReducer(state = initialState, action) {
         ...state,
         experiences_list: action.payload,
       };
-    case ADD_EXPERIENCE:
-      return state;
 
     case GET_EXPERIENCE:
       return {
         ...state,
         current_experience: action.payload,
       };
-    case MODIFY_EXPERIENCE:
-      return {
-        ...state,
-        current_experience: action.payload,
-      };
+
     default:
       return state;
   }

@@ -50,7 +50,6 @@ export default function AddExperience({ mostra, set_mostra }) {
       description: experience_description,
       area: experience_area,
     });
-    dispatch(experienceListAction(my_profileFromReduxStore._id));
   };
 
   async function addExperienceAction(userId, exp) {
@@ -69,6 +68,7 @@ export default function AddExperience({ mostra, set_mostra }) {
     )
       .then((response) => {
         if (response.ok) {
+          dispatch(experienceListAction(my_profileFromReduxStore._id));
         } else {
           throw new Error("errore nella fetch");
         }

@@ -194,30 +194,28 @@ export default function ExperienceToModify() {
   }
 
   const modifyExperienceAction = (userId, expId, exp) => {
-    return async (dispatch) => {
-      fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/" +
-          userId +
-          "/experiences/" +
-          expId,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(exp),
+    fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/" +
+        userId +
+        "/experiences/" +
+        expId,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(exp),
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          dispatch(experienceListAction(my_profileFromReduxStore._id));
+        } else {
+          throw new Error("errore nella fetch");
         }
-      )
-        .then((response) => {
-          if (response.ok) {
-            dispatch(experienceListAction(my_profileFromReduxStore._id));
-          } else {
-            throw new Error("errore nella fetch");
-          }
-        })
-        .catch((err) => console.log("ERRORE!", err));
-    };
+      })
+      .catch((err) => console.log("ERRORE!", err));
   };
 
   return (
@@ -352,6 +350,7 @@ export default function ExperienceToModify() {
                   my_profileFromReduxStore._id,
                   selectedExp_id,
                   {
+                    role: selectedExp_role,
                     company: selectedExp_company,
                     startDate: selectedExp_startDate,
                     endDate: selectedExp_endDate,

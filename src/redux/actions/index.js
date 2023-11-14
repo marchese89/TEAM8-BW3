@@ -3,10 +3,7 @@ export const MY_PROFILE = "MY_PROFILE";
 export const USER_PROFILE = "USER_PROFILE";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const EXPERIENCES_LIST = "EXPERIENCES_LIST";
-export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
 export const GET_EXPERIENCE = "GET_EXPERIENCE";
-export const MODIFY_EXPERIENCE = "GET_EXPERIENCE";
-export const DELETE_EXPERIENCE = "GET_EXPERIENCE";
 export const POST_LIST = "POST_LIST";
 export const NEW_POST = "NEW_POST";
 export const GET_POST = "GET_POST";
@@ -161,43 +158,6 @@ export const experienceListAction = (userId) => {
   };
 };
 
-export const addExperienceAction = (userId, exp) => {
-  console.log("sono in add exp, id: " + userId + " exp: " + exp);
-  return async (dispatch) => {
-    fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/" +
-        userId +
-        "/experiences",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(exp),
-      }
-    )
-      .then((response) => {
-        console.log("response", response);
-        if (response.ok) {
-          console.log("response ok");
-          // return response.json();
-        } else {
-          console.log("risposta non ok");
-          throw new Error("errore nella fetch");
-        }
-      })
-      // .then((data) => {
-      //   console.log("di di add exp", data);
-      //   dispatch({
-      //     type: ADD_EXPERIENCE,
-      //     payload: data,
-      //   });
-      // })
-      .catch((err) => console.log("ERRORE!", err));
-  };
-};
-
 export const getExperienceAction = (userId, expId) => {
   return async (dispatch) => {
     fetch(
@@ -226,74 +186,6 @@ export const getExperienceAction = (userId, expId) => {
           payload: data,
         });
       })
-      .catch((err) => console.log("ERRORE!", err));
-  };
-};
-
-export const modifyExperienceAction = (userId, expId, exp) => {
-  return async (dispatch) => {
-    fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/" +
-        userId +
-        "/experiences/" +
-        expId,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(exp),
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("errore nella fetch");
-        }
-      })
-      .then((data) => {
-        dispatch({
-          type: MODIFY_EXPERIENCE,
-          payload: data,
-        });
-      })
-      .catch((err) => console.log("ERRORE!", err));
-  };
-};
-
-export const deleteExperienceAction = (userId, expId) => {
-  return async (dispatch) => {
-    fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/" +
-        userId +
-        "/experiences/" +
-        expId,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          dispatch({
-            type: DELETE_EXPERIENCE,
-            // payload: data,
-          });
-        } else {
-          throw new Error("errore nella fetch");
-        }
-      })
-      // .then((data) => {
-      //   dispatch({
-      //     type: DELETE_EXPERIENCE,
-      //     // payload: data,
-      //   });
-      // })
       .catch((err) => console.log("ERRORE!", err));
   };
 };
