@@ -10,6 +10,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   font-size: 14px;
+  color: grey;
 `;
 
 const Footer = () => {
@@ -44,20 +45,20 @@ const Footer = () => {
         </div>
         <div className="footer-content ms-4">
           <div className="d-flex">
-            <QuestionCircleFill className="mt-2 me-2 fs-5" />
+            <QuestionCircleFill className="mt-2 me-2 fs-5 text-dark" />
             <p>
               Domande? <br /> Visita il nostro Centro assistenza
             </p>
           </div>
           <div className="d-flex">
-            <GearFill className="mt-2 me-2 fs-5" />
+            <GearFill className="mt-2 me-2 fs-5 text-dark" />
             <p>
               Gestisci il tuo account e la tua privacy <br /> Vai alle
               impostazioni
             </p>
           </div>
           <div className="d-flex">
-            <ShieldShaded className="mt-2 me-2 fs-5" />
+            <ShieldShaded className="mt-2 me-2 fs-5 text-dark" />
             <p>
               Trasparenza sui contenuti consigliati <br /> Scopri di più sui
               contenuti consigliati
