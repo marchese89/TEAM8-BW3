@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export default function experiencesReducer(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
     case POST_LIST:
       return {
         ...state,

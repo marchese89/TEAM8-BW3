@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export default function profileReducer(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
     case ALL_PROFILES:
       return {
         ...state,

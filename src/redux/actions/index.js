@@ -21,7 +21,7 @@ export const QUERY = "QUERY";
 export const COMPANY = "COMPANY";
 export const CATEGORY = "CATEGORY";
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZmRkMWM1NWU3ZTAwMThmODNjMTciLCJpYXQiOjE2OTk4NzIyMDksImV4cCI6MTcwMTA4MTgwOX0.CEioZrDUaNceaNFzixFssH01uUo-q0MlvWhg9uzuxc0`;
+export const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZmRkMWM1NWU3ZTAwMThmODNjMTciLCJpYXQiOjE2OTk4NzIyMDksImV4cCI6MTcwMTA4MTgwOX0.CEioZrDUaNceaNFzixFssH01uUo-q0MlvWhg9uzuxc0`;
 
 export const allProfilesAction = () => {
   return async (dispatch) => {
@@ -42,7 +42,7 @@ export const allProfilesAction = () => {
       .then((data) => {
         dispatch({
           type: ALL_PROFILES,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -68,7 +68,7 @@ export const myProfileAction = () => {
       .then((data) => {
         dispatch({
           type: MY_PROFILE,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -94,7 +94,7 @@ export const userProfileAction = (idUser) => {
       .then((data) => {
         dispatch({
           type: USER_PROFILE,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -121,7 +121,7 @@ export const updateProfileAction = (user) => {
       .then((data) => {
         dispatch({
           type: UPDATE_PROFILE,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -152,7 +152,7 @@ export const experienceListAction = (userId) => {
       .then((data) => {
         dispatch({
           type: EXPERIENCES_LIST,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -160,6 +160,7 @@ export const experienceListAction = (userId) => {
 };
 
 export const addExperienceAction = (userId, exp) => {
+  console.log("sono in add exp, id: " + userId + " exp: " + exp);
   return async (dispatch) => {
     fetch(
       "https://striveschool-api.herokuapp.com/api/profile/" +
@@ -175,18 +176,22 @@ export const addExperienceAction = (userId, exp) => {
       }
     )
       .then((response) => {
+        console.log("response", response);
         if (response.ok) {
-          return response.json();
+          console.log("response ok");
+          // return response.json();
         } else {
+          console.log("risposta non ok");
           throw new Error("errore nella fetch");
         }
       })
-      .then((data) => {
-        dispatch({
-          type: ADD_EXPERIENCE,
-          // payolad: data,
-        });
-      })
+      // .then((data) => {
+      //   console.log("di di add exp", data);
+      //   dispatch({
+      //     type: ADD_EXPERIENCE,
+      //     payload: data,
+      //   });
+      // })
       .catch((err) => console.log("ERRORE!", err));
   };
 };
@@ -216,7 +221,7 @@ export const getExperienceAction = (userId, expId) => {
       .then((data) => {
         dispatch({
           type: GET_EXPERIENCE,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -249,7 +254,7 @@ export const modifyExperienceAction = (userId, expId, exp) => {
       .then((data) => {
         dispatch({
           type: MODIFY_EXPERIENCE,
-          // payolad: data,
+          // payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -281,7 +286,7 @@ export const deleteExperienceAction = (userId, expId) => {
       .then((data) => {
         dispatch({
           type: DELETE_EXPERIENCE,
-          // payolad: data,
+          // payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -307,7 +312,7 @@ export const postListAction = () => {
       .then((data) => {
         dispatch({
           type: POST_LIST,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -334,7 +339,7 @@ export const newPostAction = (post) => {
       .then((data) => {
         dispatch({
           type: NEW_POST,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -360,7 +365,7 @@ export const getPostAction = (postId) => {
       .then((data) => {
         dispatch({
           type: GET_POST,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -387,7 +392,7 @@ export const modifyPostAction = (postId, post) => {
       .then((data) => {
         dispatch({
           type: MODIFY_POST,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -413,7 +418,7 @@ export const deletePostAction = (postId) => {
       .then((data) => {
         dispatch({
           type: DELETE_POST,
-          // payolad: data,
+          // payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -460,7 +465,7 @@ export const searchAction = (type, query) => {
       .then((data) => {
         dispatch({
           type: action,
-          payolad: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));

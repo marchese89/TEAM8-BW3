@@ -3,7 +3,7 @@ export default function ExperienceModal() {
     <div
       className="modal fade"
       id="exampleModal"
-      tabindex="-1"
+      // tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >

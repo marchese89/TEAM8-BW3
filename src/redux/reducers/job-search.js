@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export default function experiencesReducer(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
     case JOBS_LIST:
       return {
         ...state,
