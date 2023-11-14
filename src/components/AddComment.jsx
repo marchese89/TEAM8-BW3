@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import AllComments from './AllComments';
+import React, { useState, useEffect } from "react";
+import { Form, Button } from "react-bootstrap";
+import AllComments from "./AllComments";
 
 const AddComment = ({ postId }) => {
-    const [newComment, setNewComment] = useState('');
+    console.log("post id: ", postId);
     const [comment, setComment] = useState({
-        comment: '',
+        comment: "",
         rate: 1,
         elementId: postId,
     });
     const [loading, setLoading] = useState(false);
 
-    const fetchComments = async () => {
-    };
+    const fetchComments = async () => { };
 
     const sendComment = async (e) => {
         e.preventDefault();
@@ -20,49 +19,43 @@ const AddComment = ({ postId }) => {
             setLoading(true);
 
             if (!comment.comment.trim()) {
-                throw new Error('Il campo del commento non può essere vuoto');
+                throw new Error("Il campo del commento non può essere vuoto");
             }
-
-            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/`, {
-                method: 'POST',
-                headers: {
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNDFhMmRkOTllZjAwMTlhMDkyZmUiLCJpYXQiOjE2OTk5NTUxMDYsImV4cCI6MTcwMTE2NDcwNn0.f58KFLVbD0YqxkSlMLUZlkjHQLFooaODPwT0pwQg4jQ",
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    comment: comment.comment,
-                    rate: comment.rate,
-                    postId: comment.elementId,
-                }),
-            });
+            console.log("commento", comment);
+            const response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/comments/`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization:
+                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNDFhMmRkOTllZjAwMTlhMDkyZmUiLCJpYXQiOjE2OTk5NTUxMDYsImV4cCI6MTcwMTE2NDcwNn0.f58KFLVbD0YqxkSlMLUZlkjHQLFooaODPwT0pwQg4jQ",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ ...comment, elementId: postId }),
+                }
+            );
 
             if (!response.ok) {
-                throw new Error(`Errore nella richiesta POST: ${response.status} ${response.statusText}`);
+                throw new Error(
+                    `Errore nella richiesta POST: ${response.status} ${response.statusText}`
+                );
             }
 
-            setNewComment('');
             await fetchComments();
         } catch (error) {
-            console.error('Errore durante la richiesta POST dei commenti:', error.message);
+            console.error(
+                "Errore durante la richiesta POST dei commenti:",
+                error.message
+            );
         } finally {
             setLoading(false);
         }
     };
 
-    useEffect(() => {
-        if (postId._id !== comment.elementId) {
-            setComment({
-                ...comment,
-                elementId: postId._id,
-            });
-        }
-    }, [postId._id, comment]);
-    console.log(comment.comment)
+    console.log(comment.comment);
     return (
         <>
             <div className="my-3">
-
-
                 <Form onSubmit={sendComment}>
                     <Form.Group className="mb-2">
                         <Form.Label>Commento</Form.Label>
@@ -70,7 +63,9 @@ const AddComment = ({ postId }) => {
                             type="text"
                             placeholder="Inserisci qui il testo"
                             value={comment.comment}
-                            onChange={(e) => setComment({ ...comment, comment: e.target.value })}
+                            onChange={(e) =>
+                                setComment({ ...comment, comment: e.target.value })
+                            }
                         />
                     </Form.Group>
                     <Form.Group className="mb-2">
@@ -88,7 +83,7 @@ const AddComment = ({ postId }) => {
                         </Form.Control>
                     </Form.Group>
                     <Button variant="primary" type="submit" disabled={loading}>
-                        {loading ? 'Invio...' : 'Invia'}
+                        {loading ? "Invio..." : "Invia"}
                     </Button>
                 </Form>
             </div>
