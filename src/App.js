@@ -1,11 +1,20 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Profile from "./components/Profile";
-
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
 function App() {
   return (
-    < Profile />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/Home" element={<Home />} />
+          <Route index />
+          {/* element={}  */}
+          {/* <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
