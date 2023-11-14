@@ -80,6 +80,7 @@ const ProfileStyled = styled.div`
     height: 30px;
 }
 
+
 .certificationinfoTEXT {
     font-size: 0.9em;
     font-weight: 600;
@@ -230,14 +231,14 @@ export default function Profile() {
             <Col className="col-6">
               <div className="containercertification mt-4">
                 <div className="certificationinfo">
-                  <Image src="https://images.pexels.com/photos/1162361/pexels-photo-1162361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  <Image src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
                     className="certificationinfoIMG" />
-                  <p className="certificationinfoTEXT mt-1">Route 66 Network</p>
+                  <p className="certificationinfoTEXT mt-1">Epicode Network</p>
                 </div>
                 <div className="certificationinfo">
-                  <Image src="https://images.pexels.com/photos/430205/pexels-photo-430205.jpeg"
+                  <Image src="https://www.acousticbulletin.com/wp-content/uploads/2020/01/70-706384_illuminati-clipart-all-illuminati-logo-png.png"
                     className="certificationinfoIMG" />
-                  <p className="certificationinfoTEXT mt-1">Slack Network</p>
+                  <p className="certificationinfoTEXT mt-1">Illuminati Network</p>
                 </div>
               </div>
             </Col>
