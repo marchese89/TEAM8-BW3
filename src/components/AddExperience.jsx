@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Form, FormControl, InputGroup } from "react-bootstrap";
@@ -7,21 +6,6 @@ import { experienceListAction } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { token } from "../redux/actions";
 
-const StyledAddExperience = styled.div`
-  font-size: 16px;
-  border: 1px solid #eae8e5;
-  padding: 0.5em;
-  width: 22em;
-  #qualifica {
-    width: 10em;
-  }
-  .modal {
-    width: 30em;
-  }
-  .fs-7 {
-    font-size: 0.5em;
-  }
-`;
 export default function AddExperience({ mostra, set_mostra }) {
   const [experience_role, setExperienceRole] = useState("");
   const [experience_company, setExperienceCompany] = useState("");
@@ -77,98 +61,93 @@ export default function AddExperience({ mostra, set_mostra }) {
   }
 
   return (
-    <StyledAddExperience className="d-flex flex-column rounded-3 text-black">
-      <Modal show={mostra} onHide={handleClose} className="modal">
-        <Modal.Header closeButton>
-          <Modal.Title className="fs-5 modal-title">
-            Aggiungi esperienza
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+    <Modal show={mostra} onHide={handleClose} className="modal">
+      <Modal.Header closeButton>
+        <Modal.Title className="fs-5 modal-title">
+          Aggiungi esperienza
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <InputGroup className="d-flex flex-column w-100">
+          <Form.Label className="fs-7">
+            * Indica che il campo è obbligatorio
+          </Form.Label>
+        </InputGroup>
+        <InputGroup className="d-flex flex-column w-100">
+          <Form.Label>Qualifica*</Form.Label>
+        </InputGroup>
+        <Form.Control
+          required
+          value={experience_role}
+          onChange={(e) => {
+            setExperienceRole(e.target.value);
+          }}
+        ></Form.Control>
+        <InputGroup className="d-flex flex-column w-100">
+          <Form.Label>Nome azienda*</Form.Label>
+        </InputGroup>
+        <Form.Control
+          required
+          value={experience_company}
+          onChange={(e) => {
+            setExperienceCompany(e.target.value);
+          }}
+        ></Form.Control>
+        <InputGroup>
           <InputGroup className="d-flex flex-column w-100">
-            <Form.Label className="fs-7">
-              * Indica che il campo è obbligatorio
-            </Form.Label>
+            <Form.Label>Data inizio</Form.Label>
           </InputGroup>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label>Qualifica*</Form.Label>
-          </InputGroup>
-          <Form.Control
-            required
-            value={experience_role}
+          <input
+            type="date"
+            id="dateStartInput"
+            name="dateStartInput"
+            value={experience_startDate}
             onChange={(e) => {
-              setExperienceRole(e.target.value);
+              setExperienceStartDate(e.target.value);
             }}
-          ></Form.Control>
+            className="w-100"
+          />
           <InputGroup className="d-flex flex-column w-100">
-            <Form.Label>Nome azienda*</Form.Label>
+            <Form.Label>Data fine</Form.Label>
           </InputGroup>
-          <Form.Control
-            required
-            value={experience_company}
+          <input
+            type="date"
+            id="dateEndInput"
+            name="dateEndInput"
+            value={experience_endDate}
             onChange={(e) => {
-              setExperienceCompany(e.target.value);
+              setExperienceEndDate(e.target.value);
             }}
-          ></Form.Control>
-          <InputGroup>
-            <InputGroup className="d-flex flex-column w-100">
-              <Form.Label>Data inizio</Form.Label>
-            </InputGroup>
-            <input
-              type="date"
-              id="dateStartInput"
-              name="dateStartInput"
-              value={experience_startDate}
-              onChange={(e) => {
-                setExperienceStartDate(e.target.value);
-              }}
-              className="w-100"
-            />
-            <InputGroup className="d-flex flex-column w-100">
-              <Form.Label>Data fine</Form.Label>
-            </InputGroup>
-            <input
-              type="date"
-              id="dateEndInput"
-              name="dateEndInput"
-              value={experience_endDate}
-              onChange={(e) => {
-                setExperienceEndDate(e.target.value);
-              }}
-              className="w-100"
-            />
-          </InputGroup>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label>Area</Form.Label>
-          </InputGroup>
-          <FormControl
-            required
-            value={experience_area}
-            onChange={(e) => {
-              setExperienceArea(e.target.value);
-            }}
-          ></FormControl>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label>Descrizione</Form.Label>
-          </InputGroup>
-          <FormControl
-            as="textarea"
-            required
-            value={experience_description}
-            onChange={(e) => {
-              setExperienceDescription(e.target.value);
-            }}
-          ></FormControl>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            className="save-button rounded-5 px-3"
-            onClick={saveExperience}
-          >
-            Salva
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </StyledAddExperience>
+            className="w-100"
+          />
+        </InputGroup>
+        <InputGroup className="d-flex flex-column w-100">
+          <Form.Label>Area</Form.Label>
+        </InputGroup>
+        <FormControl
+          required
+          value={experience_area}
+          onChange={(e) => {
+            setExperienceArea(e.target.value);
+          }}
+        ></FormControl>
+        <InputGroup className="d-flex flex-column w-100">
+          <Form.Label>Descrizione</Form.Label>
+        </InputGroup>
+        <FormControl
+          as="textarea"
+          required
+          value={experience_description}
+          onChange={(e) => {
+            setExperienceDescription(e.target.value);
+          }}
+        ></FormControl>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button className="save-button rounded-5 px-3" onClick={saveExperience}>
+          Salva
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
