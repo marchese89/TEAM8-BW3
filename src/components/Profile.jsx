@@ -20,6 +20,7 @@ const ProfileStyled = styled.div`
     border: 1px solid #dbdbdb;
     border-radius: 15px;
     overflow: hidden;
+    background-color: #fff;
 }
 
 .cover {
