@@ -25,6 +25,8 @@ const ModalLanguage = ()=>{
     const [secondCol, setSecondCol]=useState(false)
     const [selected, setSelected]=useState(true)
     const [showChange, setShowChange]=useState(false)
+    const [language, setlanguage]=useState('')
+
     const showLan=()=>{
         setShow(false)
         setSecondCol(true)
@@ -35,6 +37,13 @@ const ModalLanguage = ()=>{
       setSelected(false)
         setShowChange(true)
     }
+
+const selecteLan=(value)=>{
+        setlanguage(value)
+
+}
+
+
 
     return(
         <div
@@ -85,25 +94,27 @@ const ModalLanguage = ()=>{
                                         <Col xl={6}>
                                         <select onChange={hidePage} className="form-select"
                                                  aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option>Choose a Language</option>
+                                            <option  value="italiano">Italiano</option>
+                                            <option  value="ceco">Ceco</option>
+                                            <option  value="Inglese">Inglese</option>
+                                            <option  value="Serbo">Serbo</option>
                                         </select>
                                     </Col>)
                                     }
                                         {
                                             showChange && (
                                                <Modal.Body className={'col-12'}>
-                                                <h5 className={'fs-6'}>Inizia a compilare il tuo profilo in Serbo</h5>
+                                                <h5 className={'fs-6'}>Inizia a compilare il tuo profilo in {}</h5>
                                                    <Col xl={12}>
                                                    <FormGroup className={'d-flex'}>
                                                        <FormControl placeholder={'name'}/>
                                                        <FormControl placeholder={'Surname'}/>
-                                                       <div>
 
-                                                       </div>
                                                    </FormGroup>
+                                                       <div className={'mt-3'}>
+                                                       <FormControl as={'textarea'} rows={3}/>
+                                                       </div>
                                                    </Col>
                                                </Modal.Body>
                                             )

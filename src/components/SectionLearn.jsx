@@ -2,36 +2,14 @@ import {Button, Card, Col, Row} from "react-bootstrap";
 import styled from "styled-components";
 
 
-
-
 const StyledH4=styled.h4` font-size: 0.8em;
  margin-top: 3%;
  margin-left: 3%;
 `
-
-
-// const MyVideoContainer = styled.div`
-//  border-radius: 5px;
-//  border: 1px solid rgba(128, 128, 128, 0.51);
-//  height: 80px;
-//  width: 150px;
-// `
-
-
-// const MyContainer=styled.div`
-//  display: flex;
-//  align-items: center;
-//  font-weight: bold;
-// `
-
-
-
-
 const SectionLearn=()=>{
 
-
     return(
-        <Row>
+        <Row className={'mt-2'}>
             <Card>
                 <StyledH4 className={'mx-4 my-2'}> Learning </StyledH4>
                 <div>
