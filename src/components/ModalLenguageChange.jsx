@@ -25,7 +25,7 @@ const ModalLanguage = ()=>{
     const [secondCol, setSecondCol]=useState(false)
     const [selected, setSelected]=useState(true)
     const [showChange, setShowChange]=useState(false)
-    const [language, setlanguage]=useState('')
+
 
     const showLan=()=>{
         setShow(false)
@@ -38,10 +38,6 @@ const ModalLanguage = ()=>{
         setShowChange(true)
     }
 
-const selecteLan=(value)=>{
-        setlanguage(value)
-
-}
 
 
 
