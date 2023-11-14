@@ -5,14 +5,21 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Form, FormControl, InputGroup } from "react-bootstrap";
 import AddExperience from "./AddExperience";
-import { useDispatch } from "react-redux";
-import { allProfilesAction, myProfileAction } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  experienceListAction,
+  getExperienceAction,
+  myProfileAction,
+} from "../redux/actions";
+import SingleExperience from "./SingleExperience";
+import { token } from "../redux/actions";
+import { format } from "date-fns";
 
 const StyledDiv = styled.div`
   font-size: 16px;
   border: 1px solid #eae8e5;
   padding: 0.5em;
-  width: 22em;
+  width: 35em;
   .icon {
     width: 1.3em;
     height: 1.3em;
@@ -76,75 +83,193 @@ const StyledDiv = styled.div`
   }
 `;
 
+const StyledSpan = styled.span`
+  color: #5e5e5e !important;
+  padding: 0.4em;
+  &:hover {
+    cursor: pointer !important;
+    background-color: #ebebeb;
+  }
+`;
+
 export default function ExperienceToModify() {
   const [show, setShow] = useState(false);
   const [showAddExperience, setShowAddExperience] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [selectedDateStart, setSelectedDateStart] = useState(
-    new Date().toISOString()
-  );
-  const [selectedDateEnd, setSelectedDateEnd] = useState(
-    new Date().toISOString()
-  );
-
-  const handleDateStartChange = (event) => {
-    setSelectedDateStart(event.target.value);
+  const handleShow = (idExp) => {
+    dispatch(getExperienceAction(my_profileFromReduxStore._id, idExp));
+    setShow(true);
   };
-  const handleDateEndChange = (event) => {
-    setSelectedDateEnd(event.target.value);
-  };
+
+  const [selectedExp_id, setselectedExp_id] = useState("");
+  const [selectedExp_role, setselectedExp_role] = useState("");
+  const [selectedExp_company, setselectedExp_company] = useState("");
+  const [selectedExp_startDate, setselectedExp_startDate] = useState("");
+  const [selectedExp_endDate, setselectedExp_endDate] = useState("");
+  const [selectedExp_description, setselectedExp_description] = useState("");
+  const [selectedExp_area, setselectedExp_area] = useState("");
+
   const [showDrop, setshowDrop] = useState(false);
 
   const dispatch = useDispatch();
 
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
+
+  const myExperiencesFromReduxStore = useSelector(
+    (state) => state.experience.experiences_list
+  );
+
+  const currentExperienceFromReduxStore = useSelector(
+    (state) => state.experience.current_experience
+  );
+
   useEffect(() => {
+    if (currentExperienceFromReduxStore !== null) {
+      setselectedExp_id(currentExperienceFromReduxStore._id);
+      setselectedExp_role(currentExperienceFromReduxStore.role);
+      setselectedExp_company(currentExperienceFromReduxStore.company);
+      // console.log(
+      //   format(new Date(currentExperienceFromReduxStore.endDate), "yyyy-MM-dd")
+      // );
+
+      setselectedExp_startDate(
+        new Date(currentExperienceFromReduxStore.startDate)
+      );
+
+      setselectedExp_endDate(new Date(currentExperienceFromReduxStore.endDate));
+      setselectedExp_description(currentExperienceFromReduxStore.description);
+
+      setselectedExp_area(currentExperienceFromReduxStore.area);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentExperienceFromReduxStore]);
+
+  useEffect(() => {
+    //prendiamo le informazioni del nostro profilo
     dispatch(myProfileAction());
     // dispatch(allProfilesAction());
-  });
+  }, []);
+
+  useEffect(() => {
+    if (my_profileFromReduxStore !== undefined) {
+      dispatch(experienceListAction(my_profileFromReduxStore._id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [my_profileFromReduxStore]);
+
+  async function deleteExp() {
+    setShow(false);
+    // dispatch(
+    //   deleteExperienceAction(my_profileFromReduxStore._id, selectedExp_id)
+    // );
+    console.log("chiamo la funzione per eliminare l'esperienza");
+    deleteExperience(my_profileFromReduxStore._id, selectedExp_id);
+  }
+
+  async function deleteExperience(userId, expId) {
+    fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/" +
+        userId +
+        "/experiences/" +
+        expId,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          dispatch(experienceListAction(my_profileFromReduxStore._id));
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  }
+
+  const modifyExperienceAction = (userId, expId, exp) => {
+    return async (dispatch) => {
+      fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/" +
+          userId +
+          "/experiences/" +
+          expId,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(exp),
+        }
+      )
+        .then((response) => {
+          if (response.ok) {
+            dispatch(experienceListAction(my_profileFromReduxStore._id));
+          } else {
+            throw new Error("errore nella fetch");
+          }
+        })
+        .catch((err) => console.log("ERRORE!", err));
+    };
+  };
 
   return (
     <>
       <StyledDiv className="d-flex flex-column rounded-3 text-black">
-        <div className="d-flex justify-content-between position-relative">
-          <h4>Esperienza</h4>
-          <div id="buttons" className="d-flex flex-column">
-            <Plus
-              className="icon fs-1"
-              id="plus"
-              onClick={() => {
-                setshowDrop(!showDrop);
-              }}
-            />
-            <div className="icon position-relative" id="pencil">
-              {/* <Pencil id="pencil" /> */}
+        <div className="d-flex flex-column">
+          <div className="d-flex justify-content-between position-relative">
+            <h4>Esperienza</h4>
+            <div id="buttons" className="d-flex flex-column">
+              <Plus
+                className="icon fs-1"
+                id="plus"
+                onClick={() => {
+                  setshowDrop(!showDrop);
+                }}
+              />
+              {/* <div className="icon position-relative" id="pencil">
               <i
                 className="fas fa-pencil-alt position-absolute"
                 onClick={handleShow}
               ></i>
+            </div> */}
             </div>
+            {showDrop && (
+              <div className="drop-down position-absolute">
+                <ul className="list-unstyled d-flex flex-column mb-0">
+                  <li
+                    onClick={() => {
+                      setshowDrop(false);
+                      setShowAddExperience(true);
+                    }}
+                  >
+                    <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
+                    posizione lavorativa
+                  </li>
+                  <li>
+                    <i className="fas fa-calendar-alt"></i>&nbsp;&nbsp;Aggiungi
+                    pausa lavorativa
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
-          {showDrop && (
-            <div className="drop-down position-absolute">
-              <ul className="list-unstyled d-flex flex-column mb-0">
-                <li
-                  onClick={() => {
-                    setshowDrop(false);
-                    setShowAddExperience(true);
-                  }}
-                >
-                  <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
-                  posizione lavorativa
-                </li>
-                <li>
-                  <i className="fas fa-calendar-alt"></i>&nbsp;&nbsp;Aggiungi
-                  pausa lavorativa
-                </li>
-              </ul>
-            </div>
-          )}
+          {myExperiencesFromReduxStore.map((exp) => {
+            return (
+              <SingleExperience
+                handleShow={handleShow}
+                exp={exp}
+                key={exp._id}
+              />
+            );
+          })}
         </div>
         <Modal show={show} onHide={handleClose} className="modal">
           <Modal.Header closeButton>
@@ -156,11 +281,17 @@ export default function ExperienceToModify() {
             <InputGroup className="d-flex flex-column w-100">
               <Form.Label>Qualifica*</Form.Label>
             </InputGroup>
-            <Form.Control></Form.Control>
+            <Form.Control
+              value={selectedExp_role}
+              onChange={(e) => setselectedExp_role(e.target.value)}
+            ></Form.Control>
             <InputGroup className="d-flex flex-column w-100">
               <Form.Label>Azienda</Form.Label>
             </InputGroup>
-            <Form.Control></Form.Control>
+            <Form.Control
+              value={selectedExp_company}
+              onChange={(e) => setselectedExp_company(e.target.value)}
+            ></Form.Control>
             <InputGroup>
               <InputGroup className="d-flex flex-column w-100">
                 <Form.Label>Data inizio</Form.Label>
@@ -169,8 +300,12 @@ export default function ExperienceToModify() {
                 type="date"
                 id="dateStartInput"
                 name="dateStartInput"
-                value={selectedDateStart}
-                onChange={handleDateStartChange}
+                value={
+                  selectedExp_startDate !== ""
+                    ? format(new Date(selectedExp_startDate), "yyyy-MM-dd")
+                    : ""
+                }
+                onChange={(e) => setselectedExp_startDate(e.target.value)}
                 className="w-100"
               />
               <InputGroup className="d-flex flex-column w-100">
@@ -180,24 +315,51 @@ export default function ExperienceToModify() {
                 type="date"
                 id="dateEndInput"
                 name="dateEndInput"
-                value={selectedDateEnd}
-                onChange={handleDateEndChange}
+                value={
+                  selectedExp_endDate !== ""
+                    ? format(new Date(selectedExp_endDate), "yyyy-MM-dd")
+                    : ""
+                }
+                onChange={(e) => setselectedExp_endDate(e.target.value)}
                 className="w-100"
               />
             </InputGroup>
             <InputGroup className="d-flex flex-column w-100">
               <Form.Label>Area</Form.Label>
             </InputGroup>
-            <FormControl></FormControl>
+            <FormControl
+              value={selectedExp_area}
+              onChange={(e) => setselectedExp_area(e.target.value)}
+            ></FormControl>
             <InputGroup className="d-flex flex-column w-100">
               <Form.Label>Descrizione</Form.Label>
             </InputGroup>
-            <FormControl as="textarea"></FormControl>
+            <FormControl
+              as="textarea"
+              value={selectedExp_description}
+              onChange={(e) => setselectedExp_description(e.target.value)}
+            ></FormControl>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="d-flex justify-content-between">
+            <StyledSpan className="rounded-3" onClick={deleteExp}>
+              Elimina Esperienza
+            </StyledSpan>
             <Button
               className="save-button rounded-5 px-3"
-              onClick={handleClose}
+              onClick={() => {
+                setShow(false);
+                modifyExperienceAction(
+                  my_profileFromReduxStore._id,
+                  selectedExp_id,
+                  {
+                    company: selectedExp_company,
+                    startDate: selectedExp_startDate,
+                    endDate: selectedExp_endDate,
+                    description: selectedExp_description,
+                    area: selectedExp_area,
+                  }
+                );
+              }}
             >
               Salva
             </Button>

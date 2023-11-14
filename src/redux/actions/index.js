@@ -130,32 +130,34 @@ export const updateProfileAction = (user) => {
 
 export const experienceListAction = (userId) => {
   return async (dispatch) => {
-    fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/" +
-        userId +
-        "/experiences",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("errore nella fetch");
+    if (userId !== undefined) {
+      fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/" +
+          userId +
+          "/experiences",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      })
-      .then((data) => {
-        dispatch({
-          type: EXPERIENCES_LIST,
-          payload: data,
-        });
-      })
-      .catch((err) => console.log("ERRORE!", err));
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("errore nella fetch");
+          }
+        })
+        .then((data) => {
+          dispatch({
+            type: EXPERIENCES_LIST,
+            payload: data,
+          });
+        })
+        .catch((err) => console.log("ERRORE!", err));
+    }
   };
 };
 
@@ -254,7 +256,7 @@ export const modifyExperienceAction = (userId, expId, exp) => {
       .then((data) => {
         dispatch({
           type: MODIFY_EXPERIENCE,
-          // payload: data,
+          payload: data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
@@ -278,17 +280,20 @@ export const deleteExperienceAction = (userId, expId) => {
     )
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          dispatch({
+            type: DELETE_EXPERIENCE,
+            // payload: data,
+          });
         } else {
           throw new Error("errore nella fetch");
         }
       })
-      .then((data) => {
-        dispatch({
-          type: DELETE_EXPERIENCE,
-          // payload: data,
-        });
-      })
+      // .then((data) => {
+      //   dispatch({
+      //     type: DELETE_EXPERIENCE,
+      //     // payload: data,
+      //   });
+      // })
       .catch((err) => console.log("ERRORE!", err));
   };
 };
