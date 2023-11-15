@@ -322,7 +322,6 @@ export const deletePostAction = (postId) => {
   };
 };
 
-// export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
 export const searchAction = (type, query) => {
   return async (dispatch) => {
     let url = "https://strive-benchmark.herokuapp.com/api/jobs?";
@@ -345,12 +344,8 @@ export const searchAction = (type, query) => {
         return;
     }
 
-    fetch(url + query, {
+    fetch(url + query + "&limit=20", {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
     })
       .then((response) => {
         if (response.ok) {
@@ -363,6 +358,28 @@ export const searchAction = (type, query) => {
         dispatch({
           type: action,
           payload: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
+  };
+};
+
+export const jobsListAction = () => {
+  return async (dispatch) => {
+    fetch("https://strive-benchmark.herokuapp.com/api/jobs?limit=30", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        dispatch({
+          type: JOBS_LIST,
+          payload: data.data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
