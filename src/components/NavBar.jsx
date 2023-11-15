@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { FormControl } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
 import imguno from "../img/LogoLinkedin.jpg";
 import imgdue from "../img/icona-utente.jpg";
 import styled from "styled-components";
@@ -14,6 +14,9 @@ import {
   Grid3x3GapFill,
   CaretDownFill,
 } from "react-bootstrap-icons";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   color: #666666;
@@ -21,7 +24,7 @@ const StyledDiv = styled.div`
 
   .FormControlStyle {
     max-width: 290px;
-    color: #edf3f8;
+    color: black;
     background-color: #edf3f8;
   }
 
@@ -48,11 +51,24 @@ const StyledDiv = styled.div`
   .textStyle {
     font-size: 11px;
   }
+  .select-search {
+    width: 13em;
+  }
 `;
 
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchType, setsearchType] = useState("QUERY");
+  const [search, setSearch] = useState();
+  const dispatch = useDispatch();
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      dispatch(searchAction(searchType, search));
+    }
+  };
+
   return (
     <StyledDiv>
       <Navbar
@@ -68,14 +84,30 @@ function NavBar() {
             style={{ marginLeft: "120px" }}
           />
         </Navbar.Brand>
+
         <FormControl
           type="search"
           placeholder="Cerca"
-          className="FormControlStyle"
+          className="FormControlStyle me-2"
           aria-label="Search"
-          style={{ backgroundColor: "#EDF3F8", marginRight: "100px" }}
+          onKeyDown={handleKeyPress}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
 
+        {location.pathname === "/jobs" && (
+          <Form.Select
+            className="select-search"
+            onChange={(e) => {
+              setsearchType(e.target.value);
+            }}
+            value={searchType}
+          >
+            <option value={QUERY}>Ricerca Semplice</option>
+            <option value={COMPANY}>Azienda</option>
+            <option value={CATEGORY}>Categoria</option>
+          </Form.Select>
+        )}
         <Nav className="d-flex justify-content-center">
           <div className="d-flex">
             <div
