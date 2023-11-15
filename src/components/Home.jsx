@@ -5,6 +5,12 @@ import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
 import AddComment from "./AddComment";
 import NewPost from "./AddNewPost";
 const ProfileStyled = styled.div`
+li{
+  font-weight: 700 !important;
+}
+li p{
+  font-weight: normal
+}
   .interazioni {
     padding: 0.6em !important;
   }
@@ -231,18 +237,16 @@ const Home = () => {
               <Col className="col-3 bg-white border container-fluid rounded" >
               <h1>LinkedIn Notizie</h1>
 
-<li className="mt-3"><h6>Effetto ATP Finals per Torino<br/>
-6 ore fa • 105 lettori</h6></li>
-<li className="mt-3"><h6>L'immobiliare è sempre più tech <br/>
-6 ore fa</h6></li>
-<li className="mt-3"><h6>La 'Sindrome della Papera' ci riguarda <br/>
-4 ore fa • 110 lettori</h6></li>
-<li className="mt-3"><h6>Manuale di critica costruttiva <br/>
-5 ore fa</h6></li>
-<li className="mt-3"><h6>Assunzioni e nuovi premi in Ferrari <br/>
-7 ore fa • 437 lettori</h6></li>
-
-Show more
+<li className="mt-3">Effetto ATP Finals per Torino<br/>
+<p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>6 ore fa • 105 lettori</p></li>
+<li className="mt-3">L'immobiliare è sempre più tech <br/>
+<p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>6 ore fa</p></li>
+<li className="mt-3">La 'Sindrome della Papera' ci riguarda <br/>
+<p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>4 ore fa • 110 lettori</p></li>
+<li className="mt-3">Manuale di critica costruttiva <br/>
+<p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>5 ore fa</p></li>
+<li className="mt-3">Assunzioni e nuovi premi in Ferrari <br/>
+<p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>7 ore fa • 437 lettori</p></li>
               </Col>
           </Row>
         </Container>
