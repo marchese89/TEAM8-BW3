@@ -228,18 +228,18 @@ const Home = () => {
             </Row>
           ))}
               </Col>
-              <Col className="col-3 bg-white border rounded" lg={{offset:1}}>
+              <Col className="col-3 bg-white border container-fluid rounded" >
               <h1>LinkedIn Notizie</h1>
 
-<li className="mt-3"><h6>Effetto ATP Finals per Torino
+<li className="mt-3"><h6>Effetto ATP Finals per Torino<br/>
 6 ore fa • 105 lettori</h6></li>
-<li className="mt-3"><h6>L'immobiliare è sempre più tech
+<li className="mt-3"><h6>L'immobiliare è sempre più tech <br/>
 6 ore fa</h6></li>
-<li className="mt-3"><h6>La 'Sindrome della Papera' ci riguarda
+<li className="mt-3"><h6>La 'Sindrome della Papera' ci riguarda <br/>
 4 ore fa • 110 lettori</h6></li>
-<li className="mt-3"><h6>Manuale di critica costruttiva
+<li className="mt-3"><h6>Manuale di critica costruttiva <br/>
 5 ore fa</h6></li>
-<li className="mt-3"><h6>Assunzioni e nuovi premi in Ferrari
+<li className="mt-3"><h6>Assunzioni e nuovi premi in Ferrari <br/>
 7 ore fa • 437 lettori</h6></li>
 
 Show more
