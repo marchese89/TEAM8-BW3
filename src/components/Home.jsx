@@ -21,6 +21,10 @@ const ProfileStyled = styled.div`
   #p {
     padding-top: 5em;
   }
+  .margine{
+    margin-top: 8em !important;
+    margin-bottom:8em !important;
+  }
 `;
 
 const Home = () => {
@@ -84,13 +88,14 @@ const Home = () => {
   return (
     <>
       <ProfileStyled>
+
         {loading && (
           <Row className="py-5 my-5 text-center justify-content-center">
             <Spinner animation="border " variant="primary" />
           </Row>
         )}
 
-        <Container className="w-75">
+        <Container className="w-75 margine mt-5">
           {/* Map dei post  */}
           {postData.map((post) => (
             <Row className="justify-content-center " key={post._id}>
