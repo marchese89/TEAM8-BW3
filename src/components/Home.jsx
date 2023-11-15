@@ -3,7 +3,6 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 // import styled from 'styled-components';
 import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
 import AddComment from "./AddComment";
-import Footer from "./Footer";
 // import { useDispatch } from 'react-redux';
 // const StyledButton = styled.div
 
@@ -172,7 +171,6 @@ const Home = () => {
           </Row>
         ))}
       </Container>
-      <Footer className="m-5" />
     </>
   );
 };
