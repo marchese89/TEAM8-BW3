@@ -2,8 +2,14 @@ import { differenceInMonths, format } from "date-fns";
 import styled from "styled-components";
 import { it } from "date-fns/locale";
 import { useLocation } from "react-router-dom";
+import placeholder from "../img/img_placeholder.jpg";
+
 const SytledExperiece = styled.div`
   padding: 1em;
+  .exp-img {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export default function SingleExperience({ handleShow, exp }) {
@@ -12,7 +18,11 @@ export default function SingleExperience({ handleShow, exp }) {
     <SytledExperiece>
       <div className="d-flex">
         <div>
-          <img src="https://placedog.net/50" alt=""></img>
+          <img
+            src={exp.image !== undefined ? exp.image : placeholder}
+            className="exp-img"
+            alt=""
+          ></img>
         </div>
         <div className="ms-3 flex-grow-1">
           <div>

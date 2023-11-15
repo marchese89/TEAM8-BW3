@@ -20,6 +20,7 @@ const StyledDiv = styled.div`
   border: 1px solid #eae8e5;
   padding: 0.5em;
   width: 35em;
+  margin-top: 6em;
   .icon {
     width: 1.3em;
     height: 1.3em;
@@ -207,24 +208,29 @@ export default function ExperienceToModify() {
   async function uploadExpImage(userId, expId) {
     if (selectedFile) {
       const formData = new FormData();
-      formData.append("file", selectedFile);
+      formData.append("experience", selectedFile);
       fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           body: formData,
         }
       )
         .then((response) => {
           if (response.ok) {
-            return response.json();
+            console.log("upload ok");
+            dispatch(experienceListAction(userId));
           } else {
+            console.log("upload NO");
             throw new Error("errore nell'upload'");
           }
         })
-        .then(() => {
-          dispatch(experienceListAction(userId));
-        })
+        // .then(() => {
+
+        // })
         .catch((err) => console.log("ERRORE!", err));
     }
   }
