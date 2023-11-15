@@ -50,7 +50,10 @@ function NavBar() {
   // const iconSize = "25px";
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary justify-content-center">
+    <Navbar
+      expand="lg"
+      className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
+    >
       <Navbar.Brand href="#home">
         <img
           src={imguno}

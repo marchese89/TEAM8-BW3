@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Form, FormControl, InputGroup } from "react-bootstrap";
+import { Form, FormControl, Image, InputGroup } from "react-bootstrap";
 import AddExperience from "./AddExperience";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -81,6 +81,10 @@ const StyledDiv = styled.div`
       padding: 0;
     }
   }
+  .image-preview {
+    ${"" /* width: 3em; */}
+    height: 30em;
+  }
 `;
 
 const StyledSpan = styled.span`
@@ -111,6 +115,12 @@ export default function ExperienceToModify() {
   const [selectedExp_area, setselectedExp_area] = useState("");
 
   const [showDrop, setshowDrop] = useState(false);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
   const dispatch = useDispatch();
 
@@ -194,6 +204,31 @@ export default function ExperienceToModify() {
       .catch((err) => console.log("ERRORE!", err));
   }
 
+  async function uploadExpImage(userId, expId) {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("errore nell'upload'");
+          }
+        })
+        .then(() => {
+          dispatch(experienceListAction(userId));
+        })
+        .catch((err) => console.log("ERRORE!", err));
+    }
+  }
+
   const modifyExperienceAction = (userId, expId, exp) => {
     fetch(
       "https://striveschool-api.herokuapp.com/api/profile/" +
@@ -211,7 +246,8 @@ export default function ExperienceToModify() {
     )
       .then((response) => {
         if (response.ok) {
-          dispatch(experienceListAction(my_profileFromReduxStore._id));
+          uploadExpImage(userId, expId);
+          // dispatch(experienceListAction(userId));
         } else {
           throw new Error("errore nella fetch");
         }
@@ -338,6 +374,18 @@ export default function ExperienceToModify() {
               value={selectedExp_description}
               onChange={(e) => setselectedExp_description(e.target.value)}
             ></FormControl>
+            <div className="d-flex flex-column w-100 mt-3 align-items-center">
+              <Form.Label>Immagine</Form.Label>
+              {selectedFile && (
+                <Image
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Anteprima immagine"
+                  className="image-preview w-25 my-2 rounded-2"
+                  fluid
+                />
+              )}
+              <Form.Control type="file" onChange={handleFileChange} />
+            </div>
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-between">
             <StyledSpan className="rounded-3" onClick={deleteExp}>
