@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { allProfilesAction, myProfileAction } from "../redux/actions";
 
 import React from "react";
+import { Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
@@ -10,6 +12,11 @@ import styled from "styled-components";
 import Experience from "./Experience";
 
 const ProfileStyled = styled.div`
+  
+  .marginesagerato {
+    margin-top: 120px !important;
+  }
+  
   .paddingzero {
     padding: 0 !important;
   }
@@ -190,10 +197,49 @@ export default function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedImage, setSelectedImage] = useState(null);
+
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  // const handleImage = (e) => {
+  //   const file = e.target.files[0];
+  //   setSelectedImage(file);
+  // };
+
+  // const handleImageUpload = () => {
+  //   if (selectedImage) {
+  //     const formData = new FormData();
+  //     formData.append('profileImage', selectedImage);
+
+  //     fetch('', {
+  //       method: 'POST',
+  //       body: formData,
+  //     })
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         console.log('img ok', data);
+
+  //       })
+  //       .catch(error => {
+  //         console.error('err', error);
+  //       });
+
+
+  //     closeModal();
+  //   }
+  // };
+
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5">
+        <Container className="mt-5 marginesagerato">
           <div className="containermain">
             <div className="containercover">
               <Image
@@ -204,7 +250,16 @@ export default function Profile() {
             <Image
               src="https://images.pexels.com/photos/14941556/pexels-photo-14941556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               className="avatar"
+            // style={{ cursor: 'pointer' }}
+            // onClick={openModal}
             />
+
+            {/* <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+              <input type="file" onChange={handleImage} accept="image/*" />
+              <button onClick={handleImageUpload}>Conferma</button>
+              <button onClick={closeModal}>Annulla</button>
+            </Modal> */}
+
             <Row>
               <Col className="col-6">
                 <div className="containerinfo mt-4">
@@ -267,7 +322,10 @@ export default function Profile() {
           </div>
         </Container>
       </ProfileStyled>
-      <Experience />
+      <div className="d-flex flex-row justify-content-center my-5">
+        <Experience />
+      </div>
+
     </>
   );
 }
