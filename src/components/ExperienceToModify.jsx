@@ -151,6 +151,7 @@ export default function ExperienceToModify() {
     //prendiamo le informazioni del nostro profilo
     dispatch(myProfileAction());
     // dispatch(allProfilesAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

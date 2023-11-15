@@ -44,7 +44,7 @@ const AllComments = ({ postId }) => {
                     <Spinner animation="border " variant="primary" /></Row>}
             <div>
                 {comments.map((comment) => (
-                    <li key={comment._id}>{comment.comment}</li>
+                    <li key={comment._id}>{comment.comment} ~ {comment.rate}</li>
                 ))}
             </div>
         </>
