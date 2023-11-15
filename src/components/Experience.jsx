@@ -1,10 +1,11 @@
 import { Plus } from "react-bootstrap-icons";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { experienceListAction, myProfileAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   font-size: 16px;
@@ -76,6 +77,25 @@ export default function Experience() {
   const myExperiencesFromReduxStore = useSelector(
     (state) => state.experience.experiences_list
   );
+
+  const dispatch = useDispatch();
+
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
+
+  useEffect(() => {
+    //prendiamo le informazioni del nostro profilo
+    dispatch(myProfileAction());
+    // dispatch(allProfilesAction());
+  }, []);
+
+  useEffect(() => {
+    if (my_profileFromReduxStore !== undefined) {
+      dispatch(experienceListAction(my_profileFromReduxStore._id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [my_profileFromReduxStore]);
 
   return (
     <>
