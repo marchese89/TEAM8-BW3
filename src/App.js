@@ -5,14 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import ExperienceToModify from "./components/ExperienceToModify";
+import Jobs from "./components/Jobs";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Home" element={<Home />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {/* element={}  */}
+          <Route path="/jobs/" element={<Jobs />} />
           <Route path="in/me/" element={<Profile />} />
           <Route
             path="in/me/details/experience/"

@@ -92,7 +92,12 @@ function NavBar() {
           </div>
           <div style={navItemStyle}>
             <StyledDiv>
-              <i className="fas fa-suitcase"></i>
+              <i
+                className="fas fa-suitcase"
+                onClick={() => {
+                  navigate("/jobs/");
+                }}
+              ></i>
             </StyledDiv>
             <span style={textStyle}>Lavoro</span>
           </div>

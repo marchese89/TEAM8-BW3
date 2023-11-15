@@ -6,16 +6,16 @@ import {
 } from "../actions";
 
 const initialState = {
-  jobs: [],
-  job_search: [],
+  jobs_list: null,
+  job_search: null,
 };
 
-export default function experiencesReducer(state = initialState, action) {
+export default function jobsReducer(state = initialState, action) {
   switch (action.type) {
     case JOBS_LIST:
       return {
         ...state,
-        jobs: action.payload,
+        jobs_list: action.payload,
       };
     case SEARCH_BY_QUERY:
       return {
