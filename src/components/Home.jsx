@@ -14,11 +14,11 @@ const ProfileStyled = styled.div`
   background-color: rgb(222, 220, 220);
   cursor: pointer;
 }
-/* Aggiungi questo stile al tuo foglio di stile */
+
 #top {
   position: sticky;
   top: 0;
-  z-index: 1000; /* o qualsiasi valore necessario */
+  z-index: 1000; 
 }
 #p{
   padding-top: 5em;
@@ -89,7 +89,7 @@ const Home = () => {
     <>
       <ProfileStyled>
         <div id='top'>
-          <MyNavbar sticky="top" />
+          <MyNavbar />
         </div>
 
         {loading &&
