@@ -1,11 +1,13 @@
 import { differenceInMonths, format } from "date-fns";
 import styled from "styled-components";
 import { it } from "date-fns/locale";
+import { useLocation } from "react-router-dom";
 const SytledExperiece = styled.div`
   padding: 1em;
 `;
 
 export default function SingleExperience({ handleShow, exp }) {
+  const location = useLocation();
   return (
     <SytledExperiece>
       <div className="d-flex">
@@ -48,14 +50,16 @@ export default function SingleExperience({ handleShow, exp }) {
               : ""}
           </div>
         </div>
-        <div>
-          <div className="icon position-relative" id="pencil">
-            <i
-              className="fas fa-pencil-alt position-absolute"
-              onClick={() => handleShow(exp._id)}
-            ></i>
+        {location.pathname === "/in/me/details/experience/" && (
+          <div>
+            <div className="icon position-relative" id="pencil">
+              <i
+                className="fas fa-pencil-alt position-absolute"
+                onClick={() => handleShow(exp._id)}
+              ></i>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </SytledExperiece>
   );
