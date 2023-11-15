@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Row, Spinner } from 'react-bootstrap';
 const AllComments = ({ postId }) => {
     const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     const fetchComments = async () => {
         try {
+            setLoading(true)
             console.log('ID del post per la richiesta dei commenti:', postId);
 
-            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments?postId=${postId}`, {
+            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments?${postId}`, {
                 method: 'GET',
                 headers: {
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZmRkMWM1NWU3ZTAwMThmODNjMTciLCJpYXQiOjE2OTk4NzIyMDksImV4cCI6MTcwMTA4MTgwOX0.CEioZrDUaNceaNFzixFssH01uUo-q0MlvWhg9uzuxc0",
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNDFhMmRkOTllZjAwMTlhMDkyZmUiLCJpYXQiOjE2OTk5NTUxMDYsImV4cCI6MTcwMTE2NDcwNn0.f58KFLVbD0YqxkSlMLUZlkjHQLFooaODPwT0pwQg4jQ",
                     'Content-Type': 'application/json',
                 },
             });
@@ -24,6 +28,9 @@ const AllComments = ({ postId }) => {
         } catch (error) {
             console.error('Errore durante la richiesta GET dei commenti:', error.message);
         }
+        finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -31,11 +38,16 @@ const AllComments = ({ postId }) => {
     }, [postId]);
 
     return (
-        <div>
-            {comments.map((comment) => (
-                <li key={comment._id}>{comment.comment}</li>
-            ))}
-        </div>
+        <>
+            {loading &&
+                <Row className='mb-2 text-center justify-content-center'>
+                    <Spinner animation="border " variant="primary" /></Row>}
+            <div>
+                {comments.map((comment) => (
+                    <li key={comment._id}>{comment.comment}</li>
+                ))}
+            </div>
+        </>
     );
 };
 
