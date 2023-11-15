@@ -357,7 +357,7 @@ export const searchAction = (type, query) => {
       .then((data) => {
         dispatch({
           type: action,
-          payload: data,
+          payload: data.data,
         });
       })
       .catch((err) => console.log("ERRORE!", err));
