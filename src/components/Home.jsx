@@ -125,8 +125,13 @@ const Home = () => {
           </Row>
         )}
 
-        <Container className="w-75 margine mt-5">
-        <div className="text-center ">
+        <Container className=" margine mt-5">
+        <Row>
+        <Col className="col-2 bg-white border rounded" >
+          <h2>Aggiungere Profilo con redux</h2>
+        </Col>
+        
+        {/* <div className="text-center "> */}
 
         {/* <NewPost
           show={showModal}
@@ -134,11 +139,13 @@ const Home = () => {
           onPost={handlePost}  
         /> */}
 
-        </div>
+        {/* </div> */}
+        {/* Centrare col  */}
+              <Col className=" d-sm mb-2 mt-2 rounded col-md-6  pt-2 justify-content-center">
           {/* Map dei post  */}
           {postData.map((post) => (
             <Row className="justify-content-center " key={post._id}>
-              <Col className=" d-sm border mb-2 mt-2 bg-white rounded col-md-6  pt-2">
+              <Col className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2" lg={{offset:1}}>
                 {/* Avatar + Nome Utente  */}
                 <p
                   style={{
@@ -229,9 +236,27 @@ const Home = () => {
                     <AddComment postId={selectedPostId} />
                   </>
                 )}
-              </Col>
+                </Col>
             </Row>
           ))}
+              </Col>
+              <Col className="col-3 bg-white border rounded" lg={{offset:1}}>
+              <h1>LinkedIn Notizie</h1>
+
+<li className="mt-3"><h6>Effetto ATP Finals per Torino
+6 ore fa • 105 lettori</h6></li>
+<li className="mt-3"><h6>L'immobiliare è sempre più tech
+6 ore fa</h6></li>
+<li className="mt-3"><h6>La 'Sindrome della Papera' ci riguarda
+4 ore fa • 110 lettori</h6></li>
+<li className="mt-3"><h6>Manuale di critica costruttiva
+5 ore fa</h6></li>
+<li className="mt-3"><h6>Assunzioni e nuovi premi in Ferrari
+7 ore fa • 437 lettori</h6></li>
+
+Show more
+              </Col>
+          </Row>
         </Container>
       </ProfileStyled>
     </>
