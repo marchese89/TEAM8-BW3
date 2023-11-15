@@ -4,6 +4,7 @@ import { FormControl } from "react-bootstrap";
 import imguno from "../img/LogoLinkedin.jpg";
 import imgdue from "../img/icona-utente.jpg";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import {
   HouseDoorFill,
@@ -12,10 +13,21 @@ import {
   BellFill,
   Grid3x3GapFill,
   CaretDownFill,
-  Search,
 } from "react-bootstrap-icons";
 
+const StyledDiv = styled.div`
+  color: #666666;
+  font-size: 25px;
+
+  &:hover {
+    cursor: pointer !important;
+    color: black !important;
+  }
+`;
+
 function NavBar() {
+  const navigate = useNavigate();
+
   const FormConrolStyle = {
     maxWidth: "250px",
     color: "#EDF3F8",
@@ -29,22 +41,13 @@ function NavBar() {
     justifyContent: "center",
     marginLeft: "10px",
     marginRight: "35px",
+    cursor: "pointer",
   };
-  const iconSize = "25px";
-
-  const StyledDiv = styled.div`
-    color: #666666;
-    font-size: ${iconSize};
-
-    &:hover {
-      cursor: pointer !important;
-      color: black !important;
-    }
-  `;
 
   const textStyle = {
     fontSize: "12px", // Imposta la dimensione del testo
   };
+  // const iconSize = "25px";
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary justify-content-center">
@@ -69,7 +72,11 @@ function NavBar() {
         <div className="d-flex">
           <div style={navItemStyle}>
             <StyledDiv>
-              <HouseDoorFill />
+              <HouseDoorFill
+                onClick={() => {
+                  navigate("/");
+                }}
+              />
             </StyledDiv>
             <span style={textStyle}>Home</span>
           </div>
@@ -101,7 +108,15 @@ function NavBar() {
             <span style={textStyle}>Notifiche</span>
           </div>
           <div style={navItemStyle}>
-            <img src={imgdue} alt="Utente" width="30" height="30" />
+            <img
+              src={imgdue}
+              alt="Utente"
+              width="30"
+              height="30"
+              onClick={() => {
+                navigate("/in/me");
+              }}
+            />
             <span style={textStyle}>
               Tu <CaretDownFill />
             </span>
