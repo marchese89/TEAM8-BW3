@@ -6,6 +6,7 @@ import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceListAction, myProfileAction } from "../redux/actions";
+import { Row } from "react-bootstrap";
 
 const StyledDiv = styled.div`
   font-size: 16px;
@@ -100,7 +101,8 @@ export default function Experience() {
 
   return (
     <>
-      <StyledDiv className="d-flex flex-column rounded-3 text-black">
+      <Row className='justify-content-center'>
+      <StyledDiv className="d-flex flex-column rounded-3 mt-5 text-black " >
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between position-relative">
             <h4>Esperienza</h4>
@@ -150,6 +152,7 @@ export default function Experience() {
           </div>
         </div>
       </StyledDiv>
+        </Row>
 
       {showAddExperience && (
         <AddExperience

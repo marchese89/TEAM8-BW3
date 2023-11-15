@@ -11,12 +11,15 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
   font-size: 14px;
   color: grey;
+  .margine{
+    margin-top: 8em
+  }
 `;
 
 const Footer = () => {
   return (
     <StyledDiv>
-      <footer className="footer-container d-flex justify-content-center ">
+      <footer className="footer-container d-flex justify-content-center margine ">
         <div className="footer-content ">
           <p>Informazioni</p>
           <p>LInee guida della community</p>

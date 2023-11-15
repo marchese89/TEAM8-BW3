@@ -13,18 +13,6 @@ const ProfileStyled = styled.div`
     cursor: pointer;
   }
   
-  #top {
-    position: sticky;
-    top: 0;
-    z-index: 1000; 
-  }
-  #p {
-    padding-top: 5em;
-  }
-  .margine{
-    margin-top: 8em !important;
-    margin-bottom:8em !important;
-  }
 `;
 
 const Home = () => {
