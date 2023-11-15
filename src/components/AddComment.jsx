@@ -4,7 +4,6 @@ import AllComments from './AllComments';
 
 const AddComment = ({ postId }) => {
     const [newComment, setNewComment] = useState('');
-    const [rating, setRating] = useState(null);
     const [comment, setComment] = useState({
         comment: '',
         rate: 1,
@@ -31,9 +30,9 @@ const AddComment = ({ postId }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    comment: newComment,
-                    rate: rating,
-                    postId: postId,
+                    comment: comment.comment,
+                    rate: comment.rate,
+                    postId: comment.elementId,
                 }),
             });
 
@@ -58,13 +57,15 @@ const AddComment = ({ postId }) => {
             });
         }
     }, [postId._id, comment]);
-
+    console.log(comment.comment)
     return (
         <>
             <div className="my-3">
+
+
                 <Form onSubmit={sendComment}>
                     <Form.Group className="mb-2">
-                        <Form.Label>Recensione</Form.Label>
+                        <Form.Label>Commento</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Inserisci qui il testo"
