@@ -1,15 +1,14 @@
-import {Col} from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import CardRight from "./CardRight";
+import CardEvent from "./CardEventSide";
 
-const CardLeft = ()=>{
+const CardLeft = () => {
+  return (
+    <Col xl={2} className={"mx-3 px-2"}>
+      <CardRight />
+      <CardEvent />
+    </Col>
+  );
+};
 
-
-    return(
-        <Col xl={2} className={'mx-3 px-2'}>
-            <CardRight/>
-        </Col>
-
-    )
-}
-
-export default CardLeft
+export default CardLeft;

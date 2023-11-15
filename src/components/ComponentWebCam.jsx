@@ -8,26 +8,32 @@ const StyledFoto = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  .retakeB {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const WebcamComponent = () => {
   // aggiunta cattura immagine
   const WebcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
-  const [photo, setPhoto] = useState([
-    {
-      photo: "",
-    },
-  ]);
+  const [photo, setPhoto] = useState({
+    photo: imgSrc,
+  });
+  const [show, setShow] = useState(true);
 
   const captur = useCallback(() => {
     const imageSrc = WebcamRef.current.getScreenshot();
     console.log(imageSrc);
     setImgSrc(imageSrc);
+    setShow(false);
   }, [WebcamRef]);
 
   const retake = () => {
     setImgSrc(null);
+    setShow(true);
   };
 
   const save = () => {
@@ -46,13 +52,18 @@ const WebcamComponent = () => {
             <Webcam width={500} height={500} ref={WebcamRef} />
           </div>
         )}
+        {imgSrc && (
+          <div className="retakeB">
+            <Button onClick={save}>Save</Button>
+            <Button onClick={retake}>Retake</Button>
+          </div>
+        )}
         <div className="buttonG mb-4">
-          <Button onClick={captur} className="btn">
-            Scatta
-          </Button>
-
-          <Button onClick={retake}>Retake</Button>
-          <Button onClick={save}>Save</Button>
+          {show && (
+            <Button onClick={captur} className="btn">
+              Scatta
+            </Button>
+          )}
         </div>
       </Container>
     </StyledFoto>
