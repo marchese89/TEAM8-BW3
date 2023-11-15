@@ -71,12 +71,13 @@ const Footer = () => {
           <Form.Select aria-label="Default select example">
             <option>Italiano (Italiano)</option>
             <option value="1">Italiano</option>
-            <option value="2">Inglese</option>
-            <option value="3">Francese</option>
-            <option value="3">Russo</option>
-            <option value="3">Spagnolo</option>
-            <option value="3">Portoghese</option>
-            <option value="3">Cinese</option>
+            <option value="2">Napoletano</option>
+            <option value="3">Inglese</option>
+            <option value="4">Francese</option>
+            <option value="5">Russo</option>
+            <option value="6">Spagnolo</option>
+            <option value="7">Portoghese</option>
+            <option value="8">Cinese</option>
           </Form.Select>
         </div>
       </footer>
