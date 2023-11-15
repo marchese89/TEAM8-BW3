@@ -17,136 +17,137 @@ import {
 
 const StyledDiv = styled.div`
   color: #666666;
-  font-size: 25px;
 
   &:hover {
     cursor: pointer !important;
     color: black !important;
+  }
+
+  .FormControlStyle {
+    max-width: 290px;
+    color: #edf3f8;
+    background-color: #edf3f8;
+  }
+
+  .navItemStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 35px;
+    cursor: pointer;
+    font-size: 25px;
+  }
+
+  .navItemStyle:hover::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    bottom: -5px;
+  }
+  .textStyle {
+    font-size: 13px;
   }
 `;
 
 function NavBar() {
   const navigate = useNavigate();
 
-  const FormConrolStyle = {
-    maxWidth: "250px",
-    color: "#EDF3F8",
-    marginRight: "100px",
-  };
-
-  const navItemStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "10px",
-    marginRight: "35px",
-    cursor: "pointer",
-  };
-
-  const textStyle = {
-    fontSize: "12px", // Imposta la dimensione del testo
-  };
-  // const iconSize = "25px";
-
   return (
-    <Navbar
-      expand="lg"
-      className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
-    >
-      <Navbar.Brand href="#home">
-        <img
-          src={imguno}
-          alt="Logo Linkedin"
-          width="35"
-          height="35"
-          style={{ marginLeft: "20px" }}
+    <StyledDiv>
+      <Navbar
+        expand="lg"
+        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
+      >
+        <Navbar.Brand href="#home">
+          <img
+            src={imguno}
+            alt="Logo Linkedin"
+            width="35"
+            height="35"
+            style={{ marginLeft: "120px" }}
+          />
+        </Navbar.Brand>
+        <FormControl
+          type="search"
+          placeholder="Cerca"
+          className="FormControlStyle"
+          aria-label="Search"
+          style={{ backgroundColor: "#EDF3F8", marginRight: "100px" }}
         />
-      </Navbar.Brand>
-      <FormControl
-        type="search"
-        placeholder="Cerca"
-        className="serch"
-        aria-label="Search"
-        style={{ ...FormConrolStyle, backgroundColor: "#EDF3F8" }}
-      />
 
-      <Nav className="d-flex justify-content-center">
-        <div className="d-flex">
-          <div style={navItemStyle}>
-            <StyledDiv>
+        <Nav className="d-flex justify-content-center">
+          <div className="d-flex">
+            <div className="navItemStyle">
               <HouseDoorFill
                 onClick={() => {
                   navigate("/");
                 }}
               />
-            </StyledDiv>
-            <span style={textStyle}>Home</span>
-          </div>
 
-          <div style={navItemStyle}>
-            <StyledDiv>
+              <span className="textStyle">Home</span>
+            </div>
+
+            <div className="navItemStyle">
               <PeopleFill />
-            </StyledDiv>
-            <span style={textStyle}>Rete</span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
+
+              <span className="textStyle">Rete</span>
+            </div>
+            <div className="navItemStyle">
               <i className="fas fa-suitcase"></i>
-            </StyledDiv>
-            <span style={textStyle}>Lavoro</span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
+
+              <span className="textStyle">Lavoro</span>
+            </div>
+            <div className="navItemStyle">
               <ChatRightDotsFill />
-            </StyledDiv>
 
-            <span style={textStyle}>Messagistica</span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
+              <span className="textStyle">Messagistica</span>
+            </div>
+            <div className="navItemStyle">
               <BellFill />
-            </StyledDiv>
 
-            <span style={textStyle}>Notifiche</span>
-          </div>
-          <div style={navItemStyle}>
-            <img
-              src={imgdue}
-              alt="Utente"
-              width="30"
-              height="30"
-              onClick={() => {
-                navigate("/in/me");
-              }}
-            />
-            <span style={textStyle}>
-              Tu <CaretDownFill />
-            </span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
+              <span className="textStyle">Notifiche</span>
+            </div>
+            <div className="navItemStyle">
+              <img
+                src={imgdue}
+                alt="Utente"
+                width="28"
+                height="28"
+                onClick={() => {
+                  navigate("/in/me");
+                }}
+              />
+              <span className="textStyle">
+                Tu <CaretDownFill />
+              </span>
+            </div>
+            <div className="navItemStyle">
               <Grid3x3GapFill />
-            </StyledDiv>
 
-            <span style={textStyle}>
-              Per le aziende <CaretDownFill />
-            </span>
+              <span className="textStyle">
+                Per le aziende <CaretDownFill />
+              </span>
+            </div>
+            <div className="navItemStyle">
+              <span
+                style={{
+                  color: "#915907",
+                  fontSize: "12px",
+                  textDecoration: "underline",
+                }}
+              >
+                Prova Premium per <br />0 EUR{" "}
+              </span>
+            </div>
           </div>
-          <div style={navItemStyle}>
-            <span
-              style={{
-                color: "#915907",
-                fontSize: "12px",
-                textDecoration: "underline",
-              }}
-            >
-              Prova Premium per <br />0 EUR{" "}
-            </span>
-          </div>
-        </div>
-      </Nav>
-    </Navbar>
+        </Nav>
+      </Navbar>
+    </StyledDiv>
   );
 }
 
