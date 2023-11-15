@@ -9,29 +9,25 @@ import styled from "styled-components";
 import SidePart from "./SidePart";
 import CardLeft from "./CardHomeRight";
 
-
 const ProfileStyled = styled.div`
-  @media screen and (min-width: 1200px){
-    
-    
-    
-    .paddingzero{
+  @media screen and (min-width: 1200px) {
+    .paddingzero {
       padding: 0 !important;
     }
-    
+
     .containermain {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #dbdbdb;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: white;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
       width: 60%;
-      }
+    }
     .cover {
       object-fit: cover;
-      object-position: 0 ;
+      object-position: 0;
       width: 100%;
     }
     .containercover {
@@ -184,14 +180,14 @@ const ProfileStyled = styled.div`
     .buttonothertext {
       font-weight: 500;
     }
-    
-    .exp{
+
+    .exp {
       line-height: 100%;
     }
   }
-  
-  @media screen and (min-width: 1000px) and (max-width: 1200px){
-    .paddingzero{
+
+  @media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .paddingzero {
       padding: 0 !important;
     }
 
@@ -207,7 +203,7 @@ const ProfileStyled = styled.div`
     }
     .cover {
       object-fit: cover;
-      object-position: 0 ;
+      object-position: 0;
       width: 100%;
     }
     .containercover {
@@ -361,16 +357,12 @@ const ProfileStyled = styled.div`
       font-weight: 500;
     }
 
-    .exp{
+    .exp {
       line-height: 100%;
     }
   }
-  
-  
-  
-  
-  @media screen and (min-width: 768px) and (max-width: 800px){
 
+  @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -382,13 +374,10 @@ const ProfileStyled = styled.div`
       bottom: 100px;
       left: 35px;
     }
-    
   }
-  
-  
-  
-  @media screen and (max-width: 999px){
-    .paddingzero{
+
+  @media screen and (max-width: 999px) {
+    .paddingzero {
       padding: 0 !important;
     }
 
@@ -404,7 +393,7 @@ const ProfileStyled = styled.div`
     }
     .cover {
       object-fit: cover;
-      object-position: 0 ;
+      object-position: 0;
       width: 100%;
     }
     .containercover {
@@ -559,12 +548,11 @@ const ProfileStyled = styled.div`
       font-weight: 500;
     }
 
-    .exp{
+    .exp {
       line-height: 100%;
     }
   }
-  
-`
+`;
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -575,10 +563,9 @@ export default function Profile() {
   }, []);
 
   return (
-
-    <ProfileStyled className={'d-flex'}>
+    <ProfileStyled className={"d-flex"}>
       <Container className="mt-5 d-flex justify-content-end">
-      <CardLeft/>
+        <CardLeft />
         <div className="containermain">
           <div className="containercover">
             <Image
@@ -594,7 +581,9 @@ export default function Profile() {
             <Col className="col-6">
               <div className="containerinfo mt-4">
                 <p className="name">Thomas Elsener</p>
-                <p className='exp'>Aftersales Manager bei Ducati (Schweiz) AG</p>
+                <p className="exp">
+                  Aftersales Manager bei Ducati (Schweiz) AG
+                </p>
                 <div className="containerinfosmall">
                   <p>Svizzera</p>
                   <p className="inlineblockp bold">500</p>
@@ -645,11 +634,8 @@ export default function Profile() {
             </Col>
           </Row>
         </div>
-      <SidePart/>
+        <SidePart />
       </Container>
-
     </ProfileStyled>
-
-
   );
 }
