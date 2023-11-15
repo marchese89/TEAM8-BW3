@@ -3,7 +3,7 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import styled from 'styled-components';
 import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
 import AddComment from "./AddComment";
-// import { useDispatch } from 'react-redux';
+import NewPost from "./AddNewPost";
 const ProfileStyled = styled.div`
   .interazioni {
     padding: 0.6em !important;
@@ -32,6 +32,7 @@ const Home = () => {
   const [selectedPostId, setSelectedPostId] = useState(false);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -62,6 +63,35 @@ const Home = () => {
       setLoading(false);
     }
   };
+
+  // const handlePost = async (postText, file) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('text', postText);
+  //     if (file) {
+  //       formData.append('image', file);
+  //     }
+
+  //     const response = await fetch('https://striveschool-api.herokuapp.com/api/posts/', {
+  //       method: 'POST',
+  //       headers: {
+  //         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMmVjZWM1NWU3ZTAwMThmODNjODUiLCJpYXQiOjE2OTk4ODQ3NTAsImV4cCI6MTcwMTA5NDM1MH0.JwqWWy93veTxrqjHXsB3_IFB9m9gO6IYG7BOf9uxVKQ",
+  //       },
+  //       body: formData,
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`Errore nella richiesta POST: ${response.status} ${response.statusText}`);
+  //     }
+
+  //     // Dopo la creazione del post, rifetch dei dati
+  //     fetchData();
+  //     setShowModal(false);
+  //   } catch (error) {
+  //     console.error('Errore durante la creazione del post:', error.message);
+  //   }
+  // };
+
 
   // Funzione per mostrare CommentArea
   const toggleCommentArea = (postId) => {
@@ -96,6 +126,15 @@ const Home = () => {
         )}
 
         <Container className="w-75 margine mt-5">
+        <div className="text-center ">
+
+        {/* <NewPost
+          show={showModal}
+          handleClose={() => setShowModal(false)}
+          onPost={handlePost}  
+        /> */}
+
+        </div>
           {/* Map dei post  */}
           {postData.map((post) => (
             <Row className="justify-content-center " key={post._id}>
