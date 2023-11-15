@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
 import AddComment from "./AddComment";
 // import { useDispatch } from 'react-redux';
