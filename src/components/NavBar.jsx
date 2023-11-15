@@ -4,7 +4,7 @@ import { FormControl } from "react-bootstrap";
 import imguno from "../img/LogoLinkedin.jpg";
 import imgdue from "../img/icona-utente.jpg";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   HouseDoorFill,
@@ -17,11 +17,6 @@ import {
 
 const StyledDiv = styled.div`
   color: #666666;
-
-  &:hover {
-    cursor: pointer !important;
-    color: black !important;
-  }
 
   .FormControlStyle {
     max-width: 290px;
@@ -40,23 +35,23 @@ const StyledDiv = styled.div`
     font-size: 25px;
   }
 
-  .navItemStyle:hover::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    bottom: -5px;
+  .navItemStyle:hover {
+    color: black;
+    border-bottom: 2px solid black;
+  }
+
+  .selected {
+    color: black;
+    border-bottom: 2px solid black;
   }
   .textStyle {
-    font-size: 13px;
+    font-size: 11px;
   }
 `;
 
 function NavBar() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   return (
     <StyledDiv>
       <Navbar
@@ -82,7 +77,13 @@ function NavBar() {
 
         <Nav className="d-flex justify-content-center">
           <div className="d-flex">
-            <div className="navItemStyle">
+            <div
+              className={
+                location.pathname === "/"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
+            >
               <HouseDoorFill
                 onClick={() => {
                   navigate("/");
@@ -97,7 +98,16 @@ function NavBar() {
 
               <span className="textStyle">Rete</span>
             </div>
-            <div className="navItemStyle">
+            <div
+              className={
+                location.pathname === "/jobs"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
+              onClick={() => {
+                navigate("/jobs");
+              }}
+            >
               <i className="fas fa-suitcase"></i>
 
               <span className="textStyle">Lavoro</span>
@@ -112,7 +122,13 @@ function NavBar() {
 
               <span className="textStyle">Notifiche</span>
             </div>
-            <div className="navItemStyle">
+            <div
+              className={
+                location.pathname === "/in/me"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
+            >
               <img
                 src={imgdue}
                 alt="Utente"
