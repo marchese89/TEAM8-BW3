@@ -1,4 +1,3 @@
-// AllComments.jsx
 import React, { useState, useEffect } from "react";
 import { Row, Spinner } from "react-bootstrap";
 
@@ -29,9 +28,8 @@ const AllComments = ({ postId }) => {
 
       const data = await response.json();
 
-      // Filtra i commenti solo per il post selezionato
-      const postComments = data.filter(comment => comment._id === postId);
-      setComments(postComments);
+   
+      setComments(data);
     } catch (error) {
       console.error(
         "Errore durante la richiesta GET dei commenti:",
@@ -56,8 +54,7 @@ const AllComments = ({ postId }) => {
       <div>
         {comments.map((comment) => (
           <li key={comment._id}>
-            {comment.comment} ~ {comment.rate}
-            postId: {postId} commentId: {comment._id}
+            {comment.comment} 
           </li>
         ))}
       </div>
@@ -66,3 +63,4 @@ const AllComments = ({ postId }) => {
 };
 
 export default AllComments;
+
