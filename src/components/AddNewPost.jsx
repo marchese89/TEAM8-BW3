@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form, Row } from 'react-bootstrap';
 import { CameraFill } from 'react-bootstrap-icons';
 
 const NewPost = ({ onPost }) => {
@@ -37,6 +37,11 @@ const NewPost = ({ onPost }) => {
 
   return (
     <>
+       <Row className="mb-5 ">
+
+
+
+
 <Form.Control size="lg" type="text" placeholder="Avvia un post" onClick={handleShow} />
       
 
@@ -78,6 +83,7 @@ const NewPost = ({ onPost }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      </Row>
     </>
   );
 };
