@@ -68,7 +68,7 @@ const ProfileStyled = styled.div`
       height: 170px;
       object-fit: cover;
 
-      bottom: 180px;
+      bottom: 220px;
       left: 26px;
     }
 
