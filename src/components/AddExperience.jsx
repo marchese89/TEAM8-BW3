@@ -39,8 +39,8 @@ export default function AddExperience({ mostra, set_mostra }) {
   async function addExperienceAction(userId, exp) {
     fetch(
       "https://striveschool-api.herokuapp.com/api/profile/" +
-        userId +
-        "/experiences",
+      userId +
+      "/experiences",
       {
         method: "POST",
         headers: {

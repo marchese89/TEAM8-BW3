@@ -11,8 +11,9 @@ import { Row } from "react-bootstrap";
 const StyledDiv = styled.div`
   font-size: 16px;
   border: 1px solid #eae8e5;
-  padding: 0.5em;
+  padding: 1.5em;
   width: 32em;
+  background-color: #fff;
   .icon {
     width: 1.3em;
     height: 1.3em;
@@ -37,7 +38,7 @@ const StyledDiv = styled.div`
     align-items: center;
   }
   .fa-pencil-alt.position-absolute {
-    top: 0.5em;
+    top: 0.7em;
     left: 0.6em;
   }
   #plus {
@@ -101,8 +102,7 @@ export default function Experience() {
 
   return (
     <>
-      <Row className='justify-content-center'>
-      <StyledDiv className="d-flex flex-column rounded-3 mt-5 text-black " >
+      <StyledDiv className="d-flex flex-column rounded-3 text-black bgwhite">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between position-relative">
             <h4>Esperienza</h4>
@@ -138,8 +138,8 @@ export default function Experience() {
                     posizione lavorativa
                   </li>
                   <li>
-                    <i className="fas fa-calendar-alt"></i>&nbsp;&nbsp;Aggiungi
-                    pausa lavorativa
+                    <i className="fas fa-calendar-alt"></i>
+                    &nbsp;&nbsp;Aggiungi pausa lavorativa
                   </li>
                 </ul>
               </div>
@@ -152,7 +152,6 @@ export default function Experience() {
           </div>
         </div>
       </StyledDiv>
-        </Row>
 
       {showAddExperience && (
         <AddExperience

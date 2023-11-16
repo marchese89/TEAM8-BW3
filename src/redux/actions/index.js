@@ -130,8 +130,8 @@ export const experienceListAction = (userId) => {
     if (userId !== undefined) {
       fetch(
         "https://striveschool-api.herokuapp.com/api/profile/" +
-          userId +
-          "/experiences",
+        userId +
+        "/experiences",
         {
           method: "GET",
           headers: {
@@ -162,9 +162,9 @@ export const getExperienceAction = (userId, expId) => {
   return async (dispatch) => {
     fetch(
       "https://striveschool-api.herokuapp.com/api/profile/" +
-        userId +
-        "/experiences/" +
-        expId,
+      userId +
+      "/experiences/" +
+      expId,
       {
         method: "GET",
         headers: {
