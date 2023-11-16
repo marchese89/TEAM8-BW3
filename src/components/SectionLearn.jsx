@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const StyledH4 = styled.h4`
   font-size: 0.8em;
-  ${
-    "" /* margin-top: 3%;
- margin-left: 3%; */
-  }
+`;
+
+const StyledP = styled.p`
+  font-size: 0.8em;
 `;
 const SectionLearn = () => {
   return (
@@ -17,20 +17,23 @@ const SectionLearn = () => {
           <Col className={"m-2"}>
             <Card.Body className={"mx-2 d-flex p-0"}>
               <Card.Img className={"bg-primary"}></Card.Img>
-              <p className={"mx-2 my-0"}>
+              <StyledP className={"mx-2 my-0 pVid"}>
                 Lorem ipsum sit dolor esque tempus fugit
-              </p>
+              </StyledP>
             </Card.Body>
             <Card.Body className={"mx-2 mt-2 d-flex p-0 "}>
               <Card.Img className={"bg-primary"}></Card.Img>
-              <p className={"mx-2 my-0"}>
+              <StyledP className={"mx-2 my-0 pVid"}>
                 Lorem ipsum sit dolor esque tempus fugit
-              </p>
+              </StyledP>
             </Card.Body>
             <Card.Footer className={"mt-3 text-center"}>
-              <Button className={"rounded-pill p-0 px-2 py-1 border-light"}>
-                {" "}
-                Scopri Di Più{" "}
+              <Button
+                className={
+                  "rounded-pill p-0 px-2 py-1 bg-light text-primary border-primary"
+                }
+              >
+                Scopri Di Più
               </Button>
             </Card.Footer>
           </Col>
