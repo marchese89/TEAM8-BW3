@@ -11,7 +11,7 @@ import styled from "styled-components";
 import Experience from "./Experience";
 
 const StyledSide = styled.div`
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 `;
