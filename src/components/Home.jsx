@@ -70,11 +70,7 @@ const Home = () => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-<<<<<<< HEAD
         body: JSON.stringify({ "text": postText }), 
-=======
-        body: JSON.stringify({ "text": postText }),  // Usa "text" tra virgolette
->>>>>>> master
       });
   
       if (!response.ok) {
@@ -88,7 +84,6 @@ const Home = () => {
       console.error('Errore durante la creazione del post:', error.message);
     }
   };
-  
 
 
   // Funzione per mostrare CommentArea
