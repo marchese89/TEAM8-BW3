@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
-import { CameraFill } from 'react-bootstrap-icons';
+import { Button, Modal, Form, Row, Col, Image } from 'react-bootstrap';
+import { Calendar, Calendar3, CalendarFill, CameraFill, ImageFill, Newspaper, } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import styled from "styled-components";
 const ProfileStyled = styled.div`
@@ -11,7 +11,27 @@ const ProfileStyled = styled.div`
   border-radius:5em;
   margin-left:1em;
   margin-right:1em;
-}`
+}
+.imgicon{
+  color:#50ABE4;
+  margin-right:0.7em;
+  margin-left:1em
+}
+.calendar{
+  color:#cc6d00;
+  margin-right:0.7em;
+  margin-left:3em
+}
+.newspaper{
+  color:#ff673a;
+  margin-right:0.7em;
+  margin-left:3em
+}
+span{
+  font-weight:600;
+  color:#626060;
+}
+`
 
 const NewPost = ({ onPost }) => {
   const [show, setShow] = useState(false);
@@ -63,6 +83,11 @@ const NewPost = ({ onPost }) => {
       />
     </span>
 <input size="lg" type="text" placeholder="Avvia un post" className='commento' onClick={handleShow} />
+<div className='mt-3'>
+<ImageFill className='imgicon'/><span>Contenuti multimediali</span>
+<Calendar3 className='calendar'/><span>Evento</span>
+<Newspaper className='newspaper'/><span>Scrivi un articolo</span>
+</div>
 
 
       <Modal show={show} onHide={handleClose}>
