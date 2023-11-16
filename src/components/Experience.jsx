@@ -150,7 +150,7 @@ export default function Experience() {
                 </div>
               )}
 
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-column w-100">
                 {myExperiencesFromReduxStore.map((exp) => {
                   return <SingleExperience exp={exp} key={exp._id} />;
                 })}

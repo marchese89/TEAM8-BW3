@@ -25,14 +25,14 @@ export default function SingleExperience({ handleShow, exp }) {
   const location = useLocation();
   return (
     <Row className="mb-3">
-      <Card>
+      <Card className="py-2">
         <Col className="d-flex">
           <div className="d-flex align-items-center">
             <img
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               src={exp.image !== undefined ? exp.image : placeholder}
-              className="exp-img d-flex flex-column"
+              className="exp-img d-flex flex-column rounded-5"
               alt=""
             ></img>
           </div>

@@ -264,10 +264,10 @@ export default function ExperienceToModify() {
   return (
     <>
       <StyledDiv className="d-flex flex-column rounded-3 text-black">
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column ">
           <div className="d-flex justify-content-between position-relative">
             <h4>Esperienze</h4>
-            <div id="buttons" className="d-flex flex-column">
+            <div id="buttons" className="d-flex flex-column ">
               <Plus
                 className="icon fs-1"
                 id="plus"
