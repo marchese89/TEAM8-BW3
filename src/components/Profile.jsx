@@ -20,7 +20,7 @@ import Experience from "./Experience";
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
     .marginesagerato {
-    margin-top: 120px !important;
+    margin-top: 100px !important;
   }
 
   .paddingzero {
@@ -35,7 +35,7 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 60%;
+      width: 100%;
       background-color: #fff;
   }
     .cover {
@@ -211,7 +211,7 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 60%;
+      width: 100%;
     }
     .cover {
       object-fit: cover;
@@ -719,8 +719,9 @@ export default function Profile() {
 
   return (
     <>
-      <ProfileStyled>
-        <Container className="mt-5 marginesagerato">
+      <Container>
+        <ProfileStyled>
+
           <div className="containermain">
             <div className="containercover">
               <Image
@@ -845,8 +846,10 @@ export default function Profile() {
               </Col>
             </Row>
           </div>
-        </Container>
-      </ProfileStyled>
+
+        </ProfileStyled>
+      </Container>
+
       <Modal show={show} onHide={handleClose} className="modal">
         <Modal.Header closeButton>
           <Modal.Title className="fs-5 modal-title">
