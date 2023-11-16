@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allProfilesAction, myProfileAction } from "../redux/actions";
-
+import placeholder from "../img/img_placeholder.jpg";
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
@@ -191,7 +191,7 @@ const ProfileStyled = styled.div`
 export default function Profile() {
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(allProfilesAction());
+    dispatch(allProfilesAction());
     dispatch(myProfileAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -259,7 +259,7 @@ export default function Profile() {
               src={
                 my_profileFromReduxStore.image !== undefined
                   ? my_profileFromReduxStore.image
-                  : ""
+                  : placeholder
               }
               className="avatar"
               style={{ cursor: "pointer" }}
@@ -308,7 +308,10 @@ export default function Profile() {
             <Row>
               <Col className="col-6">
                 <div className="containerinfo mt-4">
-                  <p className="name">Thomas Elsener</p>
+                  <p className="name">
+                    {my_profileFromReduxStore.name}{" "}
+                    {my_profileFromReduxStore.surname}
+                  </p>
                   <p>Aftersales Manager bei Ducati (Schweiz) AG</p>
                   <div className="containerinfosmall">
                     <p>Svizzera</p>
