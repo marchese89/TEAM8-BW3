@@ -611,7 +611,7 @@ const ProfileStyled = styled.div`
 export default function Profile() {
   const dispatch = useDispatch();
 
-  // const { idProfile } = useParams();
+  const { idProfile } = useParams();
   // useEffect(() => {
   //   if (idProfile !== undefined) {
   //     setDifferentUser(true);
@@ -646,6 +646,18 @@ export default function Profile() {
   const current_profileFromReduxStore = useSelector(
     (state) => state.profile.current_user_profile
   );
+
+  useEffect(() => {
+    if (Object.keys(current_profileFromReduxStore).length > 0) {
+      if (idProfile !== undefined) {
+        setDifferentUser(true);
+        dispatch(userProfileAction(idProfile));
+      } else {
+        setDifferentUser(false);
+        //   dispatch(userProfileAction(my_profileFromReduxStore._id));
+      }
+    }
+  }, []);
 
   // useEffect(() => {
   //   if (Object.keys(my_profileFromReduxStore).length > 0) {

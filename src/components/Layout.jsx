@@ -22,7 +22,7 @@ const Layout = () => {
   useEffect(() => {
     dispatch(allProfilesAction());
     if (idProfile === undefined) {
-      // dispatch(myProfileAction());
+      dispatch(myProfileAction());
     }
   }, []);
 
