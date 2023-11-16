@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { allProfilesAction, myProfileAction } from "../redux/actions";
 
 import React from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
@@ -12,11 +12,10 @@ import styled from "styled-components";
 import Experience from "./Experience";
 
 const ProfileStyled = styled.div`
-  
   .marginesagerato {
     margin-top: 120px !important;
   }
-  
+
   .paddingzero {
     padding: 0 !important;
   }
@@ -29,7 +28,7 @@ const ProfileStyled = styled.div`
     border-radius: 15px;
     overflow: hidden;
     background-color: #fff;
-}
+  }
 
   .cover {
     object-fit: cover;
@@ -192,49 +191,58 @@ const ProfileStyled = styled.div`
 export default function Profile() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(allProfilesAction());
+    // dispatch(allProfilesAction());
     dispatch(myProfileAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
 
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  // const handleImage = (e) => {
-  //   const file = e.target.files[0];
-  //   setSelectedImage(file);
-  // };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
-  // const handleImageUpload = () => {
-  //   if (selectedImage) {
-  //     const formData = new FormData();
-  //     formData.append('profileImage', selectedImage);
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+  };
 
-  //     fetch('', {
-  //       method: 'POST',
-  //       body: formData,
-  //     })
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         console.log('img ok', data);
+  const handleImageUpload = () => {
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("profile", selectedImage);
 
-  //       })
-  //       .catch(error => {
-  //         console.error('err', error);
-  //       });
+      fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${my_profileFromReduxStore._id}/picture`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
+        .then((response) => {
+          if (response.ok) {
+            dispatch(myProfileAction());
+          }
+        })
+        .then((data) => {
+          // console.log("img ok", data);
+        })
+        .catch((error) => {
+          console.error("err", error);
+        });
 
-
-  //     closeModal();
-  //   }
-  // };
+      closeModal();
+    }
+  };
 
   return (
     <>
@@ -248,17 +256,54 @@ export default function Profile() {
               />
             </div>
             <Image
-              src="https://images.pexels.com/photos/14941556/pexels-photo-14941556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={
+                my_profileFromReduxStore.image !== undefined
+                  ? my_profileFromReduxStore.image
+                  : ""
+              }
               className="avatar"
-            // style={{ cursor: 'pointer' }}
-            // onClick={openModal}
+              style={{ cursor: "pointer" }}
+              onClick={openModal}
             />
-
-            {/* <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-              <input type="file" onChange={handleImage} accept="image/*" />
-              <button onClick={handleImageUpload}>Conferma</button>
-              <button onClick={closeModal}>Annulla</button>
-            </Modal> */}
+            {/* isOpen={} onRequestClose={closeModal} */}
+            <Modal show={isModalOpen} onHide={closeModal}>
+              <Modal.Header closeButton>
+                <Modal.Title className="fs-5 modal-title">
+                  Modifica immagine profilo
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="d-flex flex-column w-100 mt-3 align-items-center">
+                  <Form.Label>Immagine</Form.Label>
+                  {selectedImage && (
+                    <Image
+                      src={URL.createObjectURL(selectedImage)}
+                      alt="Anteprima immagine"
+                      className="image-preview w-25 my-2 rounded-2"
+                      fluid
+                    />
+                  )}
+                  <Form.Control type="file" onChange={handleImage} />
+                </div>
+                {/* <input type="file" onChange={handleImage} accept="image/*" /> */}
+              </Modal.Body>
+              <Modal.Footer className="d-flex justify-content-between">
+                <Button
+                  className="save-button rounded-5 px-3"
+                  onClick={handleImageUpload}
+                >
+                  Conferma
+                </Button>
+                {/* <button >Conferma</button> */}
+                <Button
+                  className="save-button rounded-5 px-3"
+                  onClick={closeModal}
+                >
+                  Annulla
+                </Button>
+                {/* <button onClick={closeModal}>Annulla</button> */}
+              </Modal.Footer>
+            </Modal>
 
             <Row>
               <Col className="col-6">
@@ -325,7 +370,6 @@ export default function Profile() {
       <div className="d-flex flex-row justify-content-center my-5">
         <Experience />
       </div>
-
     </>
   );
 }
