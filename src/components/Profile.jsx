@@ -716,8 +716,9 @@ export default function Profile() {
         {
           method: "POST",
           body: formData,
-          mode: "no-cors",
-          Authorization: `Bearer ${token}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       )
         .then((response) => {
