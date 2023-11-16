@@ -165,7 +165,7 @@ const Home = () => {
                   
                 
                     <img
-                      src={my_profileFromReduxStore.image}
+                      src={post.image}
                       className="rounded-circle"
                       alt="avatar"
                       width={50 + "px"}
@@ -179,7 +179,9 @@ const Home = () => {
                     </p>
 
                     {/* Contenuto del post  */}
-                    <p style={{ fontSize: 1 + "em" }}>{post.text}</p>
+                    <div className="d-flex flex-wrap">
+                    <p className='d-flex flex-wrap'style={{ fontSize: 1 + "em" }}>{post.text}</p>
+                    </div>
                     <div className="foto">
                     <img
                       src={post.image}                     
@@ -246,14 +248,7 @@ const Home = () => {
                   </div>
                   {post._id === selectedPostId && (
                     <>
-                      <div>
-                        <img
-                          src={post.user.image}
-                          className="rounded-circle"
-                          alt="avatar"
-                          width={20 + "px"}
-                        />
-                      </div>
+                      
                       <AddComment postId={selectedPostId} />
                     </>
                   )}
