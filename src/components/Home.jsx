@@ -133,7 +133,6 @@ const Home = () => {
               <Col className="mt-2 d-lg-flex d-md-block position-sticky">
                 <CardLeft />
               </Col>
-
               {/* Centrare col  */}
               <Col lg={7} className=" d-sm mb-2 rounded justify-content-center">
                 {/* Map dei post  */}
@@ -242,8 +241,6 @@ const Home = () => {
                   </Row>
                 ))}
               </Col>
-
-              {/* Colonna laterale  */}
               <Col className="mt-2 d-none d-lg-block">
                 <NewsCard />
                 <RecentProfile />

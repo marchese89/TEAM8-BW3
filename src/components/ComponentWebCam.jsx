@@ -1,4 +1,4 @@
-import { Button, Container, Card } from "react-bootstrap";
+import { Button, Container, Card, ModalFooter } from "react-bootstrap";
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
@@ -16,6 +16,10 @@ const StyledFoto = styled.div`
   }
 
   .webImg {
+    border-radius: 50%;
+  }
+
+  .imgSet {
     border-radius: 50%;
   }
 `;
@@ -54,7 +58,13 @@ const WebcamComponent = () => {
       <Container className="d-flex flex-column align-content-center">
         {imgSrc ? (
           <div className="d-flex justify-content-center mt-4">
-            <img src={imgSrc} alt="img" />
+            <img
+              className="imgSet"
+              src={imgSrc}
+              alt="img"
+              height={400}
+              width={400}
+            />
           </div>
         ) : (
           <div className="d-flex justify-content-center">
@@ -67,18 +77,31 @@ const WebcamComponent = () => {
           </div>
         )}
         {imgSrc && (
-          <div className="retakeB">
-            <Button onClick={save}>Save</Button>
-            <Button onClick={retake}>Retake</Button>
-          </div>
+          <ModalFooter className="retakeB">
+            <Button
+              className="mx-2 rounded-pill bg-light text-primary"
+              onClick={save}
+            >
+              Save
+            </Button>
+            <Button
+              className="mx-2 rounded-pill bg-light text-primary"
+              onClick={retake}
+            >
+              Retake
+            </Button>
+          </ModalFooter>
         )}
-        <div className="buttonG mb-4">
+        <ModalFooter className="buttonG mb-4">
           {show && (
-            <Button onClick={captur} className="btn">
+            <Button
+              onClick={captur}
+              className="btn rounded-pill bg-light text-dark border-black"
+            >
               Scatta
             </Button>
           )}
-        </div>
+        </ModalFooter>
       </Container>
     </StyledFoto>
   );

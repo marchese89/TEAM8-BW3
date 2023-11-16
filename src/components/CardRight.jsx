@@ -4,6 +4,7 @@ import { Bookmark, Alipay, Person, Camera } from "react-bootstrap-icons";
 import imgp from "../assets/LinkImg.PNG";
 import ModalFoto from "./ModalFoto";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const StyledCard = styled.div`
   .h4Modify {
@@ -65,11 +66,13 @@ const StyledCard = styled.div`
   }
 `;
 
-const CardRight = () => {
+const CardRight = ({ shoModal }) => {
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const goToProf = () => {
     navigate("/in/me");
   };
+
   return (
     <StyledCard>
       <Card className={"rounded-bottom-2"}>
@@ -94,8 +97,11 @@ const CardRight = () => {
             </h4>
             <p
               className={"link text-center"}
-              data-bs-toggle="modal"
-              data-bs-target="#modalPhoto"
+              // data-bs-toggle="modal"
+              // data-bs-target="#modalPhoto"
+              onClick={() => {
+                setShowModal(true);
+              }}
             >
               Aggiungi una foto
             </p>
@@ -132,7 +138,7 @@ const CardRight = () => {
           </Row>
         </Card.Body>
       </Card>
-      <ModalFoto />
+      <ModalFoto showModal={showModal} setShowModal={setShowModal} />
     </StyledCard>
   );
 };
