@@ -1,9 +1,4 @@
-import {
-  ADD_EXPERIENCE,
-  EXPERIENCES_LIST,
-  GET_EXPERIENCE,
-  MODIFY_EXPERIENCE,
-} from "../actions";
+import { EXPERIENCES_LIST, GET_EXPERIENCE } from "../actions";
 
 const initialState = {
   experiences_list: [],

@@ -125,13 +125,14 @@ export default function ExperienceToModify() {
     (state) => state.profile.my_profile
   );
 
-  // const myExperiencesFromReduxStore = useSelector(
-  //   (state) => state.experience.experiences_list
-  // );
+  const myExperiencesFromReduxStore = useSelector(
+    (state) => state.experience.experiences_list
+  );
 
   const currentExperienceFromReduxStore = useSelector(
     (state) => state.experience.current_experience
   );
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (currentExperienceFromReduxStore !== null) {
@@ -220,7 +221,6 @@ export default function ExperienceToModify() {
       )
         .then((response) => {
           if (response.ok) {
-            console.log("upload ok");
             dispatch(experienceListAction(userId));
           } else {
             console.log("upload NO");
@@ -252,7 +252,7 @@ export default function ExperienceToModify() {
       .then((response) => {
         if (response.ok) {
           uploadExpImage(userId, expId);
-          // dispatch(experienceListAction(userId));
+          dispatch(experienceListAction(userId));
         } else {
           throw new Error("errore nella fetch");
         }
@@ -301,7 +301,7 @@ export default function ExperienceToModify() {
               </div>
             )}
           </div>
-          {currentExperienceFromReduxStore.map((exp) => {
+          {myExperiencesFromReduxStore.map((exp) => {
             return (
               <SingleExperience
                 handleShow={handleShow}

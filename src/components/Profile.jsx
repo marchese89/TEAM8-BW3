@@ -612,16 +612,13 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   const { idProfile } = useParams();
-  // useEffect(() => {
-  //   if (idProfile !== undefined) {
-  //     setDifferentUser(true);
-  //     dispatch(userProfileAction(idProfile));
-  //   } else {
-  //     setDifferentUser(false);
-  //     dispatch(userProfileAction(my_profileFromReduxStore._id));
-  //     console.log("setto il profilo utente default");
-  //   }
-  // }, [idProfile]);
+  useEffect(() => {
+    if (idProfile !== undefined) {
+      setDifferentUser(true);
+    } else {
+      setDifferentUser(false);
+    }
+  }, [idProfile]);
 
   const [show, setShow] = useState(false); //per il modale
   const handleClose = () => setShow(false); //chiusura modale
