@@ -717,7 +717,7 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato d-flex">
+        <Container className="mt-5 marginesagerato d-flex justify-content-center">
           <div className="containermain">
             <div className="containercover">
               <Image
