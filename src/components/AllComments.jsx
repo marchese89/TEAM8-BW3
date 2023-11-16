@@ -1,5 +1,7 @@
+// AllComments.jsx
 import React, { useState, useEffect } from "react";
 import { Row, Spinner } from "react-bootstrap";
+
 const AllComments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -10,7 +12,7 @@ const AllComments = ({ postId }) => {
       console.log("ID del post per la richiesta dei commenti:", postId);
 
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/comments?${postId}`,
+        `https://striveschool-api.herokuapp.com/api/comments?{postId}`,
         {
           method: "GET",
           headers: {
@@ -20,14 +22,16 @@ const AllComments = ({ postId }) => {
           },
         }
       );
-      console.log(response);
 
       if (!response.ok) {
         throw new Error("Errore nella richiesta GET");
       }
 
       const data = await response.json();
-      setComments(data);
+
+      // Filtra i commenti solo per il post selezionato
+      const postComments = data.filter(comment => comment._id === postId);
+      setComments(postComments);
     } catch (error) {
       console.error(
         "Errore durante la richiesta GET dei commenti:",
