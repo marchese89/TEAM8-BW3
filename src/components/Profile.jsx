@@ -36,7 +36,6 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 60%;
       background-color: #fff;
   }
     .cover {
@@ -52,11 +51,11 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 18px;
     }
 
     .containerinfosmall {
-      line-height: 8px;
+      line-height: 15px;
       font-size: 0.8em;
       color: rgb(134, 134, 134);
     }
@@ -156,7 +155,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -178,7 +177,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -191,12 +190,6 @@ const ProfileStyled = styled.div`
       background-color: #ebebeb;
     }
 
-
-    }
-
-    .exp {
-      line-height: 100%;
-    }
   }
 
   @media screen and (min-width: 1000px) and (max-width: 1200px) {
@@ -212,7 +205,6 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 60%;
     }
     .cover {
       object-fit: cover;
@@ -231,7 +223,7 @@ const ProfileStyled = styled.div`
     }
 
     .containerinfosmall {
-      line-height: 8px;
+      line-height: 15px;
       font-size: 0.8em;
       color: rgb(134, 134, 134);
     }
@@ -281,7 +273,6 @@ const ProfileStyled = styled.div`
     .name {
       font-size: 1.5em;
       font-weight: 500;
-      margin-top: -11px;
     }
 
     .inlineblockp {
@@ -375,7 +366,7 @@ const ProfileStyled = styled.div`
     }
   }
 
-  @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${'' /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -387,7 +378,7 @@ const ProfileStyled = styled.div`
       bottom: 100px;
       left: 35px;
     }
-  }
+  } */}
 
   @media screen and (max-width: 999px) {
     .paddingzero {
@@ -402,7 +393,6 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 100vw;
     }
     .cover {
       object-fit: cover;
@@ -416,11 +406,11 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 18px;
     }
 
     .containerinfosmall {
-      line-height: 8px;
+      line-height: 15px;
       font-size: 0.8em;
       color: rgb(134, 134, 134);
     }
@@ -471,8 +461,6 @@ const ProfileStyled = styled.div`
     .name {
       font-size: 1.5em;
       font-weight: 500;
-      line-height: 1;
-      width: 100vw;
     }
 
     .inlineblockp {
@@ -522,7 +510,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -544,7 +532,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -753,7 +741,7 @@ export default function Profile() {
               src={profileImage}
               className="avatar"
               style={!differentUser ? { cursor: "pointer" } : {}}
-              onClick={!differentUser ? openModal : () => {}}
+              onClick={!differentUser ? openModal : () => { }}
             />
             {/* isOpen={} onRequestClose={closeModal} */}
             <Modal show={isModalOpen} onHide={closeModal}>
@@ -941,9 +929,9 @@ export default function Profile() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="d-flex flex-row justify-content-center my-5">
+      <Container className="mt-5">
         <Experience />
-      </div>
+      </Container>
     </>
   );
 }
