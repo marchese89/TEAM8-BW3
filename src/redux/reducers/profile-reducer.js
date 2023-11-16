@@ -33,6 +33,7 @@ export default function profileReducer(state = initialState, action) {
       return {
         ...state,
         my_profile: action.payload,
+        current_user_profile: action.payload,
       };
     default:
       return state;
