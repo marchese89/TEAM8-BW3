@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  allProfilesAction,
   myProfileAction,
   updateProfileAction,
   userProfileAction,
@@ -16,6 +15,7 @@ import styled from "styled-components";
 import SidePart from "./SidePart";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
+import { useParams } from "react-router-dom";
 
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
@@ -611,6 +611,18 @@ const ProfileStyled = styled.div`
 export default function Profile() {
   const dispatch = useDispatch();
 
+  // const { idProfile } = useParams();
+  // useEffect(() => {
+  //   if (idProfile !== undefined) {
+  //     setDifferentUser(true);
+  //     dispatch(userProfileAction(idProfile));
+  //   } else {
+  //     setDifferentUser(false);
+  //     dispatch(userProfileAction(my_profileFromReduxStore._id));
+  //     console.log("setto il profilo utente default");
+  //   }
+  // }, [idProfile]);
+
   const [show, setShow] = useState(false); //per il modale
   const handleClose = () => setShow(false); //chiusura modale
 
@@ -622,12 +634,7 @@ export default function Profile() {
   const [title, setTitle] = useState("");
   const [area, setArea] = useState("");
   const [profileImage, setProfileImage] = useState(placeholder);
-
-  useEffect(() => {
-    dispatch(allProfilesAction());
-    dispatch(myProfileAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [differentUser, setDifferentUser] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -640,12 +647,12 @@ export default function Profile() {
     (state) => state.profile.current_user_profile
   );
 
-  useEffect(() => {
-    if (Object.keys(my_profileFromReduxStore).length > 0) {
-      setProfileImage(my_profileFromReduxStore.image);
-      dispatch(userProfileAction(my_profileFromReduxStore._id));
-    }
-  }, [my_profileFromReduxStore]);
+  // useEffect(() => {
+  //   if (Object.keys(my_profileFromReduxStore).length > 0) {
+  //     setProfileImage(my_profileFromReduxStore.image);
+  //     dispatch(userProfileAction(my_profileFromReduxStore._id));
+  //   }
+  // }, [my_profileFromReduxStore]);
 
   useEffect(() => {
     if (Object.keys(current_profileFromReduxStore).length > 0) {
@@ -656,6 +663,7 @@ export default function Profile() {
       setBio(current_profileFromReduxStore.bio);
       setTitle(current_profileFromReduxStore.title);
       setArea(current_profileFromReduxStore.area);
+      setProfileImage(current_profileFromReduxStore.image);
     }
   }, [current_profileFromReduxStore]);
 
@@ -731,8 +739,8 @@ export default function Profile() {
             <Image
               src={profileImage}
               className="avatar"
-              style={{ cursor: "pointer" }}
-              onClick={openModal}
+              style={!differentUser ? { cursor: "pointer" } : {}}
+              onClick={!differentUser ? openModal : () => {}}
             />
             {/* isOpen={} onRequestClose={closeModal} */}
             <Modal show={isModalOpen} onHide={closeModal}>
@@ -823,14 +831,16 @@ export default function Profile() {
                     <p className="certificationinfoTEXT mt-1">
                       Epicode Network
                     </p>
-                    <div className="icon pencil position-absolute">
-                      <i
-                        className="fas fa-pencil-alt position-absolute icon-inner"
-                        onClick={() => {
-                          setShow(true);
-                        }}
-                      ></i>
-                    </div>
+                    {!differentUser && (
+                      <div className="icon pencil position-absolute">
+                        <i
+                          className="fas fa-pencil-alt position-absolute icon-inner"
+                          onClick={() => {
+                            setShow(true);
+                          }}
+                        ></i>
+                      </div>
+                    )}
                   </div>
                   <div className="certificationinfo">
                     <Image

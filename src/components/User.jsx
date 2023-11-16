@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { userProfileAction } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const StyledUser = styled.div`
   width: 30em;
@@ -15,11 +17,13 @@ const StyledUser = styled.div`
 
 function User({ user }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <StyledUser>
       <img src={user.image} alt="img-prof" className="img me-3" />
       <span
         onClick={() => {
+          dispatch(userProfileAction(user._id));
           navigate("/profile/" + user._id);
         }}
       >

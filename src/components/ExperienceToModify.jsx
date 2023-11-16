@@ -6,11 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { Form, FormControl, Image, InputGroup } from "react-bootstrap";
 import AddExperience from "./AddExperience";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  experienceListAction,
-  getExperienceAction,
-  myProfileAction,
-} from "../redux/actions";
+import { experienceListAction, getExperienceAction } from "../redux/actions";
 import SingleExperience from "./SingleExperience";
 import { token } from "../redux/actions";
 import { format } from "date-fns";
@@ -129,9 +125,9 @@ export default function ExperienceToModify() {
     (state) => state.profile.my_profile
   );
 
-  const myExperiencesFromReduxStore = useSelector(
-    (state) => state.experience.experiences_list
-  );
+  // const myExperiencesFromReduxStore = useSelector(
+  //   (state) => state.experience.experiences_list
+  // );
 
   const currentExperienceFromReduxStore = useSelector(
     (state) => state.experience.current_experience
@@ -145,25 +141,28 @@ export default function ExperienceToModify() {
       // console.log(
       //   format(new Date(currentExperienceFromReduxStore.endDate), "yyyy-MM-dd")
       // );
+      if (currentExperienceFromReduxStore.startDate === undefined) {
+        setselectedExp_startDate(new Date());
+      } else {
+        setselectedExp_startDate(
+          new Date(currentExperienceFromReduxStore.startDate)
+        );
+      }
 
-      setselectedExp_startDate(
-        new Date(currentExperienceFromReduxStore.startDate)
-      );
+      if (currentExperienceFromReduxStore.endDate === undefined) {
+        new Date();
+      } else {
+        setselectedExp_endDate(
+          new Date(currentExperienceFromReduxStore.endDate)
+        );
+      }
 
-      setselectedExp_endDate(new Date(currentExperienceFromReduxStore.endDate));
       setselectedExp_description(currentExperienceFromReduxStore.description);
 
       setselectedExp_area(currentExperienceFromReduxStore.area);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentExperienceFromReduxStore]);
-
-  useEffect(() => {
-    //prendiamo le informazioni del nostro profilo
-    dispatch(myProfileAction());
-    // dispatch(allProfilesAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (my_profileFromReduxStore !== undefined) {
@@ -302,7 +301,7 @@ export default function ExperienceToModify() {
               </div>
             )}
           </div>
-          {myExperiencesFromReduxStore.map((exp) => {
+          {currentExperienceFromReduxStore.map((exp) => {
             return (
               <SingleExperience
                 handleShow={handleShow}

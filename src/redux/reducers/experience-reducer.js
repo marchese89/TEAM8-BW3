@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   experiences_list: [],
-  current_experience: null,
+  current_experience: [],
 };
 
 export default function experiencesReducer(state = initialState, action) {
@@ -16,6 +16,7 @@ export default function experiencesReducer(state = initialState, action) {
       return {
         ...state,
         experiences_list: action.payload,
+        current_experience: action.payload,
       };
 
     case GET_EXPERIENCE:

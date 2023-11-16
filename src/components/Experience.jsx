@@ -1,12 +1,11 @@
 import { Plus } from "react-bootstrap-icons";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
 import { useDispatch, useSelector } from "react-redux";
-import { experienceListAction, myProfileAction } from "../redux/actions";
-import { Row } from "react-bootstrap";
+import { experienceListAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   font-size: 16px;
@@ -79,26 +78,23 @@ export default function Experience() {
   const myExperiencesFromReduxStore = useSelector(
     (state) => state.experience.experiences_list
   );
-
+  const { idProfile } = useParams();
   const dispatch = useDispatch();
 
-  const my_profileFromReduxStore = useSelector(
-    (state) => state.profile.my_profile
+  // const my_profileFromReduxStore = useSelector(
+  //   (state) => state.profile.my_profile
+  // );
+
+  const current_profileFromReduxStore = useSelector(
+    (state) => state.profile.current_user_profile
   );
 
   useEffect(() => {
-    //prendiamo le informazioni del nostro profilo
-    dispatch(myProfileAction());
-    // dispatch(allProfilesAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (my_profileFromReduxStore !== undefined) {
-      dispatch(experienceListAction(my_profileFromReduxStore._id));
+    if (current_profileFromReduxStore !== undefined) {
+      dispatch(experienceListAction(current_profileFromReduxStore._id));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [my_profileFromReduxStore]);
+  }, [current_profileFromReduxStore]);
 
   return (
     <>
@@ -106,25 +102,28 @@ export default function Experience() {
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between position-relative">
             <h4>Esperienza</h4>
-            <div id="buttons" className="d-flex">
-              <Plus
-                className="icon fs-1"
-                id="plus"
-                onClick={() => {
-                  setshowDrop(!showDrop);
-                  console.log("setShowDrop", showDrop);
-                }}
-              />
-              <div className="icon position-relative" id="pencil">
-                {/* <Pencil id="pencil" /> */}
-                <i
-                  className="fas fa-pencil-alt position-absolute"
+            {idProfile === undefined && (
+              <div id="buttons" className="d-flex">
+                <Plus
+                  className="icon fs-1"
+                  id="plus"
                   onClick={() => {
-                    navigate("/in/me/details/experience/");
+                    setshowDrop(!showDrop);
+                    console.log("setShowDrop", showDrop);
                   }}
-                ></i>
+                />
+                <div className="icon position-relative" id="pencil">
+                  {/* <Pencil id="pencil" /> */}
+                  <i
+                    className="fas fa-pencil-alt position-absolute"
+                    onClick={() => {
+                      navigate("/in/me/details/experience/");
+                    }}
+                  ></i>
+                </div>
               </div>
-            </div>
+            )}
+
             {showDrop && (
               <div className="drop-down position-absolute">
                 <ul className="list-unstyled d-flex flex-column mb-0">
