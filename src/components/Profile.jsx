@@ -20,15 +20,14 @@ import Experience from "./Experience";
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
     .marginesagerato {
-    margin-top: 120px !important;
-  }
+      margin-top: 120px !important;
+    }
 
-  .paddingzero {
+    .paddingzero {
       padding: 0 !important;
     }
 
     .containermain {
-      position: relative;
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -37,13 +36,14 @@ const ProfileStyled = styled.div`
       background-color: white;
       width: 60%;
       background-color: #fff;
-  }
+    }
     .cover {
       object-fit: cover;
       object-position: 0;
       width: 100%;
     }
     .containercover {
+      position: relative;
       height: 400px;
       width: 100%;
       overflow: hidden;
@@ -68,8 +68,8 @@ const ProfileStyled = styled.div`
       height: 170px;
       object-fit: cover;
 
-      bottom: 190px;
-      left: 35px;
+      bottom: 290px;
+      left: 300px;
     }
 
     .containercertification {
@@ -189,13 +189,10 @@ const ProfileStyled = styled.div`
     .buttonother:hover {
       background-color: #ebebeb;
     }
+  }
 
-
-    }
-
-    .exp {
-      line-height: 100%;
-    }
+  .exp {
+    line-height: 100%;
   }
 
   @media screen and (min-width: 1000px) and (max-width: 1200px) {
@@ -242,7 +239,7 @@ const ProfileStyled = styled.div`
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 190px;
+      bottom: 250px;
       left: 35px;
     }
 
@@ -720,7 +717,7 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato">
+        <Container className="mt-5 marginesagerato d-flex">
           <div className="containermain">
             <div className="containercover">
               <Image
@@ -845,6 +842,7 @@ export default function Profile() {
               </Col>
             </Row>
           </div>
+          <SidePart />
         </Container>
       </ProfileStyled>
       <Modal show={show} onHide={handleClose} className="modal">
@@ -918,9 +916,7 @@ export default function Profile() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="d-flex flex-row justify-content-center my-5">
-        <Experience />
-      </div>
+      <div className="d-flex flex-row justify-content-center my-5"></div>
     </>
   );
 }

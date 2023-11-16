@@ -1,4 +1,4 @@
-import { Plus } from "react-bootstrap-icons";
+import { Plus, Pen } from "react-bootstrap-icons";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -6,18 +6,21 @@ import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceListAction, myProfileAction } from "../redux/actions";
-import { Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 
 const StyledDiv = styled.div`
-  font-size: 16px;
+  ${
+    "" /* font-size: 16px;
   border: 1px solid #eae8e5;
   padding: 1.5em;
   width: 32em;
-  background-color: #fff;
-  .icon {
-    width: 1.3em;
+  background-color: #fff; */
+  }
+
+  ${
+    "" /* .icon {
+    width: 0.8em;
     height: 1.3em;
-    font-size: 1.4em;
     color: #5e5e5e;
     cursor: pointer;
     margin-top: 0;
@@ -43,8 +46,9 @@ const StyledDiv = styled.div`
   }
   #plus {
     right: 1em;
+  } */
   }
-
+  
   .drop-down {
     color: #666666;
     z-index: 4;
@@ -102,57 +106,59 @@ export default function Experience() {
 
   return (
     <>
-      <StyledDiv className="d-flex flex-column rounded-3 text-black bgwhite">
-        <div className="d-flex flex-column">
-          <div className="d-flex justify-content-between position-relative">
-            <h4>Esperienza</h4>
-            <div id="buttons" className="d-flex">
-              <Plus
-                className="icon fs-1"
-                id="plus"
-                onClick={() => {
-                  setshowDrop(!showDrop);
-                  console.log("setShowDrop", showDrop);
-                }}
-              />
-              <div className="icon position-relative" id="pencil">
-                {/* <Pencil id="pencil" /> */}
-                <i
-                  className="fas fa-pencil-alt position-absolute"
+      <StyledDiv className="justify-content-center">
+        <Row className="my-2">
+          <Card>
+            <Card.Title className="d-flex py-3 px-3">
+              <h4 className="fs-5">Esperienze</h4>
+              <div className="ms-auto mx-3">
+                <Plus
+                  className="icon fs-1 mx-2"
+                  id="plus"
+                  size={30}
+                  onClick={() => {
+                    setshowDrop(!showDrop);
+                    console.log("setShowDrop", showDrop);
+                  }}
+                />
+                <Pen
                   onClick={() => {
                     navigate("/in/me/details/experience/");
                   }}
-                ></i>
+                  size={15}
+                ></Pen>
               </div>
-            </div>
-            {showDrop && (
-              <div className="drop-down position-absolute">
-                <ul className="list-unstyled d-flex flex-column mb-0">
-                  <li
-                    onClick={() => {
-                      setshowDrop(false);
-                      setShowAddExperience(true);
-                    }}
-                  >
-                    <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
-                    posizione lavorativa
-                  </li>
-                  <li>
-                    <i className="fas fa-calendar-alt"></i>
-                    &nbsp;&nbsp;Aggiungi pausa lavorativa
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-          <div className="d-flex flex-column">
-            {myExperiencesFromReduxStore.map((exp) => {
-              return <SingleExperience exp={exp} key={exp._id} />;
-            })}
-          </div>
-        </div>
-      </StyledDiv>
+            </Card.Title>
+            <Card.Body className="d-flex py-0">
+              {showDrop && (
+                <div className="drop-down position-absolute">
+                  <ul className="list-unstyled d-flex flex-column mb-0">
+                    <li
+                      onClick={() => {
+                        setshowDrop(false);
+                        setShowAddExperience(true);
+                      }}
+                    >
+                      <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
+                      posizione lavorativa
+                    </li>
+                    <li>
+                      <i className="fas fa-calendar-alt"></i>
+                      &nbsp;&nbsp;Aggiungi pausa lavorativa
+                    </li>
+                  </ul>
+                </div>
+              )}
 
+              <div className="d-flex flex-column">
+                {myExperiencesFromReduxStore.map((exp) => {
+                  return <SingleExperience exp={exp} key={exp._id} />;
+                })}
+              </div>
+            </Card.Body>
+          </Card>
+        </Row>
+      </StyledDiv>
       {showAddExperience && (
         <AddExperience
           mostra={showAddExperience}

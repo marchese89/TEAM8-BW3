@@ -8,6 +8,7 @@ import CardLan from "./CardLanguage";
 // import Learn from "./Learn";
 import SectionLearn from "./SectionLearn";
 import styled from "styled-components";
+import Experience from "./Experience";
 
 const StyledSide = styled.div`
   @media screen and (max-width: 800px) {
@@ -24,6 +25,7 @@ const SidePart = () => {
       <Col xl={8} lg={8} md={12} className={"mx-4"}>
         <CardLan />
         <SectionLearn />
+        <Experience />
       </Col>
 
       <ModalLanguage />
