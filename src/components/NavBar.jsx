@@ -129,7 +129,14 @@ function NavBar() {
             <div className="navItemStyle">
               <PeopleFill />
 
-              <span className="textStyle">Rete</span>
+              <span
+                className="textStyle"
+                onClick={() => {
+                  navigate("/Rete");
+                }}
+              >
+                Rete
+              </span>
             </div>
             <div
               className={

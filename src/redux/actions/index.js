@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 export const ALL_PROFILES = "ALL_PROFILES";
 export const MY_PROFILE = "MY_PROFILE";
@@ -387,5 +387,3 @@ export const jobsListAction = () => {
       .catch((err) => console.log("ERRORE!", err));
   };
 };
-
-

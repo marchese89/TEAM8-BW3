@@ -7,8 +7,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
 import SidePart from "./SidePart";
-import CardLeft from "./CardHomeRight";
-import CardEvent from "./CardEventSide";
 
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
@@ -566,7 +564,6 @@ export default function Profile() {
   return (
     <ProfileStyled className={"d-flex"}>
       <Container className="mt-5 d-flex justify-content-end">
-        {/* DA CANCELLARE IN FASE DI MERGE */}
         <div className="containermain">
           <div className="containercover">
             <Image
