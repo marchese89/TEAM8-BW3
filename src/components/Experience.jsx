@@ -123,7 +123,7 @@ export default function Experience() {
                 />
                 <Pen
                   onClick={() => {
-                    navigate("/in/me/details/experience/");
+                    navigate("/in/me/details/esperienze/");
                   }}
                   size={15}
                 ></Pen>

@@ -24,7 +24,8 @@ const StyledRole = styled.h5`
 export default function SingleExperience({ handleShow, exp }) {
   const location = useLocation();
   return (
-    <Row className="mb-3">
+    // <Row className="mb-3">
+    <div className="mb-3">
       <Card className="py-2">
         <Col className="d-flex">
           <div className="d-flex align-items-center">
@@ -32,7 +33,7 @@ export default function SingleExperience({ handleShow, exp }) {
               width={50}
               height={50}
               src={exp.image !== undefined ? exp.image : placeholder}
-              className="exp-img d-flex flex-column rounded-5"
+              className="exp-img d-flex flex-column rounded-5 mx-2"
               alt=""
             ></img>
           </div>
@@ -85,6 +86,7 @@ export default function SingleExperience({ handleShow, exp }) {
           </div>
         )}
       </Card>
-    </Row>
+    </div>
+    // </Row>
   );
 }

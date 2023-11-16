@@ -275,157 +275,152 @@ export default function ExperienceToModify() {
                   setshowDrop(!showDrop);
                 }}
               />
-              <div className="icon position-relative" id="pencil">
-                <i
-                  className="fas fa-pencil-alt position-absolute"
-                  onClick={handleShow}
-                ></i>
-              </div>
-            </div>
-            {showDrop && (
-              <div className="drop-down position-absolute">
-                <ul className="list-unstyled d-flex flex-column mb-0">
-                  <li
-                    onClick={() => {
-                      setshowDrop(false);
-                      setShowAddExperience(true);
-                    }}
-                  >
-                    <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
-                    posizione lavorativa
-                  </li>
-                  <li>
-                    <i className="fas fa-calendar-alt"></i>&nbsp;&nbsp;Aggiungi
-                    pausa lavorativa
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-          {myExperiencesFromReduxStore.map((exp) => {
-            return (
-              <SingleExperience
-                handleShow={handleShow}
-                exp={exp}
-                key={exp._id}
-              />
-            );
-          })}
-        </div>
-        <Modal show={show} onHide={handleClose} className="modal">
-          <Modal.Header closeButton>
-            <Modal.Title className="fs-5 modal-title">
-              Modifica esperienza
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <InputGroup className="d-flex flex-column w-100">
-              <Form.Label>Qualifica*</Form.Label>
-            </InputGroup>
-            <Form.Control
-              value={selectedExp_role}
-              onChange={(e) => setselectedExp_role(e.target.value)}
-            ></Form.Control>
-            <InputGroup className="d-flex flex-column w-100">
-              <Form.Label>Azienda</Form.Label>
-            </InputGroup>
-            <Form.Control
-              value={selectedExp_company}
-              onChange={(e) => setselectedExp_company(e.target.value)}
-            ></Form.Control>
-            <InputGroup>
-              <InputGroup className="d-flex flex-column w-100">
-                <Form.Label>Data inizio</Form.Label>
-              </InputGroup>
-              <input
-                type="date"
-                id="dateStartInput"
-                name="dateStartInput"
-                value={
-                  selectedExp_startDate !== ""
-                    ? format(new Date(selectedExp_startDate), "yyyy-MM-dd")
-                    : ""
-                }
-                onChange={(e) => setselectedExp_startDate(e.target.value)}
-                className="w-100"
-              />
-              <InputGroup className="d-flex flex-column w-100">
-                <Form.Label>Data fine</Form.Label>
-              </InputGroup>
-              <input
-                type="date"
-                id="dateEndInput"
-                name="dateEndInput"
-                value={
-                  selectedExp_endDate !== ""
-                    ? format(new Date(selectedExp_endDate), "yyyy-MM-dd")
-                    : ""
-                }
-                onChange={(e) => setselectedExp_endDate(e.target.value)}
-                className="w-100"
-              />
-            </InputGroup>
-            <InputGroup className="d-flex flex-column w-100">
-              <Form.Label>Area</Form.Label>
-            </InputGroup>
-            <FormControl
-              value={selectedExp_area}
-              onChange={(e) => setselectedExp_area(e.target.value)}
-            ></FormControl>
-            <InputGroup className="d-flex flex-column w-100">
-              <Form.Label>Descrizione</Form.Label>
-            </InputGroup>
-            <FormControl
-              as="textarea"
-              value={selectedExp_description}
-              onChange={(e) => setselectedExp_description(e.target.value)}
-            ></FormControl>
-            <div className="d-flex flex-column w-100 mt-3 align-items-center">
-              <Form.Label>Immagine</Form.Label>
-              {selectedFile && (
-                <Image
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Anteprima immagine"
-                  className="image-preview w-25 my-2 rounded-2"
-                  fluid
-                />
+
+              {showDrop && (
+                <div className="drop-down position-absolute">
+                  <ul className="list-unstyled d-flex flex-column mb-0">
+                    <li
+                      onClick={() => {
+                        setshowDrop(false);
+                        setShowAddExperience(true);
+                      }}
+                    >
+                      <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
+                      posizione lavorativa
+                    </li>
+                    <li>
+                      <i className="fas fa-calendar-alt"></i>
+                      &nbsp;&nbsp;Aggiungi pausa lavorativa
+                    </li>
+                  </ul>
+                </div>
               )}
-              <Form.Control type="file" onChange={handleFileChange} />
             </div>
-          </Modal.Body>
-          <Modal.Footer className="d-flex justify-content-between">
-            <StyledSpan className="rounded-3" onClick={deleteExp}>
-              Elimina Esperienza
-            </StyledSpan>
-            <Button
-              className="save-button rounded-5 px-3"
-              onClick={() => {
-                setShow(false);
-                modifyExperienceAction(
-                  my_profileFromReduxStore._id,
-                  selectedExp_id,
-                  {
-                    role: selectedExp_role,
-                    company: selectedExp_company,
-                    startDate: selectedExp_startDate,
-                    endDate: selectedExp_endDate,
-                    description: selectedExp_description,
-                    area: selectedExp_area,
+            {myExperiencesFromReduxStore.map((exp) => {
+              return (
+                <SingleExperience
+                  handleShow={handleShow}
+                  exp={exp}
+                  key={exp._id}
+                />
+              );
+            })}
+          </div>
+          <Modal show={show} onHide={handleClose} className="modal">
+            <Modal.Header closeButton>
+              <Modal.Title className="fs-5 modal-title">
+                Modifica esperienza
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <InputGroup className="d-flex flex-column w-100">
+                <Form.Label>Qualifica*</Form.Label>
+              </InputGroup>
+              <Form.Control
+                value={selectedExp_role}
+                onChange={(e) => setselectedExp_role(e.target.value)}
+              ></Form.Control>
+              <InputGroup className="d-flex flex-column w-100">
+                <Form.Label>Azienda</Form.Label>
+              </InputGroup>
+              <Form.Control
+                value={selectedExp_company}
+                onChange={(e) => setselectedExp_company(e.target.value)}
+              ></Form.Control>
+              <InputGroup>
+                <InputGroup className="d-flex flex-column w-100">
+                  <Form.Label>Data inizio</Form.Label>
+                </InputGroup>
+                <input
+                  type="date"
+                  id="dateStartInput"
+                  name="dateStartInput"
+                  value={
+                    selectedExp_startDate !== ""
+                      ? format(new Date(selectedExp_startDate), "yyyy-MM-dd")
+                      : ""
                   }
-                );
-              }}
-            >
-              Salva
-            </Button>
-          </Modal.Footer>
-        </Modal>
+                  onChange={(e) => setselectedExp_startDate(e.target.value)}
+                  className="w-100"
+                />
+                <InputGroup className="d-flex flex-column w-100">
+                  <Form.Label>Data fine</Form.Label>
+                </InputGroup>
+                <input
+                  type="date"
+                  id="dateEndInput"
+                  name="dateEndInput"
+                  value={
+                    selectedExp_endDate !== ""
+                      ? format(new Date(selectedExp_endDate), "yyyy-MM-dd")
+                      : ""
+                  }
+                  onChange={(e) => setselectedExp_endDate(e.target.value)}
+                  className="w-100"
+                />
+              </InputGroup>
+              <InputGroup className="d-flex flex-column w-100">
+                <Form.Label>Area</Form.Label>
+              </InputGroup>
+              <FormControl
+                value={selectedExp_area}
+                onChange={(e) => setselectedExp_area(e.target.value)}
+              ></FormControl>
+              <InputGroup className="d-flex flex-column w-100">
+                <Form.Label>Descrizione</Form.Label>
+              </InputGroup>
+              <FormControl
+                as="textarea"
+                value={selectedExp_description}
+                onChange={(e) => setselectedExp_description(e.target.value)}
+              ></FormControl>
+              <div className="d-flex flex-column w-100 mt-3 align-items-center">
+                <Form.Label>Immagine</Form.Label>
+                {selectedFile && (
+                  <Image
+                    src={URL.createObjectURL(selectedFile)}
+                    alt="Anteprima immagine"
+                    className="image-preview w-25 my-2 rounded-2"
+                    fluid
+                  />
+                )}
+                <Form.Control type="file" onChange={handleFileChange} />
+              </div>
+            </Modal.Body>
+            <Modal.Footer className="d-flex justify-content-between">
+              <StyledSpan className="rounded-3" onClick={deleteExp}>
+                Elimina Esperienza
+              </StyledSpan>
+              <Button
+                className="save-button rounded-5 px-3"
+                onClick={() => {
+                  setShow(false);
+                  modifyExperienceAction(
+                    my_profileFromReduxStore._id,
+                    selectedExp_id,
+                    {
+                      role: selectedExp_role,
+                      company: selectedExp_company,
+                      startDate: selectedExp_startDate,
+                      endDate: selectedExp_endDate,
+                      description: selectedExp_description,
+                      area: selectedExp_area,
+                    }
+                  );
+                }}
+              >
+                Salva
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
       </StyledDiv>
-      {showAddExperience && (
+      {/* {showAddExperience && (
         <AddExperience
           mostra={showAddExperience}
           set_mostra={setShowAddExperience}
         />
-      )}
+      )} */}
     </>
   );
 }
