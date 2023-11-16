@@ -16,7 +16,13 @@ import {
 } from "react-bootstrap-icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
+import {
+  CATEGORY,
+  COMPANY,
+  QUERY,
+  myProfileAction,
+  searchAction,
+} from "../redux/actions";
 
 const StyledDiv = styled.div`
   color: #666666;
@@ -142,17 +148,19 @@ function NavBar() {
               <span className="textStyle">Home</span>
             </div>
 
-            <div className="navItemStyle">
+            <div
+              className={
+                location.pathname === "/rete"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
+              onClick={() => {
+                navigate("/rete");
+              }}
+            >
               <PeopleFill />
 
-              <span
-                className="textStyle"
-                onClick={() => {
-                  navigate("/Rete");
-                }}
-              >
-                Rete
-              </span>
+              <span className="textStyle">Rete</span>
             </div>
             <div
               className={
@@ -191,6 +199,7 @@ function NavBar() {
                   alt="profile"
                   className="profile-img rounded-circle"
                   onClick={() => {
+                    dispatch(myProfileAction());
                     navigate("/in/me");
                   }}
                 />
