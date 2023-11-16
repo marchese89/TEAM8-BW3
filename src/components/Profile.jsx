@@ -401,7 +401,7 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 100vw;
+      width: 100%;
     }
     .cover {
       object-fit: cover;
@@ -415,7 +415,7 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 17px;
     }
 
     .containerinfosmall {
@@ -521,7 +521,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -543,7 +543,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
