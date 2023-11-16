@@ -1,22 +1,26 @@
-import { Plus } from "react-bootstrap-icons";
+import { Plus, Pen } from "react-bootstrap-icons";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
 import { useDispatch, useSelector } from "react-redux";
-import { experienceListAction } from "../redux/actions";
+import { experienceListAction, myProfileAction } from "../redux/actions";
+import { Card, Row } from "react-bootstrap";
 
 const StyledDiv = styled.div`
-  font-size: 16px;
+  ${
+    "" /* font-size: 16px;
   border: 1px solid #eae8e5;
   padding: 1.5em;
   width: 32em;
-  background-color: #fff;
-  .icon {
-    width: 1.3em;
+  background-color: #fff; */
+  }
+
+  ${
+    "" /* .icon {
+    width: 0.8em;
     height: 1.3em;
-    font-size: 1.4em;
     color: #5e5e5e;
     cursor: pointer;
     margin-top: 0;
@@ -42,8 +46,9 @@ const StyledDiv = styled.div`
   }
   #plus {
     right: 1em;
+  } */
   }
-
+  
   .drop-down {
     color: #666666;
     z-index: 4;
@@ -102,28 +107,25 @@ export default function Experience() {
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between position-relative">
             <h4>Esperienza</h4>
-            {idProfile === undefined && (
-              <div id="buttons" className="d-flex">
-                <Plus
-                  className="icon fs-1"
-                  id="plus"
+            <div id="buttons" className="d-flex">
+              <Plus
+                className="icon fs-1"
+                id="plus"
+                onClick={() => {
+                  setshowDrop(!showDrop);
+                  console.log("setShowDrop", showDrop);
+                }}
+              />
+              <div className="icon position-relative" id="pencil">
+                {/* <Pencil id="pencil" /> */}
+                <i
+                  className="fas fa-pencil-alt position-absolute"
                   onClick={() => {
-                    setshowDrop(!showDrop);
-                    console.log("setShowDrop", showDrop);
+                    navigate("/in/me/details/experience/");
                   }}
-                />
-                <div className="icon position-relative" id="pencil">
-                  {/* <Pencil id="pencil" /> */}
-                  <i
-                    className="fas fa-pencil-alt position-absolute"
-                    onClick={() => {
-                      navigate("/in/me/details/experience/");
-                    }}
-                  ></i>
-                </div>
+                ></i>
               </div>
-            )}
-
+            </div>
             {showDrop && (
               <div className="drop-down position-absolute">
                 <ul className="list-unstyled d-flex flex-column mb-0">
@@ -151,7 +153,6 @@ export default function Experience() {
           </div>
         </div>
       </StyledDiv>
-
       {showAddExperience && (
         <AddExperience
           mostra={showAddExperience}

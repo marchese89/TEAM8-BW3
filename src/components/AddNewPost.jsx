@@ -35,7 +35,7 @@ span{
 
 const NewPost = ({ onPost }) => {
   const [show, setShow] = useState(false);
-  const [postText, setPostText] = useState('');
+  const [postText, setPostText] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   
   const my_profileFromReduxStore = useSelector(
@@ -46,7 +46,7 @@ const NewPost = ({ onPost }) => {
   const handleClose = () => {
     setShow(false);
     // Resettare il testo del post e il file selezionato quando si chiude il modale
-    setPostText('');
+    setPostText("");
     setSelectedFile(null);
   };
 
@@ -67,7 +67,7 @@ const NewPost = ({ onPost }) => {
 
   const openFileInput = () => {
     // Apre l'input di tipo "file" quando si clicca sull'icona
-    document.getElementById('fileInput').click();
+    document.getElementById("fileInput").click();
   };
 
   return (

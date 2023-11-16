@@ -12,14 +12,14 @@ const StyledDiv = styled.div`
   font-size: 14px;
   color: grey;
   .margine{
-    margin-top: 8em
+    margin-top: 6em
   }
 `;
 
 const Footer = () => {
   return (
     <StyledDiv>
-      <footer className="footer-container d-flex justify-content-center margine ">
+      <footer className="footer-container d-flex flex-column flex-md-row justify-content-center margine align-content-center mb-5 ms-5 ms-md-0">
         <div className="footer-content ">
           <p>Informazioni</p>
           <p>LInee guida della community</p>

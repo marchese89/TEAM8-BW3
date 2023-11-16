@@ -11,15 +11,12 @@ import { token } from "../redux/actions";
 import { useSelector } from "react-redux";
 
 const ProfileStyled = styled.div`
-.destra li{
-  font-weight: 700 !important;
-}
-.lunghezza {
-
-}
-li p{
-  font-weight: normal
-}
+  .destra li {
+    font-weight: 700 !important;
+  }
+  li p {
+    font-weight: normal;
+  }
   .interazioni {
     padding: 0.6em !important;
   }
@@ -76,27 +73,31 @@ const Home = () => {
 
   const handlePost = async (postText) => {
     try {
-      const response = await fetch('https://striveschool-api.herokuapp.com/api/posts/', {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ "text": postText }), 
-      });
-  
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: postText }),
+        }
+      );
+
       if (!response.ok) {
-        throw new Error(`Errore nella richiesta POST: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Errore nella richiesta POST: ${response.status} ${response.statusText}`
+        );
       }
-  
+
       // Dopo la creazione del post, rifetch dei dati
       fetchData();
       setShowModal(false);
     } catch (error) {
-      console.error('Errore durante la creazione del post:', error.message);
+      console.error("Errore durante la creazione del post:", error.message);
     }
   };
-
 
   // Funzione per mostrare CommentArea
   const toggleCommentArea = (postId) => {
@@ -179,10 +180,10 @@ const Home = () => {
                     {post.username}
                   </p>
 
-                    {/* Data di creazione del post con funzione per trasformare la stringa della data */}
-                    <p style={{ fontSize: 0.7 + "em" }}>
-                      Creazione: {formatData(post.createdAt)}
-                    </p>
+                      {/* Data di creazione del post con funzione per trasformare la stringa della data */}
+                      <p style={{ fontSize: 0.7 + "em" }}>
+                        Creazione: {formatData(post.createdAt)}
+                      </p>
 
                     {/* Contenuto del post  */}
                     <div className="d-flex flex-wrap">
@@ -195,11 +196,11 @@ const Home = () => {
                     />
                     </div>
 
-                    {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
-                    <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
-                      Aggiornamento: {formatData(post.updatedAt)}
-                    </p>
-                    <hr />
+                      {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
+                      <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
+                        Aggiornamento: {formatData(post.updatedAt)}
+                      </p>
+                      <hr />
 
                   <div className="d-flex flex-nowrap justify-content-center">
 
@@ -264,25 +265,11 @@ const Home = () => {
               </Col>
 
               {/* Colonna laterale  */}
-              <Col className="col-3 bg-white destra border container-fluid rounded" >
-                <h5 style={{ fontSize: 1 + "em", margin: 0.2 + "em", fontWeight:700}}>LinkedIn Notizie</h5>
-
-                <li className="mt-3">Effetto ATP Finals per Torino<br/>
-                <p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>6 ore fa • 105 lettori</p></li>
-
-                <li className="mt-3">L'immobiliare è sempre più tech <br/>
-                <p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>6 ore fa</p></li>
-
-                <li className="mt-3">La 'Sindrome della Papera' ci riguarda <br/>
-                <p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>4 ore fa • 110 lettori</p></li>
-
-                <li className="mt-3">Manuale di critica costruttiva <br/>
-                <p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>5 ore fa</p></li>
-
-                <li className="mt-3">Assunzioni e nuovi premi in Ferrari <br/>
-                <p style={{ fontSize: 0.9 + "em", margin: 0.2 + "em" }}>7 ore fa • 437 lettori</p></li>
+              <Col className="mt-2 d-none d-lg-block">
+                <NewsCard />
+                <RecentProfile />
               </Col>
-          </Row>
+            </Row>
         </Container>
       </ProfileStyled>
     </>
@@ -290,4 +277,3 @@ const Home = () => {
 };
 
 export default Home;
-
