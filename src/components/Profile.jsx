@@ -13,7 +13,6 @@ import { Button, Form, FormControl, InputGroup, Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
-import SidePart from "./SidePart";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
 import { useParams } from "react-router-dom";
