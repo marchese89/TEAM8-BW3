@@ -67,7 +67,7 @@ const ProfileStyled = styled.div`
       height: 170px;
       object-fit: cover;
 
-      bottom: 190px;
+      bottom: 220px;
       left: 35px;
     }
 
@@ -234,7 +234,7 @@ const ProfileStyled = styled.div`
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 190px;
+      bottom: 210px;
       left: 35px;
     }
 
@@ -422,7 +422,7 @@ const ProfileStyled = styled.div`
       height: 140px;
       object-fit: cover;
 
-      bottom: 220px;
+      bottom: 240px;
       left: 35px;
     }
 
