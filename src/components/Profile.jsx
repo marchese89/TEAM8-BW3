@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  allProfilesAction,
   myProfileAction,
   updateProfileAction,
   userProfileAction,
-  visitUserAction,
 } from "../redux/actions";
 import placeholder from "../img/img_placeholder.jpg";
 import React from "react";
@@ -16,7 +16,6 @@ import styled from "styled-components";
 import SidePart from "./SidePart";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
-import { useParams } from "react-router-dom";
 
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
@@ -632,17 +631,6 @@ const ProfileStyled = styled.div`
 export default function Profile() {
   const dispatch = useDispatch();
 
-  const { idProfile } = useParams();
-  useEffect(() => {
-    if (idProfile !== undefined) {
-      dispatch(visitUserAction(idProfile));
-      console.log("ho chiamato visit user");
-      setDifferentUser(true);
-    } else {
-      setDifferentUser(false);
-    }
-  }, [idProfile]);
-
   const [show, setShow] = useState(false); //per il modale
   const handleClose = () => setShow(false); //chiusura modale
 
@@ -654,7 +642,12 @@ export default function Profile() {
   const [title, setTitle] = useState("");
   const [area, setArea] = useState("");
   const [profileImage, setProfileImage] = useState(placeholder);
-  const [differentUser, setDifferentUser] = useState(false);
+
+  useEffect(() => {
+    dispatch(allProfilesAction());
+    dispatch(myProfileAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -668,23 +661,11 @@ export default function Profile() {
   );
 
   useEffect(() => {
-    if (Object.keys(current_profileFromReduxStore).length > 0) {
-      if (idProfile !== undefined) {
-        setDifferentUser(true);
-        dispatch(userProfileAction(idProfile));
-      } else {
-        setDifferentUser(false);
-        //   dispatch(userProfileAction(my_profileFromReduxStore._id));
-      }
+    if (Object.keys(my_profileFromReduxStore).length > 0) {
+      setProfileImage(my_profileFromReduxStore.image);
+      dispatch(userProfileAction(my_profileFromReduxStore._id));
     }
-  }, []);
-
-  // useEffect(() => {
-  //   if (Object.keys(my_profileFromReduxStore).length > 0) {
-  //     setProfileImage(my_profileFromReduxStore.image);
-  //     dispatch(userProfileAction(my_profileFromReduxStore._id));
-  //   }
-  // }, [my_profileFromReduxStore]);
+  }, [my_profileFromReduxStore]);
 
   useEffect(() => {
     if (Object.keys(current_profileFromReduxStore).length > 0) {
@@ -695,7 +676,6 @@ export default function Profile() {
       setBio(current_profileFromReduxStore.bio);
       setTitle(current_profileFromReduxStore.title);
       setArea(current_profileFromReduxStore.area);
-      setProfileImage(current_profileFromReduxStore.image);
     }
   }, [current_profileFromReduxStore]);
 
@@ -768,12 +748,14 @@ export default function Profile() {
                 className="cover position-relative"
               />
             </div>
-            <Image
-              src={profileImage}
-              className="avatar z-3"
-              style={!differentUser ? { cursor: "pointer" } : {}}
-              onClick={!differentUser ? openModal : () => {}}
-            />
+            <Col className="position-absolute ">
+              <Image
+                src={profileImage}
+                className="avatar z-3"
+                style={{ cursor: "pointer" }}
+                onClick={openModal}
+              />
+            </Col>
             {/* isOpen={} onRequestClose={closeModal} */}
             <Modal show={isModalOpen} onHide={closeModal}>
               <Modal.Header closeButton>
@@ -863,16 +845,14 @@ export default function Profile() {
                     <p className="certificationinfoTEXT mt-1">
                       Epicode Network
                     </p>
-                    {!differentUser && (
-                      <div className="icon pencil position-absolute">
-                        <i
-                          className="fas fa-pencil-alt position-absolute icon-inner"
-                          onClick={() => {
-                            setShow(true);
-                          }}
-                        ></i>
-                      </div>
-                    )}
+                    <div className="icon pencil position-absolute">
+                      <i
+                        className="fas fa-pencil-alt position-absolute icon-inner"
+                        onClick={() => {
+                          setShow(true);
+                        }}
+                      ></i>
+                    </div>
                   </div>
                   <div className="certificationinfo">
                     <Image
