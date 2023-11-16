@@ -128,8 +128,9 @@ const Home = () => {
             </Row>
 
             {/* Colonna laterale profilo  */}
+
             <Row>
-              <Col className="mt-2 d-lg-flex d-md-block">
+              <Col className="mt-2 d-lg-flex d-md-block position-sticky">
                 <CardLeft />
               </Col>
 

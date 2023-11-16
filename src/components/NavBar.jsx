@@ -20,7 +20,7 @@ import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   color: #666666;
-  margin-top: 8em !important;
+  margin-top: 2em !important;
 
   .FormControlStyle {
     max-width: 290px;

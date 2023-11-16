@@ -28,7 +28,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      position: relative;
+      ${"" /* position: relative; */}
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -44,7 +44,7 @@ const ProfileStyled = styled.div`
       width: 100%;
     }
     .containercover {
-      height: 400px;
+      height: 50%;
       width: 100%;
       overflow: hidden;
     }
@@ -61,15 +61,17 @@ const ProfileStyled = styled.div`
     }
 
     .avatar {
-      position: absolute;
+      ${"" /* position: absolute; */}
       border: 5px solid #fff;
       border-radius: 50%;
       width: 170px;
       height: 170px;
       object-fit: cover;
 
-      bottom: 180px;
-      left: 26px;
+      ${
+        "" /* bottom: 180px;
+      left: 26px; */
+      }
     }
 
     .containercertification {
@@ -201,7 +203,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      position: relative;
+      ${"" /* position: relative; */}
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -216,7 +218,6 @@ const ProfileStyled = styled.div`
       width: 100%;
     }
     .containercover {
-      height: 400px;
       width: 100%;
       overflow: hidden;
     }
@@ -233,14 +234,16 @@ const ProfileStyled = styled.div`
     }
 
     .avatar {
-      position: absolute;
+      ${"" /* position: absolute; */}
       border: 5px solid #fff;
       border-radius: 50%;
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 220px;
-      left: 30px;
+      ${
+        "" /* bottom: 220px;
+      left: 30px; */
+      }
     }
 
     .containercertification {
@@ -371,7 +374,8 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${'' /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${
+    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -383,7 +387,8 @@ const ProfileStyled = styled.div`
       bottom: 10px;
       left: 35px;
     }
-  } */}
+  } */
+  }
 
   @media screen and (max-width: 999px) {
     .paddingzero {
@@ -391,7 +396,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      position: relative;
+      ${"" /* position: relative; */}
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -422,15 +427,17 @@ const ProfileStyled = styled.div`
     }
 
     .avatar {
-      position: absolute;
+      ${"" /* position: absolute; */}
       border: 5px solid #fff;
       border-radius: 50%;
       width: 140px;
       height: 140px;
       object-fit: cover;
 
-      bottom: 210px;
-      left: 30px;
+      ${
+        "" /* bottom: 210px;
+      left: 30px; */
+      }
     }
 
     .containercertification {
@@ -606,15 +613,17 @@ const ProfileStyled = styled.div`
 
   @media screen and (max-width: 500px) {
     .avatar {
-      position: absolute;
+      ${"" /* position: absolute; */}
       border: 5px solid #fff;
       border-radius: 50%;
       width: 140px;
       height: 140px;
       object-fit: cover;
 
-      bottom: 240px;
-      left: 30px;
+      ${
+        "" /* bottom: 240px;
+      left: 30px; */
+      }
     }
   }
 `;
@@ -736,15 +745,17 @@ export default function Profile() {
             <div className="containercover">
               <Image
                 src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="cover"
+                className="cover position-relative"
               />
             </div>
-            <Image
-              src={profileImage}
-              className="avatar"
-              style={{ cursor: "pointer" }}
-              onClick={openModal}
-            />
+            <Col className="position-absolute ">
+              <Image
+                src={profileImage}
+                className="avatar z-3"
+                style={{ cursor: "pointer" }}
+                onClick={openModal}
+              />
+            </Col>
             {/* isOpen={} onRequestClose={closeModal} */}
             <Modal show={isModalOpen} onHide={closeModal}>
               <Modal.Header closeButton>
