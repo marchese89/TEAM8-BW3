@@ -3,7 +3,7 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import styled from "styled-components";
 import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
 import AddComment from "./AddComment";
-// import { useDispatch } from 'react-redux';
+import NewPost from "./AddNewPost";
 const ProfileStyled = styled.div`
   .interazioni {
     padding: 0.6em !important;
@@ -13,18 +13,6 @@ const ProfileStyled = styled.div`
     cursor: pointer;
   }
   
-  #top {
-    position: sticky;
-    top: 0;
-    z-index: 1000; 
-  }
-  #p {
-    padding-top: 5em;
-  }
-  .margine{
-    margin-top: 8em !important;
-    margin-bottom:8em !important;
-  }
 `;
 
 const Home = () => {
@@ -32,6 +20,7 @@ const Home = () => {
   const [selectedPostId, setSelectedPostId] = useState(false);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -62,6 +51,35 @@ const Home = () => {
       setLoading(false);
     }
   };
+
+  // const handlePost = async (postText, file) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('text', postText);
+  //     if (file) {
+  //       formData.append('image', file);
+  //     }
+
+  //     const response = await fetch('https://striveschool-api.herokuapp.com/api/posts/', {
+  //       method: 'POST',
+  //       headers: {
+  //         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMmVjZWM1NWU3ZTAwMThmODNjODUiLCJpYXQiOjE2OTk4ODQ3NTAsImV4cCI6MTcwMTA5NDM1MH0.JwqWWy93veTxrqjHXsB3_IFB9m9gO6IYG7BOf9uxVKQ",
+  //       },
+  //       body: formData,
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`Errore nella richiesta POST: ${response.status} ${response.statusText}`);
+  //     }
+
+  //     // Dopo la creazione del post, rifetch dei dati
+  //     fetchData();
+  //     setShowModal(false);
+  //   } catch (error) {
+  //     console.error('Errore durante la creazione del post:', error.message);
+  //   }
+  // };
+
 
   // Funzione per mostrare CommentArea
   const toggleCommentArea = (postId) => {
@@ -95,11 +113,27 @@ const Home = () => {
           </Row>
         )}
 
-        <Container className="w-75 margine mt-5">
+        <Container className=" margine mt-5">
+        <Row>
+        <Col className="col-2 bg-white border rounded" >
+          <h2>Aggiungere Profilo con redux</h2>
+        </Col>
+        
+        {/* <div className="text-center "> */}
+
+        {/* <NewPost
+          show={showModal}
+          handleClose={() => setShowModal(false)}
+          onPost={handlePost}  
+        /> */}
+
+        {/* </div> */}
+        {/* Centrare col  */}
+              <Col className=" d-sm mb-2 mt-2 rounded col-md-6  pt-2 justify-content-center">
           {/* Map dei post  */}
           {postData.map((post) => (
             <Row className="justify-content-center " key={post._id}>
-              <Col className=" d-sm border mb-2 mt-2 bg-white rounded col-md-6  pt-2">
+              <Col className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2" lg={{offset:1}}>
                 {/* Avatar + Nome Utente  */}
                 <p
                   style={{
@@ -190,9 +224,27 @@ const Home = () => {
                     <AddComment postId={selectedPostId} />
                   </>
                 )}
-              </Col>
+                </Col>
             </Row>
           ))}
+              </Col>
+              <Col className="col-3 bg-white border rounded" lg={{offset:1}}>
+              <h1>LinkedIn Notizie</h1>
+
+<li className="mt-3"><h6>Effetto ATP Finals per Torino
+6 ore fa • 105 lettori</h6></li>
+<li className="mt-3"><h6>L'immobiliare è sempre più tech
+6 ore fa</h6></li>
+<li className="mt-3"><h6>La 'Sindrome della Papera' ci riguarda
+4 ore fa • 110 lettori</h6></li>
+<li className="mt-3"><h6>Manuale di critica costruttiva
+5 ore fa</h6></li>
+<li className="mt-3"><h6>Assunzioni e nuovi premi in Ferrari
+7 ore fa • 437 lettori</h6></li>
+
+Show more
+              </Col>
+          </Row>
         </Container>
       </ProfileStyled>
     </>

@@ -1,10 +1,10 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { FormControl } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
 import imguno from "../img/LogoLinkedin.jpg";
 import imgdue from "../img/icona-utente.jpg";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   HouseDoorFill,
@@ -14,139 +14,189 @@ import {
   Grid3x3GapFill,
   CaretDownFill,
 } from "react-bootstrap-icons";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   color: #666666;
-  font-size: 25px;
+  margin-top:8em !important;
 
-  &:hover {
-    cursor: pointer !important;
-    color: black !important;
+  .FormControlStyle {
+    max-width: 290px;
+    color: black;
+    background-color: #edf3f8;
+  }
+
+  .navItemStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 35px;
+    cursor: pointer;
+    font-size: 25px;
+  }
+
+  .navItemStyle:hover {
+    color: black;
+    border-bottom: 2px solid black;
+  }
+
+  .selected {
+    color: black;
+    border-bottom: 2px solid black;
+  }
+  .textStyle {
+    font-size: 11px;
+  }
+  .select-search {
+    width: 13em;
   }
 `;
 
 function NavBar() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchType, setsearchType] = useState("QUERY");
+  const [search, setSearch] = useState();
+  const dispatch = useDispatch();
 
-  const FormConrolStyle = {
-    maxWidth: "250px",
-    color: "#EDF3F8",
-    marginRight: "100px",
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      dispatch(searchAction(searchType, search));
+    }
   };
-
-  const navItemStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "10px",
-    marginRight: "35px",
-    cursor: "pointer",
-  };
-
-  const textStyle = {
-    fontSize: "12px", // Imposta la dimensione del testo
-  };
-  // const iconSize = "25px";
 
   return (
-    <Navbar
-      expand="lg"
-      className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
-    >
-      <Navbar.Brand href="#home">
-        <img
-          src={imguno}
-          alt="Logo Linkedin"
-          width="35"
-          height="35"
-          style={{ marginLeft: "20px" }}
-        />
-      </Navbar.Brand>
-      <FormControl
-        type="search"
-        placeholder="Cerca"
-        className="serch"
-        aria-label="Search"
-        style={{ ...FormConrolStyle, backgroundColor: "#EDF3F8" }}
-      />
+    <StyledDiv>
+      <Navbar
+        expand="lg"
+        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
+      >
+        <Navbar.Brand href="#home">
+          <img
+            src={imguno}
+            alt="Logo Linkedin"
+            width="35"
+            height="35"
+            style={{ marginLeft: "120px" }}
+          />
+        </Navbar.Brand>
 
-      <Nav className="d-flex justify-content-center">
-        <div className="d-flex">
-          <div style={navItemStyle}>
-            <StyledDiv>
+        <FormControl
+          type="search"
+          placeholder="Cerca"
+          className="FormControlStyle me-2"
+          aria-label="Search"
+          onKeyDown={handleKeyPress}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        {location.pathname === "/jobs" && (
+          <Form.Select
+            className="select-search"
+            onChange={(e) => {
+              setsearchType(e.target.value);
+            }}
+            value={searchType}
+          >
+            <option value={QUERY}>Ricerca Semplice</option>
+            <option value={COMPANY}>Azienda</option>
+            <option value={CATEGORY}>Categoria</option>
+          </Form.Select>
+        )}
+        <Nav className="d-flex justify-content-center">
+          <div className="d-flex">
+            <div
+              className={
+                location.pathname === "/"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
+            >
               <HouseDoorFill
                 onClick={() => {
                   navigate("/");
                 }}
               />
-            </StyledDiv>
-            <span style={textStyle}>Home</span>
-          </div>
 
-          <div style={navItemStyle}>
-            <StyledDiv>
+              <span className="textStyle">Home</span>
+            </div>
+
+            <div className="navItemStyle">
               <PeopleFill />
-            </StyledDiv>
-            <span style={textStyle}>Rete</span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
-              <i className="fas fa-suitcase"></i>
-            </StyledDiv>
-            <span style={textStyle}>Lavoro</span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
-              <ChatRightDotsFill />
-            </StyledDiv>
 
-            <span style={textStyle}>Messagistica</span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
-              <BellFill />
-            </StyledDiv>
-
-            <span style={textStyle}>Notifiche</span>
-          </div>
-          <div style={navItemStyle}>
-            <img
-              src={imgdue}
-              alt="Utente"
-              width="30"
-              height="30"
+              <span className="textStyle">Rete</span>
+            </div>
+            <div
+              className={
+                location.pathname === "/jobs"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
               onClick={() => {
-                navigate("/in/me");
-              }}
-            />
-            <span style={textStyle}>
-              Tu <CaretDownFill />
-            </span>
-          </div>
-          <div style={navItemStyle}>
-            <StyledDiv>
-              <Grid3x3GapFill />
-            </StyledDiv>
-
-            <span style={textStyle}>
-              Per le aziende <CaretDownFill />
-            </span>
-          </div>
-          <div style={navItemStyle}>
-            <span
-              style={{
-                color: "#915907",
-                fontSize: "12px",
-                textDecoration: "underline",
+                navigate("/jobs");
               }}
             >
-              Prova Premium per <br />0 EUR{" "}
-            </span>
+              <i className="fas fa-suitcase"></i>
+
+              <span className="textStyle">Lavoro</span>
+            </div>
+            <div className="navItemStyle">
+              <ChatRightDotsFill />
+
+              <span className="textStyle">Messagistica</span>
+            </div>
+            <div className="navItemStyle">
+              <BellFill />
+
+              <span className="textStyle">Notifiche</span>
+            </div>
+            <div
+              className={
+                location.pathname === "/in/me"
+                  ? "navItemStyle selected"
+                  : "navItemStyle"
+              }
+            >
+              <img
+                src={imgdue}
+                alt="Utente"
+                width="28"
+                height="28"
+                onClick={() => {
+                  navigate("/in/me");
+                }}
+              />
+              <span className="textStyle">
+                Tu <CaretDownFill />
+              </span>
+            </div>
+            <div className="navItemStyle">
+              <Grid3x3GapFill />
+
+              <span className="textStyle">
+                Per le aziende <CaretDownFill />
+              </span>
+            </div>
+            <div className="navItemStyle">
+              <span
+                style={{
+                  color: "#915907",
+                  fontSize: "12px",
+                  textDecoration: "underline",
+                }}
+              >
+                Prova Premium per <br />0 EUR{" "}
+              </span>
+            </div>
           </div>
-        </div>
-      </Nav>
-    </Navbar>
+        </Nav>
+      </Navbar>
+    </StyledDiv>
   );
 }
 

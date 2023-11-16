@@ -6,6 +6,7 @@ import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceListAction, myProfileAction } from "../redux/actions";
+import { Row } from "react-bootstrap";
 
 const StyledDiv = styled.div`
   font-size: 16px;
@@ -153,6 +154,7 @@ export default function Experience() {
           </div>
         </div>
       </StyledDiv>
+        </Row>
 
       {showAddExperience && (
         <AddExperience
