@@ -190,6 +190,9 @@ function NavBar() {
                   src={my_profileFromReduxStore.image}
                   alt="profile"
                   className="profile-img rounded-circle"
+                  onClick={() => {
+                    navigate("/in/me");
+                  }}
                 />
                 Tu
               </span>

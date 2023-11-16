@@ -70,7 +70,11 @@ const Home = () => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+<<<<<<< HEAD
         body: JSON.stringify({ "text": postText }), 
+=======
+        body: JSON.stringify({ "text": postText }),  // Usa "text" tra virgolette
+>>>>>>> master
       });
   
       if (!response.ok) {
