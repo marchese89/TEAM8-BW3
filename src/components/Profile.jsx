@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  allProfilesAction,
   myProfileAction,
   updateProfileAction,
   userProfileAction,
+  visitUserAction,
 } from "../redux/actions";
 import placeholder from "../img/img_placeholder.jpg";
 import React from "react";
@@ -16,19 +16,20 @@ import styled from "styled-components";
 import SidePart from "./SidePart";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
+import { useParams } from "react-router-dom";
 
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
     .marginesagerato {
-      margin-top: 120px !important;
-    }
+    margin-top: 120px !important;
+  }
 
-    .paddingzero {
+  .paddingzero {
       padding: 0 !important;
     }
 
     .containermain {
-      ${"" /* position: relative; */}
+      position: relative;
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -37,21 +38,21 @@ const ProfileStyled = styled.div`
       background-color: white;
       width: 60%;
       background-color: #fff;
-    }
+  }
     .cover {
       object-fit: cover;
       object-position: 0;
       width: 100%;
     }
     .containercover {
-      height: 50%;
+      height: 400px;
       width: 100%;
       overflow: hidden;
     }
 
     .containerinfo {
       padding: 2em;
-      line-height: 16px;
+      line-height: 10px;
     }
 
     .containerinfosmall {
@@ -61,17 +62,15 @@ const ProfileStyled = styled.div`
     }
 
     .avatar {
-      ${"" /* position: absolute; */}
+      position: absolute;
       border: 5px solid #fff;
       border-radius: 50%;
       width: 170px;
       height: 170px;
       object-fit: cover;
 
-      ${
-        "" /* bottom: 180px;
-      left: 26px; */
-      }
+      bottom: 190px;
+      left: 35px;
     }
 
     .containercertification {
@@ -157,7 +156,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 6px;
+      padding-top: 8px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -179,7 +178,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 6px;
+      padding-top: 8px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -191,10 +190,13 @@ const ProfileStyled = styled.div`
     .buttonother:hover {
       background-color: #ebebeb;
     }
-  }
 
-  .exp {
-    line-height: 100%;
+
+    }
+
+    .exp {
+      line-height: 100%;
+    }
   }
 
   @media screen and (min-width: 1000px) and (max-width: 1200px) {
@@ -203,7 +205,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      ${"" /* position: relative; */}
+      position: relative;
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -218,13 +220,14 @@ const ProfileStyled = styled.div`
       width: 100%;
     }
     .containercover {
+      height: 400px;
       width: 100%;
       overflow: hidden;
     }
 
     .containerinfo {
       padding: 2em;
-      line-height: 17px;
+      line-height: 10px;
     }
 
     .containerinfosmall {
@@ -234,16 +237,14 @@ const ProfileStyled = styled.div`
     }
 
     .avatar {
-      ${"" /* position: absolute; */}
+      position: absolute;
       border: 5px solid #fff;
       border-radius: 50%;
       width: 170px;
       height: 170px;
       object-fit: cover;
-      ${
-        "" /* bottom: 220px;
-      left: 30px; */
-      }
+      bottom: 190px;
+      left: 35px;
     }
 
     .containercertification {
@@ -330,7 +331,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 5px;
+      padding-top: 8px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -352,7 +353,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 5px;
+      padding-top: 8px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -374,8 +375,7 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${
-    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -384,10 +384,9 @@ const ProfileStyled = styled.div`
       height: 140px;
       object-fit: cover;
 
-      bottom: 10px;
+      bottom: 100px;
       left: 35px;
     }
-  } */
   }
 
   @media screen and (max-width: 999px) {
@@ -396,7 +395,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      ${"" /* position: relative; */}
+      position: relative;
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -417,27 +416,25 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 17px;
+      line-height: 10px;
     }
 
     .containerinfosmall {
-      line-height: 15px;
+      line-height: 8px;
       font-size: 0.8em;
       color: rgb(134, 134, 134);
     }
 
     .avatar {
-      ${"" /* position: absolute; */}
+      position: absolute;
       border: 5px solid #fff;
       border-radius: 50%;
       width: 140px;
       height: 140px;
       object-fit: cover;
 
-      ${
-        "" /* bottom: 210px;
-      left: 30px; */
-      }
+      bottom: 220px;
+      left: 35px;
     }
 
     .containercertification {
@@ -474,7 +471,7 @@ const ProfileStyled = styled.div`
     .name {
       font-size: 1.5em;
       font-weight: 500;
-      line-height: 15px !important;
+      line-height: 1;
       width: 100vw;
     }
 
@@ -525,7 +522,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 5px;
+      padding-top: 8px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -547,7 +544,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 6px;
+      padding-top: 8px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -610,26 +607,21 @@ const ProfileStyled = styled.div`
     left: 0.5em;
     top: 0.5em;
   }
-
-  @media screen and (max-width: 500px) {
-    .avatar {
-      ${"" /* position: absolute; */}
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-
-      ${
-        "" /* bottom: 240px;
-      left: 30px; */
-      }
-    }
-  }
 `;
 
 export default function Profile() {
   const dispatch = useDispatch();
+
+  const { idProfile } = useParams();
+  useEffect(() => {
+    if (idProfile !== undefined) {
+      dispatch(visitUserAction(idProfile));
+      console.log("ho chiamato visit user");
+      setDifferentUser(true);
+    } else {
+      setDifferentUser(false);
+    }
+  }, [idProfile]);
 
   const [show, setShow] = useState(false); //per il modale
   const handleClose = () => setShow(false); //chiusura modale
@@ -642,12 +634,7 @@ export default function Profile() {
   const [title, setTitle] = useState("");
   const [area, setArea] = useState("");
   const [profileImage, setProfileImage] = useState(placeholder);
-
-  useEffect(() => {
-    dispatch(allProfilesAction());
-    dispatch(myProfileAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [differentUser, setDifferentUser] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -661,11 +648,23 @@ export default function Profile() {
   );
 
   useEffect(() => {
-    if (Object.keys(my_profileFromReduxStore).length > 0) {
-      setProfileImage(my_profileFromReduxStore.image);
-      dispatch(userProfileAction(my_profileFromReduxStore._id));
+    if (Object.keys(current_profileFromReduxStore).length > 0) {
+      if (idProfile !== undefined) {
+        setDifferentUser(true);
+        dispatch(userProfileAction(idProfile));
+      } else {
+        setDifferentUser(false);
+        //   dispatch(userProfileAction(my_profileFromReduxStore._id));
+      }
     }
-  }, [my_profileFromReduxStore]);
+  }, []);
+
+  // useEffect(() => {
+  //   if (Object.keys(my_profileFromReduxStore).length > 0) {
+  //     setProfileImage(my_profileFromReduxStore.image);
+  //     dispatch(userProfileAction(my_profileFromReduxStore._id));
+  //   }
+  // }, [my_profileFromReduxStore]);
 
   useEffect(() => {
     if (Object.keys(current_profileFromReduxStore).length > 0) {
@@ -676,6 +675,7 @@ export default function Profile() {
       setBio(current_profileFromReduxStore.bio);
       setTitle(current_profileFromReduxStore.title);
       setArea(current_profileFromReduxStore.area);
+      setProfileImage(current_profileFromReduxStore.image);
     }
   }, [current_profileFromReduxStore]);
 
@@ -740,22 +740,20 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato d-flex justify-content-center">
+        <Container className="mt-5 marginesagerato">
           <div className="containermain">
             <div className="containercover">
               <Image
                 src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="cover position-relative"
+                className="cover"
               />
             </div>
-            <Col className="position-absolute ">
-              <Image
-                src={profileImage}
-                className="avatar z-3"
-                style={{ cursor: "pointer" }}
-                onClick={openModal}
-              />
-            </Col>
+            <Image
+              src={profileImage}
+              className="avatar"
+              style={!differentUser ? { cursor: "pointer" } : {}}
+              onClick={!differentUser ? openModal : () => {}}
+            />
             {/* isOpen={} onRequestClose={closeModal} */}
             <Modal show={isModalOpen} onHide={closeModal}>
               <Modal.Header closeButton>
@@ -845,14 +843,16 @@ export default function Profile() {
                     <p className="certificationinfoTEXT mt-1">
                       Epicode Network
                     </p>
-                    <div className="icon pencil position-absolute">
-                      <i
-                        className="fas fa-pencil-alt position-absolute icon-inner"
-                        onClick={() => {
-                          setShow(true);
-                        }}
-                      ></i>
-                    </div>
+                    {!differentUser && (
+                      <div className="icon pencil position-absolute">
+                        <i
+                          className="fas fa-pencil-alt position-absolute icon-inner"
+                          onClick={() => {
+                            setShow(true);
+                          }}
+                        ></i>
+                      </div>
+                    )}
                   </div>
                   <div className="certificationinfo">
                     <Image
@@ -867,7 +867,6 @@ export default function Profile() {
               </Col>
             </Row>
           </div>
-          <SidePart />
         </Container>
       </ProfileStyled>
       <Modal show={show} onHide={handleClose} className="modal">
@@ -941,7 +940,9 @@ export default function Profile() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="d-flex flex-row justify-content-center my-5"></div>
+      <div className="d-flex flex-row justify-content-center my-5">
+        <Experience />
+      </div>
     </>
   );
 }

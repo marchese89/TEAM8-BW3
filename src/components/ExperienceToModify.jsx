@@ -265,7 +265,7 @@ export default function ExperienceToModify() {
       <StyledDiv className="d-flex flex-column rounded-3 text-black">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between position-relative">
-            <h4>Esperienze</h4>
+            <h4>Esperienza</h4>
             <div id="buttons" className="d-flex flex-column">
               <Plus
                 className="icon fs-1"
@@ -274,12 +274,12 @@ export default function ExperienceToModify() {
                   setshowDrop(!showDrop);
                 }}
               />
-              <div className="icon position-relative" id="pencil">
-                <i
-                  className="fas fa-pencil-alt position-absolute"
-                  onClick={handleShow}
-                ></i>
-              </div>
+              {/* <div className="icon position-relative" id="pencil">
+              <i
+                className="fas fa-pencil-alt position-absolute"
+                onClick={handleShow}
+              ></i>
+            </div> */}
             </div>
             {showDrop && (
               <div className="drop-down position-absolute">

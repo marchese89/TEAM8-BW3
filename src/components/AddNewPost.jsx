@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import { Button, Modal, Form, Row, Col } from "react-bootstrap";
-import { CameraFill } from "react-bootstrap-icons";
+import React, { useState } from 'react';
+import { Button, Modal, Form, Row } from 'react-bootstrap';
+import { CameraFill } from 'react-bootstrap-icons';
 
 const NewPost = ({ onPost }) => {
   const [show, setShow] = useState(false);
-  const [postText, setPostText] = useState("");
+  const [postText, setPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
 
+  
   const handleClose = () => {
     setShow(false);
     // Resettare il testo del post e il file selezionato quando si chiude il modale
-    setPostText("");
+    setPostText('');
     setSelectedFile(null);
   };
 
@@ -31,60 +32,58 @@ const NewPost = ({ onPost }) => {
 
   const openFileInput = () => {
     // Apre l'input di tipo "file" quando si clicca sull'icona
-    document.getElementById("fileInput").click();
+    document.getElementById('fileInput').click();
   };
 
   return (
     <>
-      <Col>
-        <h5>Aggiungi un Nuovo Post</h5>
-        <Form.Control
-          size="lg"
-          type="text"
-          placeholder="Avvia un post"
-          className=""
-          onClick={handleShow}
-        />
+       <Row className="mb-5 ">
 
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Nuovo Post</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Scrivi il tuo post qui..."
-              value={postText}
-              onChange={(e) => setPostText(e.target.value)}
+
+
+
+<Form.Control size="lg" type="text" placeholder="Avvia un post" onClick={handleShow} />
+      
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Nuovo Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Scrivi il tuo post qui..."
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+          />
+          <div className="mt-3">
+            {/* Immagine/icona cliccabile */}
+            <CameraFill
+              size={30}
+              style={{ cursor: 'pointer' }}
+              onClick={openFileInput}
             />
-            <div className="mt-3">
-              {/* Immagine/icona cliccabile */}
-              <CameraFill
-                size={30}
-                style={{ cursor: "pointer" }}
-                onClick={openFileInput}
-              />
-              {/* Input di tipo "file" nascosto */}
-              <input
-                type="file"
-                id="fileInput"
-                accept="image/*"
-                onChange={handleFileChange}
-                style={{ display: "none" }}
-              />
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Chiudi
-            </Button>
-            <Button variant="primary" onClick={handlePost}>
-              Pubblica
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </Col>
+            {/* Input di tipo "file" nascosto */}
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Chiudi
+          </Button>
+          <Button variant="primary" onClick={handlePost}>
+            Pubblica
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      </Row>
     </>
   );
 };
