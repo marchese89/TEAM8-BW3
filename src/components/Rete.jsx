@@ -4,20 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { allProfilesAction } from "../redux/actions";
 
 const RetePage = () => {
-  const dispatch = useDispatch();
-  const userFromRedux = useSelector((state) => {
-    state.profile.profiles;
-  });
-  const [profiles, setprofiles]=useState()
-  
+  // const dispatch = useDispatch();
+  // const userFromRedux = useSelector((state) => {
+  //   state.profile.profiles;
+  // });
+  // const [profiles, setprofiles]=useState()
+
   // useEffect(() => {
 
   // }, []);
 
-  return (
-    
-   
-  );
+  return <></>;
 };
 
 export default RetePage;
