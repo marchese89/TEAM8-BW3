@@ -29,8 +29,9 @@ const AllComments = ({ postId }) => {
 
       const data = await response.json();
 
-   
-      setComments(data);
+      // Filtra i commenti solo per il post selezionato
+      const postComments = data.filter(comment => comment._id === postId);
+      setComments(postComments);
     } catch (error) {
       console.error(
         "Errore durante la richiesta GET dei commenti:",
@@ -55,7 +56,8 @@ const AllComments = ({ postId }) => {
       <div>
         {comments.map((comment) => (
           <li key={comment._id}>
-            {comment.comment} 
+            {comment.comment} ~ {comment.rate}
+            postId: {postId} commentId: {comment._id}
           </li>
         ))}
       </div>

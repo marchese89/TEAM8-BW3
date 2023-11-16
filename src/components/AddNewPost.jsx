@@ -1,47 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Modal, Form, Row, Col, Image } from 'react-bootstrap';
-import { Calendar, Calendar3, CalendarFill, CameraFill, ImageFill, Newspaper, } from 'react-bootstrap-icons';
-import { useSelector } from 'react-redux';
-import styled from "styled-components";
-const ProfileStyled = styled.div`
-.commento {
-  padding: 0.8em !important;
-  width:80% !important;
-  height: 80% !important;
-  border-radius:5em;
-  margin-left:1em;
-  margin-right:1em;
-}
-.imgicon{
-  color:#50ABE4;
-  margin-right:0.7em;
-  margin-left:1em
-}
-.calendar{
-  color:#cc6d00;
-  margin-right:0.7em;
-  margin-left:3em
-}
-.newspaper{
-  color:#ff673a;
-  margin-right:0.7em;
-  margin-left:3em
-}
-span{
-  font-weight:600;
-  color:#626060;
-}
-`
+import React, { useState } from "react";
+import { Button, Modal, Form, Row, Col } from "react-bootstrap";
+import { CameraFill } from "react-bootstrap-icons";
 
 const NewPost = ({ onPost }) => {
   const [show, setShow] = useState(false);
   const [postText, setPostText] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  
-  const my_profileFromReduxStore = useSelector(
-    (state) => state.profile.my_profile
-  );  
-
 
   const handleClose = () => {
     setShow(false);
@@ -71,64 +35,57 @@ const NewPost = ({ onPost }) => {
   };
 
   return (
-    <ProfileStyled>
-    <span>
-      <img
-        src={my_profileFromReduxStore.image}
-        className='rounded-circle'
-                          
-        alt="avatar"
-        width={50 + "px"}
-        height={50 + 'px'}
-      />
-    </span>
-<input size="lg" type="text" placeholder="Avvia un post" className='commento' onClick={handleShow} />
-<div className='mt-3'>
-<ImageFill className='imgicon'/><span>Contenuti multimediali</span>
-<Calendar3 className='calendar'/><span>Evento</span>
-<Newspaper className='newspaper'/><span>Scrivi un articolo</span>
-</div>
+    <>
+      <Col>
+        <h5>Aggiungi un Nuovo Post</h5>
+        <Form.Control
+          size="lg"
+          type="text"
+          placeholder="Avvia un post"
+          className=""
+          onClick={handleShow}
+        />
 
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Nuovo Post</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            placeholder="Scrivi il tuo post qui..."
-            value={postText}
-            onChange={(e) => setPostText(e.target.value)}
-          />
-          <div className="mt-3">
-            {/* Immagine/icona cliccabile */}
-            <CameraFill
-              size={30}
-              style={{ cursor: 'pointer' }}
-              
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Nuovo Post</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Scrivi il tuo post qui..."
+              value={postText}
+              onChange={(e) => setPostText(e.target.value)}
             />
-            {/* Input di tipo "file" nascosto */}
-            <input
-              type="file"
-              id="fileInput"
-              accept="image/*"
-              onChange={handleFileChange}
-              style={{ display: 'none' }}
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Chiudi
-          </Button>
-          <Button variant="primary" onClick={handlePost}>
-            Pubblica
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </ProfileStyled>
+            <div className="mt-3">
+              {/* Immagine/icona cliccabile */}
+              <CameraFill
+                size={30}
+                style={{ cursor: "pointer" }}
+                onClick={openFileInput}
+              />
+              {/* Input di tipo "file" nascosto */}
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Chiudi
+            </Button>
+            <Button variant="primary" onClick={handlePost}>
+              Pubblica
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Col>
+    </>
   );
 };
 

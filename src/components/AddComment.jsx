@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Badge } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Form, Button } from "react-bootstrap";
 import AllComments from "./AllComments";
-import styled from "styled-components";
-const ProfileStyled = styled.div`
-.commento {
-  padding: 1em !important;
-  width:70% !important;
-  height: 80% !important;
-  border-radius:5em;
-  margin-left:1em;
-  margin-right:1em;
-}
-.bottone{display:inline;}
-`;
 
 const AddComment = ({ postId, fetchComments }) => {
   console.log("post id: ", postId);
@@ -23,10 +10,6 @@ const AddComment = ({ postId, fetchComments }) => {
     elementId: postId,
   });
   const [loading, setLoading] = useState(false);
-
-  const my_profileFromReduxStore = useSelector(
-    (state) => state.profile.my_profile
-  );
 
   // const fetchComments = async () => { };
 
@@ -71,40 +54,41 @@ const AddComment = ({ postId, fetchComments }) => {
 
   console.log(comment.comment);
   return (
-    <ProfileStyled>
-      <Row className="my-3">
+    <>
+      <div className="my-3">
         <Form onSubmit={sendComment}>
           <Form.Group className="mb-2">
-            
-                      <span>
-                        <img
-                          src={my_profileFromReduxStore.image}
-                          className='rounded-circle'
-                          
-                          alt="avatar"
-                          width={50 + "px"}
-                          height={50 + 'px'}
-                        />
-                      </span>
-            <span>
-            <input
-            className="commento"
+            <Form.Label>Commento</Form.Label>
+            <Form.Control
               type="text"
-              placeholder="Aggiugni un commento..."
+              placeholder="Inserisci qui il testo"
               value={comment.comment}
               onChange={(e) =>
                 setComment({ ...comment, comment: e.target.value })
               }
-            /></span>
-          <span>
-          <Button className="bottone" variant="primary" type="submit" disabled={loading}>
-            {loading ? "Invio..." : "Invia"}
-          </Button></span>
+            />
           </Form.Group>
+          <Form.Group className="mb-2">
+            <Form.Label>Valutazione</Form.Label>
+            <Form.Control
+              as="select"
+              value={comment.rate}
+              onChange={(e) => setComment({ ...comment, rate: e.target.value })}
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Form.Control>
+          </Form.Group>
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? "Invio..." : "Invia"}
+          </Button>
         </Form>
-      </Row>
+      </div>
       <AllComments postId={postId} />
-    </ProfileStyled>
+    </>
   );
 };
 
