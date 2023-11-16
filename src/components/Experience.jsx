@@ -45,8 +45,6 @@ const StyledDiv = styled.div`
     right: 1em;
   }
 
-  
-
   .drop-down {
     color: #666666;
     z-index: 4;
@@ -140,8 +138,8 @@ export default function Experience() {
                     posizione lavorativa
                   </li>
                   <li>
-                    <i className="fas fa-calendar-alt"></i>&nbsp;&nbsp;Aggiungi
-                    pausa lavorativa
+                    <i className="fas fa-calendar-alt"></i>
+                    &nbsp;&nbsp;Aggiungi pausa lavorativa
                   </li>
                 </ul>
               </div>
@@ -154,7 +152,6 @@ export default function Experience() {
           </div>
         </div>
       </StyledDiv>
-        </Row>
 
       {showAddExperience && (
         <AddExperience
