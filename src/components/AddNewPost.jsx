@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form, Row } from 'react-bootstrap';
+import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import { CameraFill } from 'react-bootstrap-icons';
 
 const NewPost = ({ onPost }) => {
   const [show, setShow] = useState(false);
   const [postText, setPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-
+  
   
   const handleClose = () => {
     setShow(false);
@@ -37,13 +37,7 @@ const NewPost = ({ onPost }) => {
 
   return (
     <>
-       <Row className="mb-5 ">
-
-
-
-
-<Form.Control size="lg" type="text" placeholder="Avvia un post" onClick={handleShow} />
-      
+<Form.Control size="lg" type="text" placeholder="Avvia un post" className='' onClick={handleShow} />
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -83,7 +77,6 @@ const NewPost = ({ onPost }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      </Row>
     </>
   );
 };
