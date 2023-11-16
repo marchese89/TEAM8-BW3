@@ -1,18 +1,22 @@
 import { useEffect } from "react";
 import { Col, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { allProfilesAction } from "../redux/actions";
 
 const RetePage = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(allProfilesAction());
-  }, []);
+  const userFromRedux = useSelector((state) => {
+    state.profile.profiles;
+  });
+  const [profiles, setprofiles]=useState()
+  
+  // useEffect(() => {
+
+  // }, []);
 
   return (
-    <Container>
-      <Col>ciao</Col>
-    </Container>
+    
+   
   );
 };
 
