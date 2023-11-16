@@ -58,8 +58,8 @@ const StyledCard = styled.div`
   .roundedCamera {
     position: absolute;
     z-index: 6;
-    margin-left: 37%;
-    margin-top: -22%;
+    margin-left: 42%;
+    margin-top: -15%;
   }
 `;
 
