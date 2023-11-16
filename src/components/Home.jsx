@@ -8,6 +8,7 @@ import NewPost from "./AddNewPost";
 import CardLeft from "./CardHomeRight";
 import NewsCard from "./Notizie";
 import { token } from "../redux/actions";
+import { useSelector } from "react-redux";
 
 const ProfileStyled = styled.div`
 .destra li{
@@ -23,6 +24,9 @@ li p{
     background-color: rgb(222, 220, 220);
     cursor: pointer;
   }
+  .foto img{
+    width: 100%
+  }
 `;
 
 const Home = () => {
@@ -32,7 +36,12 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const fetchData = async () => {
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
+
+
+  const fetchData = async (text, file) => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -152,11 +161,14 @@ const Home = () => {
                     }}
                     >
                     {" "}
+                  
+                  
+                
                     <img
-                      src={post.user.image}
+                      src={my_profileFromReduxStore.image}
                       className="rounded-circle"
                       alt="avatar"
-                      width={45 + "px"}
+                      width={50 + "px"}
                     />{" "}
                     {post.username}
                   </p>
@@ -168,6 +180,12 @@ const Home = () => {
 
                     {/* Contenuto del post  */}
                     <p style={{ fontSize: 1 + "em" }}>{post.text}</p>
+                    <div className="foto">
+                    <img
+                      src={post.image}                     
+                      alt=""                     
+                    />
+                    </div>
 
                     {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
                     <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
