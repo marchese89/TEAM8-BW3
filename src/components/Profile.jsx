@@ -35,7 +35,7 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 100%;
+      width: 60%;
       background-color: #fff;
   }
     .cover {
@@ -211,7 +211,7 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 100%;
+      width: 60%;
     }
     .cover {
       object-fit: cover;
@@ -401,7 +401,7 @@ const ProfileStyled = styled.div`
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 100%;
+      width: 100vh;
     }
     .cover {
       object-fit: cover;
