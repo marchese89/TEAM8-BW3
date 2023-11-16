@@ -13,184 +13,577 @@ import { Button, Form, FormControl, InputGroup, Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
-// import '../stylingprofile/style.css'
-import Experience from "./Experience";
+import SidePart from "./SidePart";
 import { token } from "../redux/actions";
+import Experience from "./Experience";
 
 const ProfileStyled = styled.div`
-  .marginesagerato {
+  @media screen and (min-width: 1200px) {
+    .marginesagerato {
     margin-top: 120px !important;
   }
 
   .paddingzero {
-    padding: 0 !important;
+      padding: 0 !important;
+    }
+
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+      width: 60%;
+      background-color: #fff;
+  }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      height: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .containerinfo {
+      padding: 2em;
+      line-height: 10px;
+    }
+
+    .containerinfosmall {
+      line-height: 8px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+
+      bottom: 190px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 8px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 8px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+
+
+    }
+
+    .exp {
+      line-height: 100%;
+    }
   }
 
-  .containermain {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #dbdbdb;
-    border-radius: 15px;
-    overflow: hidden;
-    background-color: #fff;
+  @media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .paddingzero {
+      padding: 0 !important;
+    }
+
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+      width: 60%;
+    }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      height: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .containerinfo {
+      padding: 2em;
+      line-height: 10px;
+    }
+
+    .containerinfosmall {
+      line-height: 8px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      bottom: 190px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+      margin-top: -11px;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 8px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 8px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+
+    .buttonothertext {
+      font-weight: 500;
+    }
+
+    .exp {
+      line-height: 100%;
+    }
   }
 
-  .cover {
-    object-fit: cover;
-    object-position: 0 -200px;
-    width: 100%;
+  @media screen and (min-width: 768px) and (max-width: 800px) {
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 100px;
+      left: 35px;
+    }
   }
 
-  .containercover {
-    height: 400px;
-    width: 100%;
-    overflow: hidden;
-  }
+  @media screen and (max-width: 999px) {
+    .paddingzero {
+      padding: 0 !important;
+    }
 
-  .containerinfo {
-    padding: 2em;
-    line-height: 10px;
-  }
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+      width: 100vw;
+    }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      width: 100%;
+      overflow: hidden;
+    }
 
-  .containerinfosmall {
-    line-height: 8px;
-    font-size: 0.8em;
-    color: rgb(134, 134, 134);
-  }
+    .containerinfo {
+      padding: 2em;
+      line-height: 10px;
+    }
 
-  .avatar {
-    position: absolute;
-    border: 5px solid #fff;
+    .containerinfosmall {
+      line-height: 8px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 220px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+      line-height: 1;
+      width: 100vw;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 8px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 8px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+
+    .buttonothertext {
+      font-weight: 500;
+    }
+
+    .exp {
+      line-height: 100%;
+    }
+  }
+  .pencil {
+    right: 1.5em;
+    top: 0.5em;
+    width: 2.2em;
+    height: 2.2em;
     border-radius: 50%;
-    width: 170px;
-    height: 170px;
-    object-fit: cover;
-
-    bottom: 190px;
-    left: 35px;
-  }
-
-  .containercertification {
-    padding-top: 2em;
-    padding-left: 4em;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-
-  .certificationinfo {
-    display: flex;
-    flex-direction: row;
+    dispay: flex;
     justify-content: center;
-    align-items: normal;
-    margin-bottom: 12px;
+    align-items: center;
   }
-
-  .certificationinfoIMG {
-    width: 30px;
-    height: 30px;
-  }
-
-  .certificationinfoTEXT {
-    font-size: 0.9em;
-    font-weight: 600;
-    padding-left: 10px;
-    margin-bottom: 0;
-  }
-
-  /*TESTIINFORMAZIONI*/
-
-  .name {
-    font-size: 1.5em;
-    font-weight: 500;
-  }
-
-  .inlineblockp {
-    display: inline-block;
-  }
-
-  .bold {
-    font-weight: 500;
-  }
-
-  /*TUTTI I BOTTONI*/
-
-  .containerbutton {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-
-  .buttonfull {
-    border-radius: 20px !important;
-    display: inline-block;
-    width: 140px;
-    height: 30px;
-    padding-top: 6px;
-    background-color: #016adb;
-    color: #fff;
-    border: none;
-    border-radius: 15px;
+  .pencil:hover {
     cursor: pointer;
-    transition: background-color 0.3s;
-
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-  }
-
-  .buttonfull:hover {
-    background-color: #014691;
-  }
-
-  .buttonfulltext {
-    font-weight: 600 !important;
-  }
-
-  .buttonoutlined {
-    border-radius: 20px !important;
-    display: inline-block;
-    width: 140px;
-    height: 30px;
-    padding-top: 8px;
-    color: #016adb;
-    border: 1px solid #016adb;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    background-color: #fff;
-  }
-
-  .buttonoutlined:hover {
-    background-color: #d1e6fd;
-  }
-
-  .buttonoutlinedtext {
-    font-weight: 500;
-  }
-
-  .buttonother {
-    border-radius: 20px !important;
-    display: inline-block;
-    width: 70px;
-    height: 30px;
-    padding-top: 8px;
-    color: #646464;
-    border: 1px solid #646464;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    background-color: #fff;
-  }
-
-  .buttonother:hover {
     background-color: #ebebeb;
   }
-
-  .buttonothertext {
-    font-weight: 500;
+  .icon:hover {
+    background-color: #ebebeb;
+  }
+  .icon-inner {
+    left: 0.5em;
+    top: 0.5em;
   }
   .pencil {
     right: 1.5em;

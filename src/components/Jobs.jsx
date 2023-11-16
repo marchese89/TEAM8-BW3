@@ -3,7 +3,6 @@ import { jobsListAction } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
 import Job from "./Job";
-import styled from "styled-components";
 
 export default function Jobs() {
   const jobsFromReduxStore = useSelector((state) => state.jobs.jobs_list);

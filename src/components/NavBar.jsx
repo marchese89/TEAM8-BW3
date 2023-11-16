@@ -14,7 +14,7 @@ import {
   Grid3x3GapFill,
   CaretDownFill,
 } from "react-bootstrap-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
 
@@ -145,7 +145,14 @@ function NavBar() {
             <div className="navItemStyle">
               <PeopleFill />
 
-              <span className="textStyle">Rete</span>
+              <span
+                className="textStyle"
+                onClick={() => {
+                  navigate("/Rete");
+                }}
+              >
+                Rete
+              </span>
             </div>
             <div
               className={

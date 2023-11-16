@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import styled from "styled-components";
 import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
+import RecentProfile from "./recentlyProfile";
 import AddComment from "./AddComment";
 import NewPost from "./AddNewPost";
+import CardLeft from "./CardHomeRight";
+import NewsCard from "./Notizie";
 const ProfileStyled = styled.div`
 .destra li{
   font-weight: 700 !important;
@@ -18,7 +21,6 @@ li p{
     background-color: rgb(222, 220, 220);
     cursor: pointer;
   }
-  
 `;
 
 const Home = () => {
@@ -112,7 +114,6 @@ const Home = () => {
   return (
     <>
       <ProfileStyled>
-
         {loading && (
           <Row className="py-5 my-5 text-center justify-content-center">
             <Spinner animation="border " variant="primary" />
@@ -156,18 +157,18 @@ const Home = () => {
                   {post.username}
                 </p>
 
-                {/* Data di creazione del post con funzione per trasformare la stringa della data */}
-                <p style={{ fontSize: 0.7 + "em" }}>
-                  Creazione: {formatData(post.createdAt)}
-                </p>
-                {/* Contenuto del post  */}
-                <p style={{ fontSize: 1 + "em" }}>{post.text}</p>
+                    {/* Data di creazione del post con funzione per trasformare la stringa della data */}
+                    <p style={{ fontSize: 0.7 + "em" }}>
+                      Creazione: {formatData(post.createdAt)}
+                    </p>
+                    {/* Contenuto del post  */}
+                    <p style={{ fontSize: 1 + "em" }}>{post.text}</p>
 
-                {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
-                <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
-                  Aggiornamento: {formatData(post.updatedAt)}
-                </p>
-                <hr />
+                    {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
+                    <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
+                      Aggiornamento: {formatData(post.updatedAt)}
+                    </p>
+                    <hr />
 
                 <div className="d-flex flex-nowrap justify-content-center">
                   {/* Like  */}

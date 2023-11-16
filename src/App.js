@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import ExperienceToModify from "./components/ExperienceToModify";
 import Jobs from "./components/Jobs";
+import RetePage from "./components/Rete";
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/jobs/" element={<Jobs />} />
           <Route path="in/me/" element={<Profile />} />
+          <Route path="/rete" element={<RetePage />} />
           <Route
             path="in/me/details/experience/"
             element={<ExperienceToModify />}
