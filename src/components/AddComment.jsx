@@ -6,9 +6,13 @@ import styled from "styled-components";
 const ProfileStyled = styled.div`
 .commento {
   padding: 1em !important;
-  width:100%
-  hei
+  width:70% !important;
+  height: 80% !important;
+  border-radius:5em;
+  margin-left:1em;
+  margin-right:1em;
 }
+.bottone{display:inline;}
 `;
 
 const AddComment = ({ postId, fetchComments }) => {
@@ -82,20 +86,21 @@ const AddComment = ({ postId, fetchComments }) => {
                           height={50 + 'px'}
                         />
                       </span>
-            <Badge pill bg='white' className="color-white w-75">
+            <span>
             <input
-            className="commento rounded-circle"
+            className="commento"
               type="text"
-              placeholder="Inserisci qui il testo"
+              placeholder="Aggiugni un commento..."
               value={comment.comment}
               onChange={(e) =>
                 setComment({ ...comment, comment: e.target.value })
               }
-            /></Badge>
-          </Form.Group>
-          <Button variant="primary" type="submit" disabled={loading}>
+            /></span>
+          <span>
+          <Button className="bottone" variant="primary" type="submit" disabled={loading}>
             {loading ? "Invio..." : "Invia"}
-          </Button>
+          </Button></span>
+          </Form.Group>
         </Form>
       </Row>
       <AllComments postId={postId} />

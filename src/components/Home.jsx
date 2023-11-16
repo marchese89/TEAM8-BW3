@@ -14,6 +14,9 @@ const ProfileStyled = styled.div`
 .destra li{
   font-weight: 700 !important;
 }
+.lunghezza {
+
+}
 li p{
   font-weight: normal
 }
@@ -125,17 +128,10 @@ const Home = () => {
             <Spinner animation="border " variant="primary" />
           </Row>
         )}
-
+            {/* Contenitore  */}
         <Container className=" margine mt-5">
-          <Row className="mb-5 justify-content-center ">
-            <Col className='col-6'>
-              <NewPost
-                show={showModal}
-                handleClose={() => setShowModal(false)}
-                onPost={handlePost} 
-              />
-            </Col>
-          </Row>
+
+           
 
           {/* Colonna laterale profilo  */}
           <Row>
@@ -147,6 +143,16 @@ const Home = () => {
               {/* Centrare col  */}
             <Col className=" d-sm mb-2 mt-2 rounded col-md-6  pt-2 justify-content-center">
 
+           {/* Row add post  */}
+           <Row className="mb-5  justify-content-center ">
+            <Col className=' bg-white py-3 border rounded lunghezza'lg={{span:11, offset:1}}>
+              <NewPost
+                show={showModal}
+                handleClose={() => setShowModal(false)}
+                onPost={handlePost} 
+              />
+            </Col>
+          </Row>
                 {/* Map dei post  */}
               {postData.map((post) => (
                 <Row className="justify-content-center " key={post._id}>
@@ -249,7 +255,7 @@ const Home = () => {
                   {post._id === selectedPostId && (
                     <>
                       
-                      <AddComment postId={selectedPostId} />
+                      <AddComment postId={selectedPostId}/>
                     </>
                   )}
                 </Col>
