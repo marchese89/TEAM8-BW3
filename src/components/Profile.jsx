@@ -5,6 +5,7 @@ import {
   myProfileAction,
   updateProfileAction,
   userProfileAction,
+  visitUserAction,
 } from "../redux/actions";
 import placeholder from "../img/img_placeholder.jpg";
 import React from "react";
@@ -614,6 +615,8 @@ export default function Profile() {
   const { idProfile } = useParams();
   useEffect(() => {
     if (idProfile !== undefined) {
+      dispatch(visitUserAction(idProfile));
+      console.log("ho chiamato visit user");
       setDifferentUser(true);
     } else {
       setDifferentUser(false);

@@ -3,12 +3,14 @@ import {
   MY_PROFILE,
   UPDATE_PROFILE,
   USER_PROFILE,
+  VISIT_USER,
 } from "../actions";
 
 const initialState = {
   profiles: [],
   my_profile: {},
   current_user_profile: {},
+  recently_visited: [],
 };
 
 export default function profileReducer(state = initialState, action) {
@@ -36,6 +38,24 @@ export default function profileReducer(state = initialState, action) {
         my_profile: action.payload,
         current_user_profile: action.payload,
       };
+
+    case VISIT_USER:
+      console.log("dentro il reducer");
+      let to_insert = true;
+      state.recently_visited.forEach((element) => {
+        if (action.payload === element) {
+          to_insert = false;
+        }
+      });
+      if (to_insert) {
+        return {
+          ...state,
+          recently_visited: [...state.recently_visited, action.payload],
+        };
+      } else {
+        return state;
+      }
+
     default:
       return state;
   }
