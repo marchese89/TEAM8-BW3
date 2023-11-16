@@ -56,7 +56,7 @@ const NewPost = ({ onPost }) => {
             <CameraFill
               size={30}
               style={{ cursor: 'pointer' }}
-              onClick={openFileInput}
+              
             />
             {/* Input di tipo "file" nascosto */}
             <input
