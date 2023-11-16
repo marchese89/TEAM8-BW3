@@ -77,13 +77,11 @@ export default function SingleExperience({ handleShow, exp }) {
           </Container>
         </Col>
         {location.pathname === "/in/me/details/experience/" && (
-          <div>
-            <div className="icon position-relative" id="pencil">
-              <i
-                className="fas fa-pencil-alt position-absolute"
-                onClick={() => handleShow(exp._id)}
-              ></i>
-            </div>
+          <div className="icon " id="pencil">
+            <i
+              className="fas fa-pencil-alt "
+              onClick={() => handleShow(exp._id)}
+            ></i>
           </div>
         )}
       </Card>
