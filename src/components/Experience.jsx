@@ -6,13 +6,12 @@ import AddExperience from "./AddExperience";
 import SingleExperience from "./SingleExperience";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceListAction, myProfileAction } from "../redux/actions";
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 const StyledDiv = styled.div`
   font-size: 16px;
   border: 1px solid #eae8e5;
   padding: 1.5em;
-  width: 32em;
   background-color: #fff;
   .icon {
     width: 1.3em;
@@ -102,63 +101,65 @@ export default function Experience() {
 
   return (
     <>
-      <StyledDiv className="d-flex flex-column rounded-3 text-black bgwhite">
-        <div className="d-flex flex-column">
-          <div className="d-flex justify-content-between position-relative">
-            <h4>Esperienza</h4>
-            <div id="buttons" className="d-flex">
-              <Plus
-                className="icon fs-1"
-                id="plus"
-                onClick={() => {
-                  setshowDrop(!showDrop);
-                  console.log("setShowDrop", showDrop);
-                }}
-              />
-              <div className="icon position-relative" id="pencil">
-                {/* <Pencil id="pencil" /> */}
-                <i
-                  className="fas fa-pencil-alt position-absolute"
-                  onClick={() => {
-                    navigate("/in/me/details/experience/");
-                  }}
-                ></i>
-              </div>
-            </div>
-            {showDrop && (
-              <div className="drop-down position-absolute">
-                <ul className="list-unstyled d-flex flex-column mb-0">
-                  <li
-                    onClick={() => {
-                      setshowDrop(false);
-                      setShowAddExperience(true);
-                    }}
-                  >
-                    <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
-                    posizione lavorativa
-                  </li>
-                  <li>
-                    <i className="fas fa-calendar-alt"></i>
-                    &nbsp;&nbsp;Aggiungi pausa lavorativa
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+      <Container>
+        <StyledDiv className="d-flex flex-column rounded-3 text-black bgwhite">
           <div className="d-flex flex-column">
-            {myExperiencesFromReduxStore.map((exp) => {
-              return <SingleExperience exp={exp} key={exp._id} />;
-            })}
+            <div className="d-flex justify-content-between position-relative">
+              <h4>Esperienza</h4>
+              <div id="buttons" className="d-flex">
+                <Plus
+                  className="icon fs-1"
+                  id="plus"
+                  onClick={() => {
+                    setshowDrop(!showDrop);
+                    console.log("setShowDrop", showDrop);
+                  }}
+                />
+                <div className="icon position-relative" id="pencil">
+                  {/* <Pencil id="pencil" /> */}
+                  <i
+                    className="fas fa-pencil-alt position-absolute"
+                    onClick={() => {
+                      navigate("/in/me/details/experience/");
+                    }}
+                  ></i>
+                </div>
+              </div>
+              {showDrop && (
+                <div className="drop-down position-absolute">
+                  <ul className="list-unstyled d-flex flex-column mb-0">
+                    <li
+                      onClick={() => {
+                        setshowDrop(false);
+                        setShowAddExperience(true);
+                      }}
+                    >
+                      <i className="fas fa-suitcase"></i>&nbsp;&nbsp;Aggiungi
+                      posizione lavorativa
+                    </li>
+                    <li>
+                      <i className="fas fa-calendar-alt"></i>
+                      &nbsp;&nbsp;Aggiungi pausa lavorativa
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+            <div className="d-flex flex-column">
+              {myExperiencesFromReduxStore.map((exp) => {
+                return <SingleExperience exp={exp} key={exp._id} />;
+              })}
+            </div>
           </div>
-        </div>
-      </StyledDiv>
+        </StyledDiv>
 
-      {showAddExperience && (
-        <AddExperience
-          mostra={showAddExperience}
-          set_mostra={setShowAddExperience}
-        />
-      )}
+        {showAddExperience && (
+          <AddExperience
+            mostra={showAddExperience}
+            set_mostra={setShowAddExperience}
+          />
+        )}
+      </Container>
     </>
   );
 }
