@@ -567,9 +567,6 @@ export default function Profile() {
     <ProfileStyled className={"d-flex"}>
       <Container className="mt-5 d-flex justify-content-end">
         {/* DA CANCELLARE IN FASE DI MERGE */}
-
-        <CardLeft />
-
         <div className="containermain">
           <div className="containercover">
             <Image

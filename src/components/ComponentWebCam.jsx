@@ -1,4 +1,4 @@
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Card } from "react-bootstrap";
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
@@ -12,6 +12,11 @@ const StyledFoto = styled.div`
   .retakeB {
     display: flex;
     justify-content: center;
+    margin-top: 5%;
+  }
+
+  .webImg {
+    border-radius: 50%;
   }
 `;
 
@@ -38,18 +43,36 @@ const WebcamComponent = () => {
 
   const save = () => {
     setPhoto(imgSrc);
+
+    // Imposta le dimensioni del canvas sulla base delle dimensioni del video
+
+    // Disegna l'immagine del fotogramma corrente sulla canvas
+
+    // Puoi utilizzare canvas.toDataURL() per ottenere l'URL dei dati dell'immagi
+
+    // Ora puoi utilizzare dataURL per creare un link di download o inviarlo al server
+    // Ad esempio, creare un link di download
+    const a = document.createElement("a");
+    a.href = imgSrc;
+    a.download = "captured_image.png";
+    a.click();
   };
 
   return (
     <StyledFoto>
       <Container className="d-flex flex-column align-content-center">
         {imgSrc ? (
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mt-4">
             <img src={imgSrc} alt="img" />
           </div>
         ) : (
           <div className="d-flex justify-content-center">
-            <Webcam width={500} height={500} ref={WebcamRef} />
+            <Webcam
+              width={500}
+              height={500}
+              ref={WebcamRef}
+              className="webImg"
+            />
           </div>
         )}
         {imgSrc && (

@@ -14,13 +14,13 @@ import {
   Grid3x3GapFill,
   CaretDownFill,
 } from "react-bootstrap-icons";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   color: #666666;
-  margin-top:8em !important;
+  margin-top: 8em !important;
 
   .FormControlStyle {
     max-width: 290px;

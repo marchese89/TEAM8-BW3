@@ -9,8 +9,6 @@ import Jobs from "./components/Jobs";
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
-
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
