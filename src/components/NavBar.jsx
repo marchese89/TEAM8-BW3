@@ -20,7 +20,7 @@ import { CATEGORY, COMPANY, QUERY, searchAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   color: #666666;
-  margin-top:8em !important;
+  margin-top: 8em !important;
 
   .FormControlStyle {
     max-width: 290px;
@@ -54,6 +54,14 @@ const StyledDiv = styled.div`
   .select-search {
     width: 13em;
   }
+  .brand:hover {
+    cursor: pointer;
+  }
+
+  .profile-img {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 function NavBar() {
@@ -69,19 +77,27 @@ function NavBar() {
     }
   };
 
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
+
   return (
     <StyledDiv>
       <Navbar
         expand="lg"
         className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
       >
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <img
             src={imguno}
             alt="Logo Linkedin"
             width="35"
             height="35"
             style={{ marginLeft: "120px" }}
+            onClick={() => {
+              navigate("/");
+            }}
+            className="brand"
           />
         </Navbar.Brand>
 
@@ -162,17 +178,13 @@ function NavBar() {
                   : "navItemStyle"
               }
             >
-              <img
-                src={imgdue}
-                alt="Utente"
-                width="28"
-                height="28"
-                onClick={() => {
-                  navigate("/in/me");
-                }}
-              />
-              <span className="textStyle">
-                Tu <CaretDownFill />
+              <span className="textStyle prof-img-cont d-flex flex-column align-items-center">
+                <img
+                  src={my_profileFromReduxStore.image}
+                  alt="profile"
+                  className="profile-img rounded-circle"
+                />
+                Tu
               </span>
             </div>
             <div className="navItemStyle">
