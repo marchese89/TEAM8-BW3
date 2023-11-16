@@ -28,6 +28,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
+      position: relative;
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -43,7 +44,6 @@ const ProfileStyled = styled.div`
       width: 100%;
     }
     .containercover {
-      position: relative;
       height: 400px;
       width: 100%;
       overflow: hidden;
@@ -51,7 +51,7 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 16px;
     }
 
     .containerinfosmall {
@@ -68,8 +68,8 @@ const ProfileStyled = styled.div`
       height: 170px;
       object-fit: cover;
 
-      bottom: 290px;
-      left: 300px;
+      bottom: 180px;
+      left: 26px;
     }
 
     .containercertification {
@@ -155,7 +155,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 6px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -177,7 +177,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 6px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -223,7 +223,7 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 17px;
     }
 
     .containerinfosmall {
@@ -239,8 +239,8 @@ const ProfileStyled = styled.div`
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 250px;
-      left: 35px;
+      bottom: 220px;
+      left: 30px;
     }
 
     .containercertification {
@@ -327,7 +327,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -349,7 +349,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -371,7 +371,7 @@ const ProfileStyled = styled.div`
     }
   }
 
-  @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${'' /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -380,10 +380,10 @@ const ProfileStyled = styled.div`
       height: 140px;
       object-fit: cover;
 
-      bottom: 100px;
+      bottom: 10px;
       left: 35px;
     }
-  }
+  } */}
 
   @media screen and (max-width: 999px) {
     .paddingzero {
@@ -412,11 +412,11 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 17px;
     }
 
     .containerinfosmall {
-      line-height: 8px;
+      line-height: 15px;
       font-size: 0.8em;
       color: rgb(134, 134, 134);
     }
@@ -429,8 +429,8 @@ const ProfileStyled = styled.div`
       height: 140px;
       object-fit: cover;
 
-      bottom: 220px;
-      left: 35px;
+      bottom: 210px;
+      left: 30px;
     }
 
     .containercertification {
@@ -467,7 +467,7 @@ const ProfileStyled = styled.div`
     .name {
       font-size: 1.5em;
       font-weight: 500;
-      line-height: 1;
+      line-height: 15px !important;
       width: 100vw;
     }
 
@@ -518,7 +518,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -540,7 +540,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 6px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -602,6 +602,20 @@ const ProfileStyled = styled.div`
   .icon-inner {
     left: 0.5em;
     top: 0.5em;
+  }
+
+  @media screen and (max-width: 500px) {
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 240px;
+      left: 30px;
+    }
   }
 `;
 
