@@ -107,6 +107,8 @@ const Home = () => {
     (state) => state.profile.my_profile
   );
   const [showDrop, setshowDrop] = useState(false);
+  const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
+
   const fetchData = async (text, file) => {
     try {
       setLoading(true);
@@ -341,9 +343,10 @@ const Home = () => {
                           }
                           onClick={() => {
                             setshowDrop(!showDrop);
+                            setSelectedPostIdDrop(post._id);
                           }}
                         />
-                        {showDrop && (
+                        {showDrop && selectedPostIdDrop === post._id && (
                           <div
                             className={
                               my_profileFromReduxStore.username ===
