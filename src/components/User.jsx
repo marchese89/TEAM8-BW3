@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 
 const StyledUser = styled.div`
   width: 30em;
-  height: 8em;
+  height: 4em;
+
   .img {
     width: 35px;
     height: 35px;
