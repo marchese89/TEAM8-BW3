@@ -29,7 +29,7 @@ const RetePage = () => {
       <ReteStyled>
         <Container className="margin-auto containergeneric">
           <h3 className="mb-4">Profili</h3>
-          <Row className="justify-content-center d-flex">
+          <Row className="d-flex">
             {usersFromRedux.map((user) => {
               return (
                 <Col key={user._id} xs={12} md={6} className="justify-content-center">
