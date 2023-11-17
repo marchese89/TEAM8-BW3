@@ -730,7 +730,8 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato d-flex justify-content-center">
+        {/* mt-5 marginesagerato */}
+        <Container className=" d-flex justify-content-center">
           <Col lg={8}>
             <div className="containermain">
               <div className="containercover">
