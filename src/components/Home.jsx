@@ -142,6 +142,27 @@ const Home = () => {
     }
   };
 
+  function deletePost(idPost) {
+    console.log("entro in delete post");
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + idPost, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetchData();
+        } else {
+          throw new Error("Errore nella delete");
+        }
+      })
+      .catch((err) => {
+        console.log("Errore ", err);
+      });
+  }
+
   // Funzione per mostrare CommentArea
   const toggleCommentArea = (postId) => {
     setSelectedPostId(postId === selectedPostId ? null : postId);
@@ -254,7 +275,11 @@ const Home = () => {
                                 <PencilFill className="me-2" />
                                 Modifica Post
                               </li>
-                              <li>
+                              <li
+                                onClick={() => {
+                                  deletePost(post._id);
+                                }}
+                              >
                                 <Trash3Fill className="me-2" />
                                 Elimina post
                               </li>
