@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Card,
@@ -28,8 +30,9 @@ import AddComment from "./AddComment";
 import NewPost from "./AddNewPost";
 import CardLeft from "./CardHomeRight";
 import NewsCard from "./Notizie";
-import { token } from "../redux/actions";
+import { token, userProfileAction } from "../redux/actions";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const ProfileStyled = styled.div`
   .destra li {
@@ -84,6 +87,9 @@ const ProfileStyled = styled.div`
       padding: 0;
     }
   }
+  .hover:hover{
+    cursor:pointer;
+  }
 `;
 
 const Home = () => {
@@ -132,6 +138,8 @@ const Home = () => {
       setLoading(false);
     }
   };
+
+  const navigate = useNavigate();
 
   const handlePost = async (postText) => {
     try {
@@ -205,6 +213,7 @@ const Home = () => {
         console.log("Errore ", err);
       });
   }
+
 
   function uploadPostImage(idPost) {
     if (selectedFile) {
@@ -303,13 +312,16 @@ const Home = () => {
                     // lg={{ offset: 1 }}
                   >
                     {/* Avatar + Nome Utente  */}
-                    <p
+                    <p  onClick={() => {
+                      console.log(post.user._id);
+                      navigate("/profile/" + post.user._id);
+                       }}
                       style={{
                         fontSize: 1 + "em",
                         fontWeight: "bold",
                         margin: 0.2 + "em",
                       }}
-                      className="d-flex justify-content-between"
+                      className="d-flex hover justify-content-between"
                     >
                       <div>
                         {" "}
