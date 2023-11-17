@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  experienceListAction,
   myProfileAction,
   updateProfileAction,
   userProfileAction,
@@ -19,13 +20,12 @@ import { useParams } from "react-router-dom";
 import SidePart from "./SidePart";
 
 const ProfileStyled = styled.div`
-
-.infoprofile {
-      border: 1px solid #dbdbdb;
-      border-radius: 10px;
-      padding: 2em;
-      background-color: #fff;
-}
+  .infoprofile {
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    padding: 2em;
+    background-color: #fff;
+  }
 
   @media screen and (min-width: 1200px) {
     .marginesagerato {
@@ -372,7 +372,8 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${"" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${
+    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -642,6 +643,9 @@ export default function Profile() {
     (state) => state.profile.current_user_profile
   );
 
+  const myExperiencesFromReduxStore = useSelector(
+    (state) => state.experience.experiences_list
+  );
   useEffect(() => {
     if (Object.keys(current_profileFromReduxStore).length > 0) {
       if (idProfile !== undefined) {
@@ -652,6 +656,10 @@ export default function Profile() {
         //   dispatch(userProfileAction(my_profileFromReduxStore._id));
       }
     }
+  }, []);
+
+  useEffect(() => {
+    dispatch(experienceListAction(current_profileFromReduxStore._id));
   }, []);
 
   // useEffect(() => {
@@ -750,7 +758,7 @@ export default function Profile() {
                 src={profileImage}
                 className="avatar"
                 style={!differentUser ? { cursor: "pointer" } : {}}
-                onClick={!differentUser ? openModal : () => { }}
+                onClick={!differentUser ? openModal : () => {}}
               />
               {/* isOpen={} onRequestClose={closeModal} */}
               <Modal show={isModalOpen} onHide={closeModal}>
@@ -799,7 +807,11 @@ export default function Profile() {
                       {current_profileFromReduxStore.name}{" "}
                       {current_profileFromReduxStore.surname}
                     </p>
-                    <p>Aftersales Manager bei Ducati (Schweiz) AG</p>
+                    <p>
+                      {myExperiencesFromReduxStore.length === 0
+                        ? ""
+                        : myExperiencesFromReduxStore[0].role}
+                    </p>
                     <div className="containerinfosmall">
                       <p>{current_profileFromReduxStore.area}</p>
                       <p className="inlineblockp bold">500</p>
@@ -868,7 +880,14 @@ export default function Profile() {
             <div>
               <Container className="infoprofile my-3">
                 <h3>Informazioni</h3>
-                <p>Mollit ea nisi cillum mollit et ullamco sit elit labore sint. Amet consectetur velit dolore nulla Lorem aliqua sint. Velit ut id nulla sit eiusmod. Dolor pariatur sint magna elit adipisicing minim laboris exercitation voluptate laborum dolore laborum. Enim enim id incididunt amet. Occaecat Lorem veniam proident quis reprehenderit.</p>
+                <p>
+                  Mollit ea nisi cillum mollit et ullamco sit elit labore sint.
+                  Amet consectetur velit dolore nulla Lorem aliqua sint. Velit
+                  ut id nulla sit eiusmod. Dolor pariatur sint magna elit
+                  adipisicing minim laboris exercitation voluptate laborum
+                  dolore laborum. Enim enim id incididunt amet. Occaecat Lorem
+                  veniam proident quis reprehenderit.
+                </p>
               </Container>
             </div>
             <div className="C">
