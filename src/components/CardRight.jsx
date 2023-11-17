@@ -4,6 +4,8 @@ import { Bookmark, Alipay, Person, Camera } from "react-bootstrap-icons";
 import imgp from "../assets/LinkImg.PNG";
 import ModalFoto from "./ModalFoto";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const StyledCard = styled.div`
   .h4Modify {
@@ -56,39 +58,56 @@ const StyledCard = styled.div`
     margin: 0;
   }
   .roundedCamera {
-    position: absolute;
+    ${"" /* position: absolute; */}
     z-index: 6;
-    margin-left: 37%;
-    margin-top: -22%;
+  }
+  .cont img{
+    height:100%
   }
 `;
 
-const CardRight = () => {
+const CardRight = ({ shoModal }) => {
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const goToProf = () => {
     navigate("/in/me");
   };
+
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
+
+  
+
   return (
-    <StyledCard className={"position-relative"}>
+    <StyledCard>
       <Card className={"rounded-bottom-2"}>
         <Col>
-          <Row className={"imgProfile"}>
+          <Row className={"imgProfile position-relative"}>
             <img height={100} src={imgp} alt={"logo"} />
+            <div
+              className={
+                " position-absolute top-100 start-50 translate-middle d-flex justify-content-center "
+              }
+            >
+              <img src={my_profileFromReduxStore.image} alt='profile' width={50} height={50} onClick={goToProf} className={"rounded-circle "} />
+            </div>
           </Row>
         </Col>
         <Card.Body className={"px-0"}>
-          <div className={"roundedCamera "}>
-            <Camera size={50} onClick={goToProf} className={"camera"} />
-          </div>
           <Row>
             <h4 className="h4Modify text-center pt-4">
               {" "}
-              Ti diamo il benvenuto (nome){" "}
+              Ti diamo il benvenuto {my_profileFromReduxStore.name} {my_profileFromReduxStore.surname} {" "}
             </h4>
+            <p>{my_profileFromReduxStore.experience}</p>
             <p
               className={"link text-center"}
-              data-bs-toggle="modal"
-              data-bs-target="#modalPhoto"
+              // data-bs-toggle="modal"
+              // data-bs-target="#modalPhoto"
+              onClick={() => {
+                setShowModal(true);
+              }}
             >
               Aggiungi una foto
             </p>
@@ -125,7 +144,7 @@ const CardRight = () => {
           </Row>
         </Card.Body>
       </Card>
-      <ModalFoto />
+      <ModalFoto showModal={showModal} setShowModal={setShowModal} />
     </StyledCard>
   );
 };

@@ -13,193 +13,25 @@ import { Button, Form, FormControl, InputGroup, Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
-import SidePart from "./SidePart";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
 import { useParams } from "react-router-dom";
+import SidePart from "./SidePart";
 
 const ProfileStyled = styled.div`
+
+.infoprofile {
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      padding: 2em;
+      background-color: #fff;
+}
+
   @media screen and (min-width: 1200px) {
     .marginesagerato {
-    margin-top: 120px !important;
-  }
-
-  .paddingzero {
-      padding: 0 !important;
+      margin-top: 120px !important;
     }
 
-    .containermain {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #dbdbdb;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: white;
-      width: 60%;
-      background-color: #fff;
-  }
-    .cover {
-      object-fit: cover;
-      object-position: 0;
-      width: 100%;
-    }
-    .containercover {
-      height: 400px;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .containerinfo {
-      padding: 2em;
-      line-height: 10px;
-    }
-
-    .containerinfosmall {
-      line-height: 8px;
-      font-size: 0.8em;
-      color: rgb(134, 134, 134);
-    }
-
-    .avatar {
-      position: absolute;
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-
-      bottom: 190px;
-      left: 35px;
-    }
-
-    .containercertification {
-      padding-top: 2em;
-      padding-left: 4em;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .certificationinfo {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: normal;
-      margin-bottom: 12px;
-    }
-
-    .certificationinfoIMG {
-      width: 30px;
-      height: 30px;
-    }
-
-    .certificationinfoTEXT {
-      font-size: 0.9em;
-      font-weight: 600;
-      padding-left: 10px;
-      margin-bottom: 0;
-    }
-
-    /*TESTIINFORMAZIONI*/
-
-    .name {
-      font-size: 1.5em;
-      font-weight: 500;
-    }
-
-    .inlineblockp {
-      display: inline-block;
-    }
-
-    .bold {
-      font-weight: 500;
-    }
-
-    /*TUTTI I BOTTONI*/
-
-    .containerbutton {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-
-    .buttonfull {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 6px;
-      background-color: #016adb;
-      color: #fff;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-    }
-
-    .buttonfull:hover {
-      background-color: #014691;
-    }
-
-    .buttonfulltext {
-      font-weight: 600 !important;
-    }
-
-    .buttonoutlined {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 8px;
-      color: #016adb;
-      border: 1px solid #016adb;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonoutlined:hover {
-      background-color: #d1e6fd;
-    }
-
-    .buttonoutlinedtext {
-      font-weight: 500;
-    }
-
-    .buttonother {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 70px;
-      height: 30px;
-      padding-top: 8px;
-      color: #646464;
-      border: 1px solid #646464;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonother:hover {
-      background-color: #ebebeb;
-    }
-
-
-    }
-
-    .exp {
-      line-height: 100%;
-    }
-  }
-
-  @media screen and (min-width: 1000px) and (max-width: 1200px) {
     .paddingzero {
       padding: 0 !important;
     }
@@ -211,8 +43,7 @@ const ProfileStyled = styled.div`
       border: 1px solid #dbdbdb;
       border-radius: 10px;
       overflow: hidden;
-      background-color: white;
-      width: 60%;
+      background-color: #fff;
     }
     .cover {
       object-fit: cover;
@@ -227,11 +58,11 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 18px;
     }
 
     .containerinfosmall {
-      line-height: 8px;
+      line-height: 15px;
       font-size: 0.8em;
       color: rgb(134, 134, 134);
     }
@@ -242,195 +73,6 @@ const ProfileStyled = styled.div`
       border-radius: 50%;
       width: 170px;
       height: 170px;
-      object-fit: cover;
-      bottom: 190px;
-      left: 35px;
-    }
-
-    .containercertification {
-      padding-top: 2em;
-      padding-left: 4em;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .certificationinfo {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: normal;
-      margin-bottom: 12px;
-    }
-
-    .certificationinfoIMG {
-      width: 30px;
-      height: 30px;
-    }
-
-    .certificationinfoTEXT {
-      font-size: 0.9em;
-      font-weight: 600;
-      padding-left: 10px;
-      margin-bottom: 0;
-    }
-
-    /*TESTIINFORMAZIONI*/
-
-    .name {
-      font-size: 1.5em;
-      font-weight: 500;
-      margin-top: -11px;
-    }
-
-    .inlineblockp {
-      display: inline-block;
-    }
-
-    .bold {
-      font-weight: 500;
-    }
-
-    /*TUTTI I BOTTONI*/
-
-    .containerbutton {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-
-    .buttonfull {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 6px;
-      background-color: #016adb;
-      color: #fff;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-    }
-
-    .buttonfull:hover {
-      background-color: #014691;
-    }
-
-    .buttonfulltext {
-      font-weight: 600 !important;
-    }
-
-    .buttonoutlined {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 8px;
-      color: #016adb;
-      border: 1px solid #016adb;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonoutlined:hover {
-      background-color: #d1e6fd;
-    }
-
-    .buttonoutlinedtext {
-      font-weight: 500;
-    }
-
-    .buttonother {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 70px;
-      height: 30px;
-      padding-top: 8px;
-      color: #646464;
-      border: 1px solid #646464;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonother:hover {
-      background-color: #ebebeb;
-    }
-
-    .buttonothertext {
-      font-weight: 500;
-    }
-
-    .exp {
-      line-height: 100%;
-    }
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 800px) {
-    .avatar {
-      position: absolute;
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-
-      bottom: 100px;
-      left: 35px;
-    }
-  }
-
-  @media screen and (max-width: 999px) {
-    .paddingzero {
-      padding: 0 !important;
-    }
-
-    .containermain {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #dbdbdb;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: white;
-      width: 100vw;
-    }
-    .cover {
-      object-fit: cover;
-      object-position: 0;
-      width: 100%;
-    }
-    .containercover {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .containerinfo {
-      padding: 2em;
-      line-height: 10px;
-    }
-
-    .containerinfosmall {
-      line-height: 8px;
-      font-size: 0.8em;
-      color: rgb(134, 134, 134);
-    }
-
-    .avatar {
-      position: absolute;
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
       object-fit: cover;
 
       bottom: 220px;
@@ -471,8 +113,6 @@ const ProfileStyled = styled.div`
     .name {
       font-size: 1.5em;
       font-weight: 500;
-      line-height: 1;
-      width: 100vw;
     }
 
     .inlineblockp {
@@ -522,7 +162,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -544,7 +184,362 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+  }
+
+  @media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .paddingzero {
+      padding: 0 !important;
+    }
+
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+    }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      height: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .containerinfo {
+      padding: 2em;
+      line-height: 18px;
+    }
+
+    .containerinfosmall {
+      line-height: 15px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      bottom: 230px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 5px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 5px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+
+    .buttonothertext {
+      font-weight: 500;
+    }
+
+    .exp {
+      line-height: 100%;
+    }
+  }
+
+  ${"" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 100px;
+      left: 35px;
+    }
+  } */
+  }
+
+  @media screen and (max-width: 999px) {
+    .paddingzero {
+      padding: 0 !important;
+    }
+
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+    }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .containerinfo {
+      padding: 2em;
+      line-height: 18px;
+    }
+
+    .containerinfosmall {
+      line-height: 15px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 240px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 5px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -716,8 +711,9 @@ export default function Profile() {
         {
           method: "POST",
           body: formData,
-          mode: "no-cors",
-          Authorization: `Bearer ${token}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       )
         .then((response) => {
@@ -740,133 +736,149 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato">
-          <div className="containermain">
-            <div className="containercover">
+        {/* mt-5 marginesagerato */}
+        <Container className=" d-flex justify-content-center">
+          <Col lg={8}>
+            <div className="containermain">
+              <div className="containercover">
+                <Image
+                  src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  className="cover"
+                />
+              </div>
               <Image
-                src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="cover"
+                src={profileImage}
+                className="avatar"
+                style={!differentUser ? { cursor: "pointer" } : {}}
+                onClick={!differentUser ? openModal : () => { }}
               />
-            </div>
-            <Image
-              src={profileImage}
-              className="avatar"
-              style={!differentUser ? { cursor: "pointer" } : {}}
-              onClick={!differentUser ? openModal : () => {}}
-            />
-            {/* isOpen={} onRequestClose={closeModal} */}
-            <Modal show={isModalOpen} onHide={closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title className="fs-5 modal-title">
-                  Modifica immagine profilo
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className="d-flex flex-column w-100 mt-3 align-items-center">
-                  <Form.Label>Immagine</Form.Label>
-                  {selectedImage && (
-                    <Image
-                      src={URL.createObjectURL(selectedImage)}
-                      alt="Anteprima immagine"
-                      className="image-preview w-25 my-2 rounded-2"
-                      fluid
-                    />
-                  )}
-                  <Form.Control type="file" onChange={handleImage} />
-                </div>
-                {/* <input type="file" onChange={handleImage} accept="image/*" /> */}
-              </Modal.Body>
-              <Modal.Footer className="d-flex justify-content-between">
-                <Button
-                  className="save-button rounded-5 px-3"
-                  onClick={handleImageUpload}
-                >
-                  Conferma
-                </Button>
-                {/* <button >Conferma</button> */}
-                <Button
-                  className="save-button rounded-5 px-3"
-                  onClick={closeModal}
-                >
-                  Annulla
-                </Button>
-                {/* <button onClick={closeModal}>Annulla</button> */}
-              </Modal.Footer>
-            </Modal>
-
-            <Row className="position-relative">
-              <Col className="col-6">
-                <div className="containerinfo mt-4">
-                  <p className="name">
-                    {current_profileFromReduxStore.name}{" "}
-                    {current_profileFromReduxStore.surname}
-                  </p>
-                  <p>Aftersales Manager bei Ducati (Schweiz) AG</p>
-                  <div className="containerinfosmall">
-                    <p>{current_profileFromReduxStore.area}</p>
-                    <p className="inlineblockp bold">500</p>
-                    <p className="inlineblockp ms-1">Collegamenti</p>
-                  </div>
-                  <Container className="paddingzero">
-                    <Row>
-                      <Col className="col-12">
-                        <div className="containerbutton">
-                          <button variant="primary" className="buttonfull">
-                            <i className="bi bi-person-plus-fill"></i>
-                            <p className="buttonfulltext"> &nbsp;Collegati</p>
-                          </button>
-                          <button
-                            variant="primary"
-                            className="buttonoutlined ms-2"
-                          >
-                            <p className="buttonoutlinedtext">Messaggio</p>
-                          </button>
-                          <button
-                            variant="primary"
-                            className="buttonother ms-2"
-                          >
-                            <p className="buttonothertext">Altro</p>
-                          </button>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Container>
-                </div>
-              </Col>
-              <Col className="col-6">
-                <div className="containercertification mt-4">
-                  <div className="certificationinfo">
-                    <Image
-                      src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
-                      className="certificationinfoIMG"
-                    />
-                    <p className="certificationinfoTEXT mt-1">
-                      Epicode Network
-                    </p>
-                    {!differentUser && (
-                      <div className="icon pencil position-absolute">
-                        <i
-                          className="fas fa-pencil-alt position-absolute icon-inner"
-                          onClick={() => {
-                            setShow(true);
-                          }}
-                        ></i>
-                      </div>
+              {/* isOpen={} onRequestClose={closeModal} */}
+              <Modal show={isModalOpen} onHide={closeModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title className="fs-5 modal-title">
+                    Modifica immagine profilo
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="d-flex flex-column w-100 mt-3 align-items-center">
+                    <Form.Label>Immagine</Form.Label>
+                    {selectedImage && (
+                      <Image
+                        src={URL.createObjectURL(selectedImage)}
+                        alt="Anteprima immagine"
+                        className="image-preview w-25 my-2 rounded-2"
+                        fluid
+                      />
                     )}
+                    <Form.Control type="file" onChange={handleImage} />
                   </div>
-                  <div className="certificationinfo">
-                    <Image
-                      src="https://www.acousticbulletin.com/wp-content/uploads/2020/01/70-706384_illuminati-clipart-all-illuminati-logo-png.png"
-                      className="certificationinfoIMG"
-                    />
-                    <p className="certificationinfoTEXT mt-1">
-                      Illuminati Network
+                  {/* <input type="file" onChange={handleImage} accept="image/*" /> */}
+                </Modal.Body>
+                <Modal.Footer className="d-flex justify-content-between">
+                  <Button
+                    className="save-button rounded-5 px-3"
+                    onClick={handleImageUpload}
+                  >
+                    Conferma
+                  </Button>
+                  {/* <button >Conferma</button> */}
+                  <Button
+                    className="save-button rounded-5 px-3"
+                    onClick={closeModal}
+                  >
+                    Annulla
+                  </Button>
+                  {/* <button onClick={closeModal}>Annulla</button> */}
+                </Modal.Footer>
+              </Modal>
+
+              <Row className="position-relative">
+                <Col className="col-6">
+                  <div className="containerinfo mt-4">
+                    <p className="name">
+                      {current_profileFromReduxStore.name}{" "}
+                      {current_profileFromReduxStore.surname}
                     </p>
+                    <p>Aftersales Manager bei Ducati (Schweiz) AG</p>
+                    <div className="containerinfosmall">
+                      <p>{current_profileFromReduxStore.area}</p>
+                      <p className="inlineblockp bold">500</p>
+                      <p className="inlineblockp ms-1">Collegamenti</p>
+                    </div>
+                    <Container className="paddingzero">
+                      <Row>
+                        <Col className="col-12">
+                          <div className="containerbutton">
+                            <button variant="primary" className="buttonfull">
+                              <i className="bi bi-person-plus-fill"></i>
+                              <p className="buttonfulltext"> &nbsp;Collegati</p>
+                            </button>
+                            <button
+                              variant="primary"
+                              className="buttonoutlined ms-2"
+                            >
+                              <p className="buttonoutlinedtext">Messaggio</p>
+                            </button>
+                            <button
+                              variant="primary"
+                              className="buttonother ms-2"
+                            >
+                              <p className="buttonothertext">Altro</p>
+                            </button>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Container>
                   </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
+                </Col>
+                <Col className="col-6">
+                  <div className="containercertification mt-4">
+                    <div className="certificationinfo">
+                      <Image
+                        src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
+                        className="certificationinfoIMG"
+                      />
+                      <p className="certificationinfoTEXT mt-1">
+                        Epicode Network
+                      </p>
+                      {!differentUser && (
+                        <div className="icon pencil position-absolute">
+                          <i
+                            className="fas fa-pencil-alt position-absolute icon-inner"
+                            onClick={() => {
+                              setShow(true);
+                            }}
+                          ></i>
+                        </div>
+                      )}
+                    </div>
+                    <div className="certificationinfo">
+                      <Image
+                        src="https://www.acousticbulletin.com/wp-content/uploads/2020/01/70-706384_illuminati-clipart-all-illuminati-logo-png.png"
+                        className="certificationinfoIMG"
+                      />
+                      <p className="certificationinfoTEXT mt-1">
+                        Illuminati Network
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            <div>
+              <Container className="infoprofile my-3">
+                <h3>Informazioni</h3>
+                <p>Mollit ea nisi cillum mollit et ullamco sit elit labore sint. Amet consectetur velit dolore nulla Lorem aliqua sint. Velit ut id nulla sit eiusmod. Dolor pariatur sint magna elit adipisicing minim laboris exercitation voluptate laborum dolore laborum. Enim enim id incididunt amet. Occaecat Lorem veniam proident quis reprehenderit.</p>
+              </Container>
+            </div>
+            <div className="C">
+              <Experience />
+            </div>
+          </Col>
+
+          <Col lg={3}>
+            <SidePart />
+          </Col>
         </Container>
       </ProfileStyled>
       <Modal show={show} onHide={handleClose} className="modal">
@@ -940,9 +952,7 @@ export default function Profile() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="d-flex flex-row justify-content-center my-5">
-        <Experience />
-      </div>
+      <Container className="mt-5"></Container>
     </>
   );
 }

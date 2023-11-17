@@ -11,15 +11,12 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
   font-size: 14px;
   color: grey;
-  .margine{
-    margin-top: 8em
-  }
 `;
 
 const Footer = () => {
   return (
     <StyledDiv>
-      <footer className="footer-container d-flex justify-content-center margine ">
+      <footer className="footer-container d-flex flex-column flex-md-row justify-content-center align-content-center my-5 ms-5 ms-md-none">
         <div className="footer-content ">
           <p>Informazioni</p>
           <p>LInee guida della community</p>
@@ -71,7 +68,7 @@ const Footer = () => {
         <div className="footer-content ms-4">
           <p>Seleziona lingua</p>
 
-          <Form.Select aria-label="Default select example">
+          <Form.Select aria-label="Default select example" className="w-50">
             <option>Italiano (Italiano)</option>
             <option value="1">Italiano</option>
             <option value="2">Napoletano</option>

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Button, Card, Container, Row } from "react-bootstrap";
 import papa from "../assets/papa.webp";
 import styled from "styled-components";
+import { Plus, PersonAdd } from "react-bootstrap-icons";
 
 const StyledUse = styled.div`
   .sectionProfile {
@@ -15,29 +16,35 @@ const StyledUse = styled.div`
     font-size: 0.8em;
   }
   .profilePill {
-    background: #f8f8f8;
     padding: 2%;
+  }
+  .collegamenti {
+    font-size: 0.8em;
+    padding: 0;
   }
 `;
 
 const RecentProfile = () => {
   return (
     <StyledUse>
-      <Card>
-        <div className="rounded-pill my-3 mx-2 d-flex profilePill ">
-          <img
-            src={papa}
-            alt="imgProfile"
-            width={40}
-            height={40}
-            className="rounded-5 mx-2"
-          />
-          <section className="sectionProfile">
-            <h5 className="m-0">Name</h5>
-            <p className="m-0">Lavoro</p>
-          </section>
-        </div>
-      </Card>
+      <div className=" my-1 mx-2 d-flex profilePill flex-wrap ">
+        <img
+          src={papa}
+          alt="imgProfile"
+          width={40}
+          height={40}
+          className="rounded-5 mx-2"
+        />
+        <section className="sectionProfile">
+          <h5 className="m-0">Federico Poggi</h5>
+          <p className="m-0">Full-stack-developer</p>
+        </section>
+        <Container className="w-50">
+          <Button className="rounded-pill bg-light text-primary collegamenti d-flex align-items-center px-2">
+            <PersonAdd className="mx-1" /> Collegati
+          </Button>
+        </Container>
+      </div>
     </StyledUse>
   );
 };

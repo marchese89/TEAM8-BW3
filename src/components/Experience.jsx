@@ -9,9 +9,8 @@ import { experienceListAction } from "../redux/actions";
 
 const StyledDiv = styled.div`
   font-size: 16px;
-  border: 1px solid #eae8e5;
+  border: 1px solid #dbdbdb;
   padding: 1.5em;
-  width: 32em;
   background-color: #fff;
   .icon {
     width: 1.3em;

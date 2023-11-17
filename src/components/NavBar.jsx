@@ -13,6 +13,7 @@ import {
   BellFill,
   Grid3x3GapFill,
   CaretDownFill,
+  Search,
 } from "react-bootstrap-icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +27,7 @@ import {
 
 const StyledDiv = styled.div`
   color: #666666;
-  margin-top: 8em !important;
+  margin-top: 5em !important;
 
   .FormControlStyle {
     max-width: 290px;
@@ -68,6 +69,46 @@ const StyledDiv = styled.div`
     width: 30px;
     height: 30px;
   }
+  .search-text {
+    text-indent: 25px;
+    background-color: #edf3f8 !important;
+    width: 13em;
+    transition: width 0.3s linear;
+    border-radius: 4px !important;
+  }
+  .search-text:focus {
+    border: 2px solid #3c3d3e !important;
+    box-shadow: none !important;
+    width: 18em;
+  }
+  .search-text-alt {
+    text-indent: 25px;
+    background-color: #edf3f8 !important;
+    border-radius: 4px !important;
+  }
+  .search-text-alt:focus {
+    border: 2px solid #3c3d3e !important;
+    box-shadow: none !important;
+  }
+
+  .search-icon {
+    top: 0.7em;
+    left: 0.7em;
+    color: #3c3d3e;
+  }
+  .search-wrapper {
+    margin-right: 5em;
+    transition: margin-right 0.3s linear;
+  }
+  .search-wrapper-alt {
+    margin-right: 0.6em;
+  }
+  .search-wrapper:focus-within {
+    margin-right: 0;
+  }
+  .nav-bar {
+    height: 4em;
+  }
 `;
 
 function NavBar() {
@@ -91,7 +132,7 @@ function NavBar() {
     <StyledDiv>
       <Navbar
         expand="lg"
-        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3"
+        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3 nav-bar"
       >
         <Navbar.Brand>
           <img
@@ -106,17 +147,28 @@ function NavBar() {
             className="brand"
           />
         </Navbar.Brand>
-
-        <FormControl
-          type="search"
-          placeholder="Cerca"
-          className="FormControlStyle me-2"
-          aria-label="Search"
-          onKeyDown={handleKeyPress}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
+        <div
+          className={
+            location.pathname !== "/jobs"
+              ? "position-relative search-wrapper"
+              : "position-relative search-wrapper-alt"
+          }
+        >
+          <Search className="position-absolute search-icon" />
+          <FormControl
+            type="search"
+            placeholder="Cerca"
+            className={
+              location.pathname !== "/jobs"
+                ? "FormControlStyle me-2 search-text"
+                : "FormControlStyle me-2 search-text-alt"
+            }
+            aria-label="Search"
+            onKeyDown={handleKeyPress}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
         {location.pathname === "/jobs" && (
           <Form.Select
             className="select-search"

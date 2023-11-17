@@ -60,10 +60,18 @@ const StyledDiv = styled.div`
   }
 `;
 
-const ModalFoto = () => {
+const StyledImg = styled.img`
+  border-radius: 50%;
+  margin: 2%;
+`;
+
+const ModalFoto = (props) => {
   const [show, setShow] = useState(false);
   const [showTit, setShowTit] = useState(true);
 
+  const handleClose = () => {
+    props.setShowModal(false);
+  };
   const showChange = () => {
     setShow(true);
     setShowTit(false);
@@ -71,97 +79,98 @@ const ModalFoto = () => {
 
   return (
     <StyledDiv>
-      <div
-        className="modal fade bd-example-modal-lg"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-        aria-hidden="true"
-        id="modalPhoto"
+      <Modal
+        show={props.showModal}
+        onHide={handleClose}
+        backdrop={true}
+        size="xl"
       >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className={"modal-header"}>
-              <div className={"modal-title"}>
-                {" "}
-                <h5 className={"px-3 py-3"}>Add a Photo</h5>{" "}
-              </div>
-              <button
-                type="button"
-                className="btn-close me-2"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+        {/* <div className="modal-content"> */}
+        <Modal.Header>
+          <Modal.Title>
+            {" "}
+            <h5 className={"px-3 py-3"}>Add a Photo</h5>{" "}
+          </Modal.Title>
+          <button
+            onClick={() => {
+              props.setShowModal(false);
+            }}
+            type="button"
+            className="btn-close me-2"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </Modal.Header>
+        {showTit && (
+          <Modal.Body className="d-flex flex-column align-items-center">
+            <div className={"text-center"}>
+              <Container className={"slogan mt-3"}>
+                <Col className={"col-12"}>
+                  <p className={"h4"}>
+                    Your photo doesn't have to be a close-up of you!
+                    <br />
+                    But something that represents you.
+                  </p>
+                </Col>
+              </Container>
             </div>
-            {showTit && (
-              <div className="modal-body">
-                <div className={"text-center"}>
-                  <Container className={"slogan mt-3"}>
-                    <Col className={"col-8"}>
-                      <p className={"h4"}>
-                        Your photo doesn't have to be a close-up of you!
-                        <br />
-                        But something that represents you.
-                      </p>
-                    </Col>
-                  </Container>
-                </div>
-                <div className={"d-flex justify-content-center mt-4"}>
-                  <img
-                    height={50}
-                    width={50}
-                    className="asbulla"
-                    src={asbulla}
-                    alt={"logo"}
-                  />
-                  <img
-                    height={80}
-                    className="nyancat"
-                    src={nyan}
-                    alt={"logo"}
-                  />
-                  <img
-                    height={100}
-                    width={100}
-                    className="papa"
-                    src={papa}
-                    alt={"logo"}
-                  />
-                  <img
-                    height={80}
-                    width={80}
-                    className="astro"
-                    src={astro}
-                    alt={"logo"}
-                  />
-                  <img
-                    height={50}
-                    width={50}
-                    className="astronaut"
-                    src={astronaut}
-                    alt={"logo"}
-                  />
-                </div>
+            <div className={"d-flex justify-content-center mt-4"}>
+              <StyledImg
+                height={50}
+                width={50}
+                className="asbulla rounded-5"
+                src={asbulla}
+                alt={"logo"}
+              />
+              <StyledImg
+                height={80}
+                className="nyancat"
+                src={nyan}
+                alt={"logo"}
+              />
+              <StyledImg
+                height={100}
+                width={200}
+                className={"papa"}
+                src={papa}
+                alt={"logo"}
+              />
+              <StyledImg
+                height={80}
+                width={80}
+                className="astro"
+                src={astro}
+                alt={"logo"}
+              />
+              <StyledImg
+                height={50}
+                width={50}
+                className="astronaut"
+                src={astronaut}
+                alt={"logo"}
+              />
+            </div>
 
-                <div className="trueId">
-                  <Col className={" col-10 text-center"}>
-                    Chiediamo agli utenti di LinkedIn di utilizzare le loro vere
-                    identità, quindi scatta o carica una tua foto. Poi
-                    ritagliala, applica dei filtri e perfezionala come vuoi.
-                  </Col>
-                </div>
-                <div className={"modal-footer"}>
-                  <Container className={"d-flex justify-content-end"}>
-                    <Button>Carica Foto</Button>
-                    <Button onClick={showChange}>Usa Fotocamera</Button>
-                  </Container>
-                </div>
-              </div>
-            )}
-            {show && <WebcamComponent />}
-          </div>
-        </div>
-      </div>
+            <div className="trueId px-5 my-5">
+              <Col className={" d-flex col-12 text-center"}>
+                Chiediamo agli utenti di LinkedIn di utilizzare le loro vere
+                identità, quindi scatta o carica una tua foto. Poi ritagliala,
+                applica dei filtri e perfezionala come vuoi.
+              </Col>
+            </div>
+            <Modal.Footer className={" d-flex w-100"}>
+              <Container className="d-flex justify-content-end">
+                <Button className="mx-1">Carica Foto</Button>
+                <Button className="mx-1" onClick={showChange}>
+                  Usa Fotocamera
+                </Button>
+              </Container>
+            </Modal.Footer>
+          </Modal.Body>
+        )}
+        {show && <WebcamComponent />}
+        {/* </div> */}
+      </Modal>
     </StyledDiv>
   );
 };
