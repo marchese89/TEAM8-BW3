@@ -18,10 +18,6 @@ const StyledFoto = styled.div`
   .webImg {
     border-radius: 50%;
   }
-
-  .imgSet {
-    border-radius: 50%;
-  }
 `;
 
 const WebcamComponent = () => {
@@ -72,7 +68,7 @@ const WebcamComponent = () => {
               src={imgSrc}
               alt="img"
               height={400}
-              width={400}
+              width={500}
             />
           </div>
         ) : (
