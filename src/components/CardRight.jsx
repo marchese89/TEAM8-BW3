@@ -1,7 +1,7 @@
 import { Card, Col, Container, Modal, Row } from "react-bootstrap";
 import styled from "styled-components";
 import { Bookmark, Alipay, Person, Camera } from "react-bootstrap-icons";
-import imgp from "../assets/LinkImg.PNG";
+import imgp from "../assets/astrocat.jpg";
 import ModalFoto from "./ModalFoto";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -61,8 +61,8 @@ const StyledCard = styled.div`
     ${"" /* position: absolute; */}
     z-index: 6;
   }
-  .cont img{
-    height:100%
+  .cont img {
+    height: 100%;
   }
 `;
 
@@ -77,8 +77,6 @@ const CardRight = ({ shoModal }) => {
     (state) => state.profile.my_profile
   );
 
-  
-
   return (
     <StyledCard>
       <Card className={"rounded-bottom-2"}>
@@ -90,7 +88,14 @@ const CardRight = ({ shoModal }) => {
                 " position-absolute top-100 start-50 translate-middle d-flex justify-content-center "
               }
             >
-              <img src={my_profileFromReduxStore.image} alt='profile' width={50} height={50} onClick={goToProf} className={"rounded-circle "} />
+              <img
+                src={my_profileFromReduxStore.image}
+                alt="profile"
+                width={50}
+                height={50}
+                onClick={goToProf}
+                className={"rounded-circle "}
+              />
             </div>
           </Row>
         </Col>
@@ -98,7 +103,8 @@ const CardRight = ({ shoModal }) => {
           <Row>
             <h4 className="h4Modify text-center pt-4">
               {" "}
-              Ti diamo il benvenuto {my_profileFromReduxStore.name} {my_profileFromReduxStore.surname} {" "}
+              Ti diamo il benvenuto {my_profileFromReduxStore.name}{" "}
+              {my_profileFromReduxStore.surname}{" "}
             </h4>
             <p>{my_profileFromReduxStore.experience}</p>
             <p
