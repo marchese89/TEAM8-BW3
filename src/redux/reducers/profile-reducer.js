@@ -54,10 +54,14 @@ export default function profileReducer(state = initialState, action) {
             userToInsert = user;
           }
         });
-        return {
-          ...state,
-          recently_visited: [...state.recently_visited, userToInsert],
-        };
+        if (userToInsert !== null) {
+          return {
+            ...state,
+            recently_visited: [...state.recently_visited, userToInsert],
+          };
+        } else {
+          return state;
+        }
       } else {
         return state;
       }

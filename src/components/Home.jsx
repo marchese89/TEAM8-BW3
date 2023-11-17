@@ -473,8 +473,8 @@ const Home = () => {
               <Card>
                 <Card.Body className="">
                   <h6>Altri profili consultati</h6>
-                  {recently_visitedFromReduxStore.map((user) => {
-                    return <RecentProfile user={user} key={user._id} />;
+                  {recently_visitedFromReduxStore.map((user, i) => {
+                    return <RecentProfile user={user} key={i} />;
                   })}
                   {/* <RecentProfile />
                   <RecentProfile />

@@ -3,6 +3,7 @@ import { Button, Card, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 import { Plus, PersonAdd } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
+import placeholder from "../img/img_placeholder.jpg";
 const StyledUse = styled.div`
   .sectionProfile {
     line-height: 1;
@@ -28,7 +29,7 @@ const RecentProfile = ({ user }) => {
     <StyledUse>
       <div className=" my-1 mx-2 d-flex profilePill flex-wrap ">
         <img
-          src={user.image}
+          src={user !== null ? user.image : placeholder}
           alt="imgProfile"
           width={40}
           height={40}
@@ -36,7 +37,8 @@ const RecentProfile = ({ user }) => {
         />
         <section className="sectionProfile">
           <h5 className="m-0">
-            {user.name} {user.surname}
+            {user !== null ? user.name : "     "}{" "}
+            {user !== null ? user.surname : "    "}
           </h5>
           <p className="m-0">Full-stack-developer</p>
         </section>
