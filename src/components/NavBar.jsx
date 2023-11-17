@@ -282,7 +282,7 @@ function NavBar() {
                       navigate("/in/me");
                     }}
                   />
-                  Tu
+                  <p className="textStyle d-none d-md-block m-0 ">Tu</p>
                 </span>
               </div>
               <div className="d-none d-lg-flex">
