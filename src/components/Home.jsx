@@ -309,14 +309,62 @@ const Home = () => {
                       }}
                       className="d-flex justify-content-between"
                     >
-                      {" "}
-                      <img
-                        src={post.user.image}
-                        className="rounded-circle"
-                        alt="avatar"
-                        width={50 + "px"}
-                      />{" "}
-                      {post.username}
+                      <div>
+                        {" "}
+                        <img
+                          src={post.image}
+                          className="rounded-circle"
+                          alt="avatar"
+                          width={50 + "px"}
+                        />{" "}
+                        {post.username}
+                      </div>
+                      <div className="position-relative">
+                        <ThreeDots
+                          className={
+                            my_profileFromReduxStore.username === post.username
+                              ? "three-dots"
+                              : "three-dots d-none"
+                          }
+                          onClick={() => {
+                            setshowDrop(!showDrop);
+                          }}
+                        />
+                        {showDrop && (
+                          <div
+                            className={
+                              my_profileFromReduxStore.username ===
+                              post.username
+                                ? "drop-down position-absolute"
+                                : "drop-down position-absolute d-none"
+                            }
+                          >
+                            <ul className="list-unstyled d-flex flex-column mb-0">
+                              <li
+                                onClick={() => {
+                                  // setshowDrop(true);
+                                  setShowModPost(true);
+                                  setshowDrop(false);
+                                  setPost(post);
+                                  setPostText(post.text);
+                                  // setShowAddExperience(true);
+                                }}
+                              >
+                                <PencilFill className="me-2" />
+                                Modifica Post
+                              </li>
+                              <li
+                                onClick={() => {
+                                  deletePost(post._id);
+                                }}
+                              >
+                                <Trash3Fill className="me-2" />
+                                Elimina post
+                              </li>
+                            </ul>
+                          </div>
+                        )}
+                      </div>
                     </p>
 
                     {/* Data di creazione del post con funzione per trasformare la stringa della data */}
