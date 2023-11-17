@@ -109,7 +109,6 @@ const AddComment = ({ postId, author, fetchComments }) => {
           </Form.Group>
         </Form>
       </Row>
-      <AllComments author={author} />
     </ProfileStyled>
   );
 };

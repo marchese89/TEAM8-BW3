@@ -32,6 +32,7 @@ import NewsCard from "./Notizie";
 import { token, userProfileAction } from "../redux/actions";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import AllComments from "./AllComments";
 
 const ProfileStyled = styled.div`
   .destra li {
@@ -482,6 +483,7 @@ const Home = () => {
                         {/* selectedPostId */}
                       </>
                     )}
+                    <AllComments author={post.user.username} />
                   </Col>
                 </Row>
               ))}
