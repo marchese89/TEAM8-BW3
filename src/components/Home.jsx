@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  FormControl,
+  Image,
+  InputGroup,
+  Modal,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import styled from "styled-components";
 import {
   HandThumbsUp,
   ChatText,
   Share,
   SendFill,
+  ThreeDots,
+  Trash3Fill,
+  PencilFill,
   CaretDown,
 } from "react-bootstrap-icons";
 import RecentProfile from "./recentlyProfile";
@@ -33,6 +48,42 @@ const ProfileStyled = styled.div`
   .foto img {
     width: 100%;
   }
+  .three-dots {
+    width: 1.8em;
+    height: 1.8em;
+  }
+  .three-dots:hover {
+    cursor: pointer;
+  }
+  .drop-down {
+    color: #666666;
+    z-index: 4;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #eae8e5;
+    right: 0em;
+    top: 2em;
+    & ul li {
+      white-space: nowrap;
+      width: 20em;
+    }
+    & ul li:hover {
+      background-color: #f3f3f3;
+      cursor: pointer;
+    }
+    & ul li:nth-of-type(1) {
+      padding: 0.5em;
+      border-radius: 10px 10px 0 0;
+    }
+    & ul li:nth-of-type(2) {
+      padding: 0.5em;
+      border-radius: 0 0 10px 10px;
+    }
+    &ul {
+      margin: 0;
+      padding: 0;
+    }
+  }
 `;
 
 const Home = () => {
@@ -41,10 +92,16 @@ const Home = () => {
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showModPost, setShowModPost] = useState(false);
+  const [postText, setPostText] = useState("");
+  const [post, setPost] = useState();
 
   const my_profileFromReduxStore = useSelector(
     (state) => state.profile.my_profile
   );
+  const [showDrop, setshowDrop] = useState(false);
+  const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
 
   const fetchData = async (text, file) => {
     try {
@@ -104,6 +161,77 @@ const Home = () => {
     }
   };
 
+  function deletePost(idPost) {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + idPost, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetchData();
+        } else {
+          throw new Error("Errore nella delete");
+        }
+      })
+      .catch((err) => {
+        console.log("Errore ", err);
+      });
+  }
+
+  function modifyPost(idPost) {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + idPost, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: postText }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          if (selectedFile !== null) {
+            uploadPostImage(idPost);
+          } else {
+            fetchData();
+          }
+        } else {
+          throw new Error("Errore nella delete");
+        }
+      })
+      .catch((err) => {
+        console.log("Errore ", err);
+      });
+  }
+
+  function uploadPostImage(idPost) {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("post", selectedFile);
+      fetch(`https://striveschool-api.herokuapp.com/api/posts/${idPost}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) {
+            fetchData();
+          } else {
+            console.log("upload NO");
+            throw new Error("errore nell'upload'");
+          }
+        })
+        // .then(() => {
+
+        // })
+        .catch((err) => console.log("ERRORE!", err));
+    }
+  }
+
   // Funzione per mostrare CommentArea
   const toggleCommentArea = (postId) => {
     setSelectedPostId(postId === selectedPostId ? null : postId);
@@ -122,6 +250,11 @@ const Home = () => {
     return data.toLocaleDateString("it-IT", options);
   }
 
+  const handleFileChange = (event) => {
+    // Gestisci il cambiamento del file selezionato
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -176,15 +309,66 @@ const Home = () => {
                         fontWeight: "bold",
                         margin: 0.2 + "em",
                       }}
+                      className="d-flex justify-content-between"
                     >
-                      {" "}
-                      <img
-                        src={post.image}
-                        className="rounded-circle"
-                        alt="avatar"
-                        width={50 + "px"}
-                      />{" "}
-                      {post.username}
+                      <div>
+                        {" "}
+                        <img
+                          src={post.user.image}
+                          className="rounded-circle"
+                          alt="avatar"
+                          width={50 + "px"}
+                          height={50 + "px"}
+                        />{" "}
+                        {post.username}
+                      </div>
+                      <div className="position-relative">
+                        <ThreeDots
+                          className={
+                            my_profileFromReduxStore.username === post.username
+                              ? "three-dots"
+                              : "three-dots d-none"
+                          }
+                          onClick={() => {
+                            setshowDrop(!showDrop);
+                            setSelectedPostIdDrop(post._id);
+                          }}
+                        />
+                        {showDrop && selectedPostIdDrop === post._id && (
+                          <div
+                            className={
+                              my_profileFromReduxStore.username ===
+                              post.username
+                                ? "drop-down position-absolute"
+                                : "drop-down position-absolute d-none"
+                            }
+                          >
+                            <ul className="list-unstyled d-flex flex-column mb-0">
+                              <li
+                                onClick={() => {
+                                  // setshowDrop(true);
+                                  setShowModPost(true);
+                                  setshowDrop(false);
+                                  setPost(post);
+                                  setPostText(post.text);
+                                  // setShowAddExperience(true);
+                                }}
+                              >
+                                <PencilFill className="me-2" />
+                                Modifica Post
+                              </li>
+                              <li
+                                onClick={() => {
+                                  deletePost(post._id);
+                                }}
+                              >
+                                <Trash3Fill className="me-2" />
+                                Elimina post
+                              </li>
+                            </ul>
+                          </div>
+                        )}
+                      </div>
                     </p>
 
                     {/* Data di creazione del post con funzione per trasformare la stringa della data */}
@@ -280,6 +464,53 @@ const Home = () => {
             </Col>
           </Row>
         </Container>
+
+        <Modal
+          show={showModPost}
+          onHide={() => {
+            setShowModPost(false);
+          }}
+          className="modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title className="fs-5 modal-title">
+              Modifica Post
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <InputGroup className="d-flex flex-column w-100">
+              <Form.Label>Testo</Form.Label>
+            </InputGroup>
+            <Form.Control
+              value={postText}
+              onChange={(e) => setPostText(e.target.value)}
+            ></Form.Control>
+
+            <div className="d-flex flex-column w-100 mt-3 align-items-center">
+              <Form.Label>Immagine</Form.Label>
+              {selectedFile && (
+                <Image
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Anteprima immagine"
+                  className="image-preview w-25 my-2 rounded-2"
+                  fluid
+                />
+              )}
+              <Form.Control type="file" onChange={handleFileChange} />
+            </div>
+          </Modal.Body>
+          <Modal.Footer className="d-flex justify-content-end">
+            <Button
+              className="save-button rounded-5 px-3"
+              onClick={() => {
+                setShowModPost(false);
+                modifyPost(post._id);
+              }}
+            >
+              Salva
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </ProfileStyled>
     </>
   );

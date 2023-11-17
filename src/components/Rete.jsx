@@ -14,13 +14,21 @@ const RetePage = () => {
 
   return (
     <>
-      <Container className="margin-auto">
+      <Container className="">
         <Row className="justify-content-center d-flex w-100">
           {usersFromRedux.map((user) => {
             return (
-              <Col key={user._id} xs={12} className="justify-content-center">
-                <User user={user} />
-              </Col>
+              <>
+                <Col xs={3}></Col>
+                <Col
+                  key={user._id}
+                  xs={6}
+                  className="justify-content-center  mx-auto"
+                >
+                  <User user={user} />
+                </Col>
+                <Col xs={3}></Col>
+              </>
             );
           })}
         </Row>
