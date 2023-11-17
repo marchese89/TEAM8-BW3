@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Button,
+  Card,
   Col,
   Container,
   Form,
@@ -20,6 +21,7 @@ import {
   ThreeDots,
   Trash3Fill,
   PencilFill,
+  CaretDown,
 } from "react-bootstrap-icons";
 import RecentProfile from "./recentlyProfile";
 import AddComment from "./AddComment";
