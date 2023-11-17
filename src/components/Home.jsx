@@ -286,7 +286,7 @@ const Home = () => {
     <>
       <ProfileStyled>
         {loading && (
-          <Row className="py-5 my-5 text-center d-flex flex-column">
+          <Row className="py-5 my-5 d-flex justify-content-center ">
             <Spinner animation="border " variant="primary" />
           </Row>
         )}
@@ -309,7 +309,7 @@ const Home = () => {
               <Row className="mb-2  justify-content-center ">
                 <Col
                   className=" bg-white py-3 border rounded lunghezza"
-                  // lg={{ span: 11, offset: 1 }}
+                // lg={{ span: 11, offset: 1 }}
                 >
                   <NewPost
                     show={showModal}
@@ -323,7 +323,7 @@ const Home = () => {
                 <Row className="justify-content-center " key={post._id}>
                   <Col
                     className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2"
-                    // lg={{ offset: 1 }}
+                  // lg={{ offset: 1 }}
                   >
                     {/* Avatar + Nome Utente  */}
                     <p
@@ -370,7 +370,7 @@ const Home = () => {
                           <div
                             className={
                               my_profileFromReduxStore.username ===
-                              post.username
+                                post.username
                                 ? "drop-down position-absolute"
                                 : "drop-down position-absolute d-none"
                             }
