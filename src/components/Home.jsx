@@ -309,15 +309,15 @@ const Home = () => {
                       }}
                       className="d-flex justify-content-between"
                     >
-                      <div>
-                        {" "}
-                        <img
-                          src={post.image}
-                          className="rounded-circle"
-                          alt="avatar"
-                          width={50 + "px"}
-                        />{" "}
-                        {post.username}
+                    <div>
+                      {" "}
+                      <img
+                        src={post.user.image}
+                        className="rounded-circle"
+                        alt="avatar"
+                        width={50 + "px"}
+                      />{" "}
+                      {post.username}
                       </div>
                       <div className="position-relative">
                         <ThreeDots
