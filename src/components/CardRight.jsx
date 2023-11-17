@@ -5,6 +5,7 @@ import imgp from "../assets/LinkImg.PNG";
 import ModalFoto from "./ModalFoto";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const StyledCard = styled.div`
   .h4Modify {
@@ -60,6 +61,9 @@ const StyledCard = styled.div`
     ${"" /* position: absolute; */}
     z-index: 6;
   }
+  .cont img{
+    height:100%
+  }
 `;
 
 const CardRight = ({ shoModal }) => {
@@ -68,6 +72,12 @@ const CardRight = ({ shoModal }) => {
   const goToProf = () => {
     navigate("/in/me");
   };
+
+  const my_profileFromReduxStore = useSelector(
+    (state) => state.profile.my_profile
+  );
+
+  
 
   return (
     <StyledCard>
@@ -80,7 +90,7 @@ const CardRight = ({ shoModal }) => {
                 " position-absolute top-100 start-50 translate-middle d-flex justify-content-center "
               }
             >
-              <Camera size={50} onClick={goToProf} className={"camera "} />
+              <img src={my_profileFromReduxStore.image} alt='profile' width={50} height={50} onClick={goToProf} className={"rounded-circle "} />
             </div>
           </Row>
         </Col>
@@ -88,8 +98,9 @@ const CardRight = ({ shoModal }) => {
           <Row>
             <h4 className="h4Modify text-center pt-4">
               {" "}
-              Ti diamo il benvenuto (nome){" "}
+              Ti diamo il benvenuto {my_profileFromReduxStore.name} {my_profileFromReduxStore.surname} {" "}
             </h4>
+            <p>{my_profileFromReduxStore.experience}</p>
             <p
               className={"link text-center"}
               // data-bs-toggle="modal"
