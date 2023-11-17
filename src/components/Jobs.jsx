@@ -21,9 +21,9 @@ export default function Jobs() {
   }, []);
 
   return (
-    <Container className="cont">
-      <Row>
-        <Col xs={7} className="mx-auto">
+    <Container className="cont d-flex">
+      <Row className="d-flex">
+        <Col xs={12} className="d-flex flex-wrap">
           {!showSearch &&
             jobsFromReduxStore &&
             jobsFromReduxStore.map((job) => {

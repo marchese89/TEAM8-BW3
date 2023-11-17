@@ -1,26 +1,39 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Card, Container } from "react-bootstrap";
 import styled from "styled-components";
+import imgJob from "../assets/asbulla.jpg";
 
-const StyledCont = styled.div`
-  a {
-    text-decoration: none;
-    color: #666666;
-  }
+const StyledCont = styled.a`
+  text-decoration: none;
+  color: #666666;
 `;
 
 export default function Job({ data }) {
   return (
-    <StyledCont>
-      <Row
-        className="mx-0 mt-3 p-3"
-        style={{ border: "1px solid #00000033", borderRadius: 4 }}
-      >
+    // <StyledCont>
+    <Col className="col-3 mx-2 my-2">
+      {/* <Card>
+        <Card.Img src={imgJob} alt="logo" />
+
         <Col xs={12}>
-          <a href={data.url} target="_blank" rel="noreferrer">
+          <StyledCont href={data.url} target="_blank" rel="noreferrer">
             {data.title}
-          </a>
+          </StyledCont>
         </Col>
-      </Row>
-    </StyledCont>
+      </Card> */}
+
+      <Card border="light" style={{ width: "18rem" }}>
+        <Card.Img src={imgJob} alt="logo" />
+        <Card.Body>
+          <Card.Title>Light Card Title</Card.Title>
+          <Card.Text>
+            <StyledCont href={data.url} target="_blank" rel="noreferrer">
+              {" "}
+              {data.title}
+            </StyledCont>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+    // </StyledCont>
   );
 }

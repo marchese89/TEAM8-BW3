@@ -27,7 +27,7 @@ const SectionLearn = () => {
                 Lorem ipsum sit dolor esque tempus fugit
               </StyledP>
             </Card.Body>
-            <Card.Footer className={"mt-3 text-center"}>
+            <Card.Footer className={"mt-3 text-center bg-transparent"}>
               <Button
                 className={
                   "rounded-pill p-0 px-2 py-1 bg-light text-primary border-primary"
