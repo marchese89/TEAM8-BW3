@@ -17,7 +17,6 @@ import {
 import styled from "styled-components";
 import {
   HandThumbsUp,
-  HandThumbsUpFill,
   ChatText,
   Share,
   SendFill,
@@ -91,10 +90,6 @@ const ProfileStyled = styled.div`
   .hover:hover{
     cursor:pointer;
   }
-  .liked {
-    color: #007bff;
-    border: 1px solid blue !important;
-  }
 `;
 
 const Home = () => {
@@ -143,7 +138,7 @@ const Home = () => {
       setLoading(false);
     }
   };
-  const [likedPosts, setLikedPosts] = useState([]);
+
   const navigate = useNavigate();
 
   const handlePost = async (postText) => {
@@ -273,17 +268,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const handleLike = (postId) => {
-    // Controlla se il post è già stato "consigliato"
-    if (likedPosts.includes(postId)) {
-      // Rimuovi il post dall'elenco dei post piaciuti
-      setLikedPosts(likedPosts.filter((id) => id !== postId));
-    } else {
-      // Aggiungi il post all'elenco dei post piaciuti
-      setLikedPosts([...likedPosts, postId]);
-    }
-  };
-  
   return (
     <>
       <ProfileStyled>
@@ -430,11 +414,7 @@ const Home = () => {
                         // *DA FIXARE* Al click pollice colorato
                         className="d-none rounded d-lg-block align-items-start align-text-center me-3 interazioni p-1 pb-1"
                       >
-                        <HandThumbsUp
-  className={`align-center me-1 ${likedPosts.includes(post._id) ? "liked" : ""}`}
-  onClick={() => handleLike(post._id)}
-/>
-
+                        <HandThumbsUp className="align-center me-1" />
                         Consiglia
                       </p>{" "}
                       {/* Stato per mettere like */}
