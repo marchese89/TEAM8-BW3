@@ -87,8 +87,8 @@ const ProfileStyled = styled.div`
       padding: 0;
     }
   }
-  .hover:hover{
-    cursor:pointer;
+  .hover:hover {
+    cursor: pointer;
   }
 `;
 
@@ -108,6 +108,10 @@ const Home = () => {
   );
   const [showDrop, setshowDrop] = useState(false);
   const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
+
+  const recently_visitedFromReduxStore = useSelector(
+    (state) => state.profile.recently_visited
+  );
 
   const fetchData = async (text, file) => {
     try {
@@ -214,7 +218,6 @@ const Home = () => {
       });
   }
 
-
   function uploadPostImage(idPost) {
     if (selectedFile) {
       const formData = new FormData();
@@ -312,10 +315,11 @@ const Home = () => {
                     // lg={{ offset: 1 }}
                   >
                     {/* Avatar + Nome Utente  */}
-                    <p  onClick={() => {
-                      console.log(post.user._id);
-                      navigate("/profile/" + post.user._id);
-                       }}
+                    <p
+                      onClick={() => {
+                        console.log(post.user._id);
+                        // navigate("/profile/" + post.user._id);
+                      }}
                       style={{
                         fontSize: 1 + "em",
                         fontWeight: "bold",
@@ -467,10 +471,13 @@ const Home = () => {
               <Card>
                 <Card.Body className="">
                   <h6>Altri profili consultati</h6>
+                  {recently_visitedFromReduxStore.map((user) => {
+                    return <RecentProfile user={user} key={user._id} />;
+                  })}
+                  {/* <RecentProfile />
                   <RecentProfile />
                   <RecentProfile />
-                  <RecentProfile />
-                  <RecentProfile />
+                  <RecentProfile /> */}
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-center">
                   <Container className="d-flex align-items-center justify-content-center">
