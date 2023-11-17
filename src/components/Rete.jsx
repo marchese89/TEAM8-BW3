@@ -17,7 +17,6 @@ const RetePage = () => {
   const ReteStyled = styled.div`
 
   margin-top: 120px;
-
   .containergeneric {
       border: 1px solid #dbdbdb;
       border-radius: 10px;
@@ -30,10 +29,10 @@ const RetePage = () => {
       <ReteStyled>
         <Container className="margin-auto containergeneric">
           <h3 className="mb-4">Profili</h3>
-          <Row className="justify-content-center d-flex w-100">
+          <Row className="justify-content-center d-flex">
             {usersFromRedux.map((user) => {
               return (
-                <Col key={user._id} xs={12} className="justify-content-center">
+                <Col key={user._id} xs={12} md={6} className="justify-content-center">
                   <User user={user} />
                 </Col>
               );
