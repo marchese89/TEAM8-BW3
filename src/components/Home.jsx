@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormControl,
+  Image,
+  InputGroup,
+  Modal,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import styled from "styled-components";
 import {
   HandThumbsUp,
@@ -79,6 +90,10 @@ const Home = () => {
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showModPost, setShowModPost] = useState(false);
+  const [postText, setPostText] = useState("");
+  const [post, setPost] = useState();
 
   const my_profileFromReduxStore = useSelector(
     (state) => state.profile.my_profile
@@ -143,13 +158,33 @@ const Home = () => {
   };
 
   function deletePost(idPost) {
-    console.log("entro in delete post");
     fetch("https://striveschool-api.herokuapp.com/api/posts/" + idPost, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetchData();
+        } else {
+          throw new Error("Errore nella delete");
+        }
+      })
+      .catch((err) => {
+        console.log("Errore ", err);
+      });
+  }
+
+  function modifyPost(idPost) {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/" + idPost, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: postText }),
     })
       .then((response) => {
         if (response.ok) {
@@ -181,6 +216,11 @@ const Home = () => {
     return data.toLocaleDateString("it-IT", options);
   }
 
+  const handleFileChange = (event) => {
+    // Gestisci il cambiamento del file selezionato
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -268,7 +308,11 @@ const Home = () => {
                             <ul className="list-unstyled d-flex flex-column mb-0">
                               <li
                                 onClick={() => {
+                                  // setshowDrop(true);
+                                  setShowModPost(true);
                                   setshowDrop(false);
+                                  setPost(post);
+                                  setPostText(post.text);
                                   // setShowAddExperience(true);
                                 }}
                               >
@@ -374,6 +418,53 @@ const Home = () => {
             </Col>
           </Row>
         </Container>
+
+        <Modal
+          show={showModPost}
+          onHide={() => {
+            setShowModPost(false);
+          }}
+          className="modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title className="fs-5 modal-title">
+              Modifica Post
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <InputGroup className="d-flex flex-column w-100">
+              <Form.Label>Testo</Form.Label>
+            </InputGroup>
+            <Form.Control
+              value={postText}
+              onChange={(e) => setPostText(e.target.value)}
+            ></Form.Control>
+
+            <div className="d-flex flex-column w-100 mt-3 align-items-center">
+              <Form.Label>Immagine</Form.Label>
+              {selectedFile && (
+                <Image
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Anteprima immagine"
+                  className="image-preview w-25 my-2 rounded-2"
+                  fluid
+                />
+              )}
+              <Form.Control type="file" onChange={handleFileChange} />
+            </div>
+          </Modal.Body>
+          <Modal.Footer className="d-flex justify-content-end">
+            <Button
+              className="save-button rounded-5 px-3"
+              onClick={() => {
+                setShowModPost(false);
+                modifyPost(post._id);
+              }}
+            >
+              Salva
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </ProfileStyled>
     </>
   );

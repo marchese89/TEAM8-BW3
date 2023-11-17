@@ -43,7 +43,6 @@ const ProfileStyled = styled.div`
 const NewPost = ({ onPost }) => {
   const [show, setShow] = useState(false);
   const [postText, setPostText] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const my_profileFromReduxStore = useSelector(
     (state) => state.profile.my_profile
@@ -53,22 +52,15 @@ const NewPost = ({ onPost }) => {
     setShow(false);
     // Resettare il testo del post e il file selezionato quando si chiude il modale
     setPostText("");
-    setSelectedFile(null);
   };
 
   const handleShow = () => setShow(true);
 
   const handlePost = () => {
     // Esegui l'azione di pubblicazione del post, includendo il testo e il file
-    onPost(postText, selectedFile);
+    onPost(postText);
     // Chiudi il modale
     handleClose();
-  };
-
-  const handleFileChange = (event) => {
-    // Gestisci il cambiamento del file selezionato
-    const file = event.target.files[0];
-    setSelectedFile(file);
   };
 
   // const openFileInput = () => {
@@ -125,18 +117,6 @@ const NewPost = ({ onPost }) => {
               accept="image/*"
               onChange={handleFileChange}
             /> */}
-            <div className="d-flex flex-column w-100 mt-3 align-items-center">
-              <Form.Label>Immagine</Form.Label>
-              {selectedFile && (
-                <Image
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Anteprima immagine"
-                  className="image-preview w-25 my-2 rounded-2"
-                  fluid
-                />
-              )}
-              <Form.Control type="file" onChange={handleFileChange} />
-            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
