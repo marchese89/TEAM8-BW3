@@ -259,7 +259,7 @@ const Home = () => {
     <>
       <ProfileStyled>
         {loading && (
-          <Row className="py-5 my-5 text-center justify-content-center">
+          <Row className="py-5 my-5 text-center d-flex flex-column">
             <Spinner animation="border " variant="primary" />
           </Row>
         )}
@@ -274,7 +274,9 @@ const Home = () => {
             {/* Centrare col  */}
             <Col
               lg={7}
-              className=" d-sm mb-2 mt-0 rounded col-md-6  pt-2 justify-content-center"
+              md={12}
+              sm={12}
+              className="mb-2 mt-0 rounded col-md-6 pt-2 justify-content-center"
             >
               {/* Row add post  */}
               <Row className="mb-2  justify-content-center ">
@@ -444,7 +446,21 @@ const Home = () => {
             </Col>
             <Col className="mt-2 d-none d-lg-block">
               <NewsCard />
-              <RecentProfile />
+              <Card>
+                <Card.Body className="">
+                  <h6>Altri profili consultati</h6>
+                  <RecentProfile />
+                  <RecentProfile />
+                  <RecentProfile />
+                  <RecentProfile />
+                </Card.Body>
+                <Card.Footer className="d-flex justify-content-center">
+                  <Container className="d-flex align-items-center justify-content-center">
+                    <h6>Vedi altro</h6>
+                    <CaretDown className="mx-2" size={20} />
+                  </Container>
+                </Card.Footer>
+              </Card>
             </Col>
           </Row>
         </Container>

@@ -19,6 +19,14 @@ import { useParams } from "react-router-dom";
 import SidePart from "./SidePart";
 
 const ProfileStyled = styled.div`
+
+.infoprofile {
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      padding: 2em;
+      background-color: #fff;
+}
+
   @media screen and (min-width: 1200px) {
     .marginesagerato {
       margin-top: 120px !important;
@@ -35,7 +43,6 @@ const ProfileStyled = styled.div`
       border: 1px solid #dbdbdb;
       border-radius: 10px;
       overflow: hidden;
-      background-color: white;
       background-color: #fff;
     }
     .cover {
@@ -218,7 +225,7 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 18px;
     }
 
     .containerinfosmall {
@@ -234,7 +241,7 @@ const ProfileStyled = styled.div`
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 210px;
+      bottom: 230px;
       left: 35px;
     }
 
@@ -321,7 +328,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -343,7 +350,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -365,8 +372,7 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${
-    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${"" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -744,7 +750,7 @@ export default function Profile() {
                 src={profileImage}
                 className="avatar"
                 style={!differentUser ? { cursor: "pointer" } : {}}
-                onClick={!differentUser ? openModal : () => {}}
+                onClick={!differentUser ? openModal : () => { }}
               />
               {/* isOpen={} onRequestClose={closeModal} */}
               <Modal show={isModalOpen} onHide={closeModal}>
@@ -859,7 +865,13 @@ export default function Profile() {
                 </Col>
               </Row>
             </div>
-            <div className="mt-3">
+            <div>
+              <Container className="infoprofile my-3">
+                <h3>Informazioni</h3>
+                <p>Mollit ea nisi cillum mollit et ullamco sit elit labore sint. Amet consectetur velit dolore nulla Lorem aliqua sint. Velit ut id nulla sit eiusmod. Dolor pariatur sint magna elit adipisicing minim laboris exercitation voluptate laborum dolore laborum. Enim enim id incididunt amet. Occaecat Lorem veniam proident quis reprehenderit.</p>
+              </Container>
+            </div>
+            <div className="C">
               <Experience />
             </div>
           </Col>
