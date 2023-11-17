@@ -42,23 +42,15 @@ export default function profileReducer(state = initialState, action) {
     case VISIT_USER:
       console.log("dentro il reducer");
       let to_insert = true;
-      let userToInsert = null;
       state.recently_visited.forEach((element) => {
-        if (action.payload === element._id) {
-          //confrontiamo l'id dell'utente visitato con gli id degli utenti registrati
+        if (action.payload === element) {
           to_insert = false;
         }
       });
-
       if (to_insert) {
-        state.profiles.forEach((profile) => {
-          if (profile._id === action.payload) {
-            userToInsert = profile;
-          }
-        });
         return {
           ...state,
-          recently_visited: [...state.recently_visited, userToInsert],
+          recently_visited: [...state.recently_visited, action.payload],
         };
       } else {
         return state;

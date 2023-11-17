@@ -388,9 +388,9 @@ export const jobsListAction = () => {
   };
 };
 
-export const visitUserAction = (user) => {
+export const visitUserAction = (idUser) => {
   return {
     type: VISIT_USER,
-    payload: user,
+    payload: idUser,
   };
 };

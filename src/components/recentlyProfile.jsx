@@ -3,7 +3,6 @@ import { Button, Card, Container, Row } from "react-bootstrap";
 import papa from "../assets/papa.webp";
 import styled from "styled-components";
 import { Plus, PersonAdd } from "react-bootstrap-icons";
-import { useSelector } from "react-redux";
 
 const StyledUse = styled.div`
   .sectionProfile {
@@ -25,21 +24,19 @@ const StyledUse = styled.div`
   }
 `;
 
-const RecentProfile = ({ user }) => {
+const RecentProfile = () => {
   return (
     <StyledUse>
       <div className=" my-1 mx-2 d-flex profilePill flex-wrap ">
         <img
-          src={user.image}
+          src={papa}
           alt="imgProfile"
           width={40}
           height={40}
           className="rounded-5 mx-2"
         />
         <section className="sectionProfile">
-          <h5 className="m-0">
-            {user.name} {user.surname}
-          </h5>
+          <h5 className="m-0">Federico Poggi</h5>
           <p className="m-0">Full-stack-developer</p>
         </section>
         <Container className="w-50">

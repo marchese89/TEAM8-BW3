@@ -59,7 +59,7 @@ const StyledCard = styled.div`
   }
   .roundedCamera {
     ${"" /* position: absolute; */}
-    ${"" /* z-index: 6; */}
+    z-index: 6;
   }
   .cont img{
     height:100%
