@@ -4,19 +4,20 @@ import { useSelector } from "react-redux";
 import AllComments from "./AllComments";
 import styled from "styled-components";
 const ProfileStyled = styled.div`
-.commento {
-  padding: 1em !important;
-  width:70% !important;
-  height: 80% !important;
-  border-radius:5em;
-  margin-left:1em;
-  margin-right:1em;
-}
-.bottone{display:inline;}
+  .commento {
+    padding: 1em !important;
+    width: 70% !important;
+    height: 80% !important;
+    border-radius: 5em;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+  .bottone {
+    display: inline;
+  }
 `;
 
-const AddComment = ({ postId, fetchComments }) => {
-  console.log("post id: ", postId);
+const AddComment = ({ postId, author, fetchComments }) => {
   const [comment, setComment] = useState({
     comment: "",
     rate: 1,
@@ -75,35 +76,40 @@ const AddComment = ({ postId, fetchComments }) => {
       <Row className="my-3">
         <Form onSubmit={sendComment}>
           <Form.Group className="mb-2">
-            
-                      <span>
-                        <img
-                          src={my_profileFromReduxStore.image}
-                          className='rounded-circle'
-                          
-                          alt="avatar"
-                          width={50 + "px"}
-                          height={50 + 'px'}
-                        />
-                      </span>
             <span>
-            <input
-            className="commento"
-              type="text"
-              placeholder="Aggiugni un commento..."
-              value={comment.comment}
-              onChange={(e) =>
-                setComment({ ...comment, comment: e.target.value })
-              }
-            /></span>
-          <span>
-          <Button className="bottone" variant="primary" type="submit" disabled={loading}>
-            {loading ? "Invio..." : "Invia"}
-          </Button></span>
+              <img
+                src={my_profileFromReduxStore.image}
+                className="rounded-circle"
+                alt="avatar"
+                width={50 + "px"}
+                height={50 + "px"}
+              />
+            </span>
+            <span>
+              <input
+                className="commento"
+                type="text"
+                placeholder="Aggiugni un commento..."
+                value={comment.comment}
+                onChange={(e) =>
+                  setComment({ ...comment, comment: e.target.value })
+                }
+              />
+            </span>
+            <span>
+              <Button
+                className="bottone"
+                variant="primary"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Invio..." : "Invia"}
+              </Button>
+            </span>
           </Form.Group>
         </Form>
       </Row>
-      <AllComments postId={postId} />
+      <AllComments author={author} />
     </ProfileStyled>
   );
 };
