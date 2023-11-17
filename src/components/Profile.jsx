@@ -18,6 +18,7 @@ import { token } from "../redux/actions";
 import Experience from "./Experience";
 import { useParams } from "react-router-dom";
 import SidePart from "./SidePart";
+import placeHolder from "../assets/astrocat.jpg";
 
 const ProfileStyled = styled.div`
   .infoprofile {
@@ -750,7 +751,8 @@ export default function Profile() {
             <div className="containermain">
               <div className="containercover">
                 <Image
-                  src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  // src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  src={placeHolder}
                   className="cover"
                 />
               </div>
