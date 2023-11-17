@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  experienceListAction,
   myProfileAction,
   updateProfileAction,
   userProfileAction,
@@ -656,6 +657,10 @@ export default function Profile() {
     }
   }, []);
 
+  useEffect(() => {
+    dispatch(experienceListAction(current_profileFromReduxStore._id));
+  }, []);
+
   // useEffect(() => {
   //   if (Object.keys(my_profileFromReduxStore).length > 0) {
   //     setProfileImage(my_profileFromReduxStore.image);
@@ -801,7 +806,11 @@ export default function Profile() {
                       {current_profileFromReduxStore.name}{" "}
                       {current_profileFromReduxStore.surname}
                     </p>
-                    <p>{myExperiencesFromReduxStore[0].role}</p>
+                    <p>
+                      {myExperiencesFromReduxStore.length === 0
+                        ? ""
+                        : myExperiencesFromReduxStore[0].role}
+                    </p>
                     <div className="containerinfosmall">
                       <p>{current_profileFromReduxStore.area}</p>
                       <p className="inlineblockp bold">500</p>
