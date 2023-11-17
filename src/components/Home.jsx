@@ -7,7 +7,6 @@ import {
   Col,
   Container,
   Form,
-  FormControl,
   Image,
   InputGroup,
   Modal,
@@ -335,6 +334,9 @@ const Home = () => {
                           alt="avatar"
                           width={50 + "px"}
                           height={50 + "px"}
+                          onClick={() => {
+                            navigate("/profile/" + post.user._id);
+                          }}
                         />{" "}
                         {post.username}
                       </div>
