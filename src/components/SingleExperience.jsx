@@ -39,29 +39,29 @@ export default function SingleExperience({ handleShow, exp }) {
               ) / 12
             ) > 0
               ? Math.floor(
-                  differenceInMonths(
-                    new Date(exp.endDate),
-                    new Date(exp.startDate)
-                  ) / 12
-                ) + " anni e"
+                differenceInMonths(
+                  new Date(exp.endDate),
+                  new Date(exp.startDate)
+                ) / 12
+              ) + " anni e"
               : ""}{" "}
             {differenceInMonths(
               new Date(exp.endDate),
               new Date(exp.startDate)
             ) %
               12 >
-            0
+              0
               ? (differenceInMonths(
-                  new Date(exp.endDate),
-                  new Date(exp.startDate)
-                ) %
-                  12) +
-                " mesi"
+                new Date(exp.endDate),
+                new Date(exp.startDate)
+              ) %
+                12) +
+              " mesi"
               : ""}
           </div>
         </div>
         {location.pathname === "/in/me/details/experience/" && (
-          <div className="icon " id="pencil">
+          <div className="icon d-flex justify-content-center" id="pencil">
             <i
               className="fas fa-pencil-alt "
               onClick={() => handleShow(exp._id)}
