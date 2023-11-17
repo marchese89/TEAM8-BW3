@@ -133,16 +133,19 @@ const Home = () => {
           {/* Colonna laterale profilo  */}
 
           <Row>
-            <Col className="mt-2 d-lg-flex d-md-block position-sticky">
+            <Col lg={2} className="mt-2 d-lg-flex d-md-block position-sticky ">
               <CardLeft />
             </Col>
             {/* Centrare col  */}
-            <Col className=" d-sm mb-2 mt-2 rounded col-md-6  pt-2 justify-content-center">
+            <Col
+              lg={7}
+              className=" d-sm mb-2 mt-0 rounded col-md-6  pt-2 justify-content-center"
+            >
               {/* Row add post  */}
-              <Row className="mb-5  justify-content-center ">
+              <Row className="mb-2  justify-content-center ">
                 <Col
                   className=" bg-white py-3 border rounded lunghezza"
-                  lg={{ span: 11, offset: 1 }}
+                  // lg={{ span: 11, offset: 1 }}
                 >
                   <NewPost
                     show={showModal}
@@ -156,7 +159,7 @@ const Home = () => {
                 <Row className="justify-content-center " key={post._id}>
                   <Col
                     className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2"
-                    lg={{ offset: 1 }}
+                    // lg={{ offset: 1 }}
                   >
                     {/* Avatar + Nome Utente  */}
                     <p
