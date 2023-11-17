@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Card,
   Col,
   Container,
   Form,
+  FormControl,
   Image,
   InputGroup,
   Modal,
@@ -91,27 +93,26 @@ const ProfileStyled = styled.div`
   }
   .liked {
     color: #007bff;
+    border: 1px solid blue !important;
   }
 `;
 
 const Home = () => {
   const [postData, setPostData] = useState([]);
   const [selectedPostId, setSelectedPostId] = useState(false);
+  const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModPost, setShowModPost] = useState(false);
   const [postText, setPostText] = useState("");
   const [post, setPost] = useState();
-  const [likedPosts, setLikedPosts] = useState([]);
-  const navigate = useNavigate();
-  const [showDrop, setshowDrop] = useState(false);
-  const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
 
   const my_profileFromReduxStore = useSelector(
     (state) => state.profile.my_profile
   );
-
+  const [showDrop, setshowDrop] = useState(false);
+  const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
 
   const fetchData = async (text, file) => {
     try {
@@ -142,6 +143,8 @@ const Home = () => {
       setLoading(false);
     }
   };
+  const [likedPosts, setLikedPosts] = useState([]);
+  const navigate = useNavigate();
 
   const handlePost = async (postText) => {
     try {
@@ -243,7 +246,10 @@ const Home = () => {
     }
   }
 
- 
+  // Funzione per mostrare CommentArea
+  const toggleCommentArea = (postId) => {
+    setSelectedPostId(postId === selectedPostId ? null : postId);
+  };
 
   // Funzione per stringa orario
   function formatData(dataString) {
@@ -267,12 +273,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-   // Funzione per mostrare CommentArea
-   const toggleCommentArea = (postId) => {
-    setSelectedPostId(postId === selectedPostId ? null : postId);
-  };
-
-  // Funzione per mettere like 
   const handleLike = (postId) => {
     // Controlla se il post è già stato "consigliato"
     if (likedPosts.includes(postId)) {
@@ -287,7 +287,11 @@ const Home = () => {
   return (
     <>
       <ProfileStyled>
-        
+        {loading && (
+          <Row className="py-5 my-5 text-center d-flex flex-column">
+            <Spinner animation="border " variant="primary" />
+          </Row>
+        )}
         {/* Contenitore  */}
         <Container className=" margine mt-5">
           {/* Colonna laterale profilo  */}
@@ -316,11 +320,6 @@ const Home = () => {
                   />
                 </Col>
               </Row>
-              {loading && (
-          <Row className="py-5 my-5 text-center d-flex justify-content-center ">
-            <Spinner animation="border " variant="primary" />
-          </Row>
-        )}
               {/* Map dei post  */}
               {postData.map((post) => (
                 <Row className="justify-content-center " key={post._id}>
@@ -427,21 +426,14 @@ const Home = () => {
                     <div className="d-flex flex-nowrap justify-content-center">
                       {/* Like  */}
                       <p
-                        onClick={() => handleLike(post._id)}
+                        onClick={() => setLiked(!liked)}
                         // *DA FIXARE* Al click pollice colorato
                         className="d-none rounded d-lg-block align-items-start align-text-center me-3 interazioni p-1 pb-1"
                       >
-                        {likedPosts.includes(post._id) ? (
-                          <HandThumbsUpFill
-                          className="align-center liked me-1"
-                           onClick={() => handleLike(post._id)}
-                          />
-                          ) : (
-                          <HandThumbsUp
-                          className="align-center me-1"
-                          onClick={() => handleLike(post._id)}
-                          />
-                        )}
+                        <HandThumbsUp
+  className={`align-center me-1 ${likedPosts.includes(post._id) ? "liked" : ""}`}
+  onClick={() => handleLike(post._id)}
+/>
 
                         Consiglia
                       </p>{" "}
