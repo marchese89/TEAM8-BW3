@@ -218,7 +218,7 @@ const ProfileStyled = styled.div`
 
     .containerinfo {
       padding: 2em;
-      line-height: 10px;
+      line-height: 18px;
     }
 
     .containerinfosmall {
@@ -321,7 +321,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 140px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #016adb;
       border: 1px solid #016adb;
       border-radius: 15px;
@@ -343,7 +343,7 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
-      padding-top: 8px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -365,8 +365,7 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${
-    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${"" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -744,7 +743,7 @@ export default function Profile() {
                 src={profileImage}
                 className="avatar"
                 style={!differentUser ? { cursor: "pointer" } : {}}
-                onClick={!differentUser ? openModal : () => {}}
+                onClick={!differentUser ? openModal : () => { }}
               />
               {/* isOpen={} onRequestClose={closeModal} */}
               <Modal show={isModalOpen} onHide={closeModal}>
