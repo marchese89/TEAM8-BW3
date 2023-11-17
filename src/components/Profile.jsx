@@ -19,6 +19,14 @@ import { useParams } from "react-router-dom";
 import SidePart from "./SidePart";
 
 const ProfileStyled = styled.div`
+
+.infoprofile {
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      padding: 2em;
+      background-color: #fff;
+}
+
   @media screen and (min-width: 1200px) {
     .marginesagerato {
       margin-top: 120px !important;
@@ -35,7 +43,6 @@ const ProfileStyled = styled.div`
       border: 1px solid #dbdbdb;
       border-radius: 10px;
       overflow: hidden;
-      background-color: white;
       background-color: #fff;
     }
     .cover {
@@ -234,7 +241,7 @@ const ProfileStyled = styled.div`
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 210px;
+      bottom: 230px;
       left: 35px;
     }
 
@@ -858,7 +865,13 @@ export default function Profile() {
                 </Col>
               </Row>
             </div>
-            <div className="mt-3">
+            <div>
+              <Container className="infoprofile my-3">
+                <h3>Informazioni</h3>
+                <p>Mollit ea nisi cillum mollit et ullamco sit elit labore sint. Amet consectetur velit dolore nulla Lorem aliqua sint. Velit ut id nulla sit eiusmod. Dolor pariatur sint magna elit adipisicing minim laboris exercitation voluptate laborum dolore laborum. Enim enim id incididunt amet. Occaecat Lorem veniam proident quis reprehenderit.</p>
+              </Container>
+            </div>
+            <div className="C">
               <Experience />
             </div>
           </Col>
