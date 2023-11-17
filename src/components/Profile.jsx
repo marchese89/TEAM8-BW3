@@ -730,7 +730,7 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato d-flex">
+        <Container className="mt-5 marginesagerato d-flex justify-content-center">
           <Col lg={8}>
             <div className="containermain">
               <div className="containercover">
@@ -863,7 +863,7 @@ export default function Profile() {
             </div>
           </Col>
 
-          <Col lg={4}>
+          <Col lg={3}>
             <SidePart />
           </Col>
         </Container>
