@@ -16,14 +16,15 @@ import styled from "styled-components";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
 import { useParams } from "react-router-dom";
+import SidePart from "./SidePart";
 
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
     .marginesagerato {
-    margin-top: 120px !important;
-  }
+      margin-top: 120px !important;
+    }
 
-  .paddingzero {
+    .paddingzero {
       padding: 0 !important;
     }
 
@@ -36,7 +37,7 @@ const ProfileStyled = styled.div`
       overflow: hidden;
       background-color: white;
       background-color: #fff;
-  }
+    }
     .cover {
       object-fit: cover;
       object-position: 0;
@@ -188,7 +189,6 @@ const ProfileStyled = styled.div`
     .buttonother:hover {
       background-color: #ebebeb;
     }
-
   }
 
   @media screen and (min-width: 1000px) and (max-width: 1200px) {
@@ -365,7 +365,8 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${'' /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${
+    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -377,7 +378,8 @@ const ProfileStyled = styled.div`
       bottom: 100px;
       left: 35px;
     }
-  } */}
+  } */
+  }
 
   @media screen and (max-width: 999px) {
     .paddingzero {
@@ -728,133 +730,142 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato">
-          <div className="containermain">
-            <div className="containercover">
+        <Container className="mt-5 marginesagerato d-flex">
+          <Col lg={8}>
+            <div className="containermain">
+              <div className="containercover">
+                <Image
+                  src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  className="cover"
+                />
+              </div>
               <Image
-                src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="cover"
+                src={profileImage}
+                className="avatar"
+                style={!differentUser ? { cursor: "pointer" } : {}}
+                onClick={!differentUser ? openModal : () => {}}
               />
-            </div>
-            <Image
-              src={profileImage}
-              className="avatar"
-              style={!differentUser ? { cursor: "pointer" } : {}}
-              onClick={!differentUser ? openModal : () => { }}
-            />
-            {/* isOpen={} onRequestClose={closeModal} */}
-            <Modal show={isModalOpen} onHide={closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title className="fs-5 modal-title">
-                  Modifica immagine profilo
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className="d-flex flex-column w-100 mt-3 align-items-center">
-                  <Form.Label>Immagine</Form.Label>
-                  {selectedImage && (
-                    <Image
-                      src={URL.createObjectURL(selectedImage)}
-                      alt="Anteprima immagine"
-                      className="image-preview w-25 my-2 rounded-2"
-                      fluid
-                    />
-                  )}
-                  <Form.Control type="file" onChange={handleImage} />
-                </div>
-                {/* <input type="file" onChange={handleImage} accept="image/*" /> */}
-              </Modal.Body>
-              <Modal.Footer className="d-flex justify-content-between">
-                <Button
-                  className="save-button rounded-5 px-3"
-                  onClick={handleImageUpload}
-                >
-                  Conferma
-                </Button>
-                {/* <button >Conferma</button> */}
-                <Button
-                  className="save-button rounded-5 px-3"
-                  onClick={closeModal}
-                >
-                  Annulla
-                </Button>
-                {/* <button onClick={closeModal}>Annulla</button> */}
-              </Modal.Footer>
-            </Modal>
-
-            <Row className="position-relative">
-              <Col className="col-6">
-                <div className="containerinfo mt-4">
-                  <p className="name">
-                    {current_profileFromReduxStore.name}{" "}
-                    {current_profileFromReduxStore.surname}
-                  </p>
-                  <p>Aftersales Manager bei Ducati (Schweiz) AG</p>
-                  <div className="containerinfosmall">
-                    <p>{current_profileFromReduxStore.area}</p>
-                    <p className="inlineblockp bold">500</p>
-                    <p className="inlineblockp ms-1">Collegamenti</p>
-                  </div>
-                  <Container className="paddingzero">
-                    <Row>
-                      <Col className="col-12">
-                        <div className="containerbutton">
-                          <button variant="primary" className="buttonfull">
-                            <i className="bi bi-person-plus-fill"></i>
-                            <p className="buttonfulltext"> &nbsp;Collegati</p>
-                          </button>
-                          <button
-                            variant="primary"
-                            className="buttonoutlined ms-2"
-                          >
-                            <p className="buttonoutlinedtext">Messaggio</p>
-                          </button>
-                          <button
-                            variant="primary"
-                            className="buttonother ms-2"
-                          >
-                            <p className="buttonothertext">Altro</p>
-                          </button>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Container>
-                </div>
-              </Col>
-              <Col className="col-6">
-                <div className="containercertification mt-4">
-                  <div className="certificationinfo">
-                    <Image
-                      src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
-                      className="certificationinfoIMG"
-                    />
-                    <p className="certificationinfoTEXT mt-1">
-                      Epicode Network
-                    </p>
-                    {!differentUser && (
-                      <div className="icon pencil position-absolute">
-                        <i
-                          className="fas fa-pencil-alt position-absolute icon-inner"
-                          onClick={() => {
-                            setShow(true);
-                          }}
-                        ></i>
-                      </div>
+              {/* isOpen={} onRequestClose={closeModal} */}
+              <Modal show={isModalOpen} onHide={closeModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title className="fs-5 modal-title">
+                    Modifica immagine profilo
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="d-flex flex-column w-100 mt-3 align-items-center">
+                    <Form.Label>Immagine</Form.Label>
+                    {selectedImage && (
+                      <Image
+                        src={URL.createObjectURL(selectedImage)}
+                        alt="Anteprima immagine"
+                        className="image-preview w-25 my-2 rounded-2"
+                        fluid
+                      />
                     )}
+                    <Form.Control type="file" onChange={handleImage} />
                   </div>
-                  <div className="certificationinfo">
-                    <Image
-                      src="https://www.acousticbulletin.com/wp-content/uploads/2020/01/70-706384_illuminati-clipart-all-illuminati-logo-png.png"
-                      className="certificationinfoIMG"
-                    />
-                    <p className="certificationinfoTEXT mt-1">
-                      Illuminati Network
+                  {/* <input type="file" onChange={handleImage} accept="image/*" /> */}
+                </Modal.Body>
+                <Modal.Footer className="d-flex justify-content-between">
+                  <Button
+                    className="save-button rounded-5 px-3"
+                    onClick={handleImageUpload}
+                  >
+                    Conferma
+                  </Button>
+                  {/* <button >Conferma</button> */}
+                  <Button
+                    className="save-button rounded-5 px-3"
+                    onClick={closeModal}
+                  >
+                    Annulla
+                  </Button>
+                  {/* <button onClick={closeModal}>Annulla</button> */}
+                </Modal.Footer>
+              </Modal>
+
+              <Row className="position-relative">
+                <Col className="col-6">
+                  <div className="containerinfo mt-4">
+                    <p className="name">
+                      {current_profileFromReduxStore.name}{" "}
+                      {current_profileFromReduxStore.surname}
                     </p>
+                    <p>Aftersales Manager bei Ducati (Schweiz) AG</p>
+                    <div className="containerinfosmall">
+                      <p>{current_profileFromReduxStore.area}</p>
+                      <p className="inlineblockp bold">500</p>
+                      <p className="inlineblockp ms-1">Collegamenti</p>
+                    </div>
+                    <Container className="paddingzero">
+                      <Row>
+                        <Col className="col-12">
+                          <div className="containerbutton">
+                            <button variant="primary" className="buttonfull">
+                              <i className="bi bi-person-plus-fill"></i>
+                              <p className="buttonfulltext"> &nbsp;Collegati</p>
+                            </button>
+                            <button
+                              variant="primary"
+                              className="buttonoutlined ms-2"
+                            >
+                              <p className="buttonoutlinedtext">Messaggio</p>
+                            </button>
+                            <button
+                              variant="primary"
+                              className="buttonother ms-2"
+                            >
+                              <p className="buttonothertext">Altro</p>
+                            </button>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Container>
                   </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
+                </Col>
+                <Col className="col-6">
+                  <div className="containercertification mt-4">
+                    <div className="certificationinfo">
+                      <Image
+                        src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
+                        className="certificationinfoIMG"
+                      />
+                      <p className="certificationinfoTEXT mt-1">
+                        Epicode Network
+                      </p>
+                      {!differentUser && (
+                        <div className="icon pencil position-absolute">
+                          <i
+                            className="fas fa-pencil-alt position-absolute icon-inner"
+                            onClick={() => {
+                              setShow(true);
+                            }}
+                          ></i>
+                        </div>
+                      )}
+                    </div>
+                    <div className="certificationinfo">
+                      <Image
+                        src="https://www.acousticbulletin.com/wp-content/uploads/2020/01/70-706384_illuminati-clipart-all-illuminati-logo-png.png"
+                        className="certificationinfoIMG"
+                      />
+                      <p className="certificationinfoTEXT mt-1">
+                        Illuminati Network
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            <div className="mt-3">
+              <Experience />
+            </div>
+          </Col>
+
+          <Col lg={4}>
+            <SidePart />
+          </Col>
         </Container>
       </ProfileStyled>
       <Modal show={show} onHide={handleClose} className="modal">
@@ -928,9 +939,7 @@ export default function Profile() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Container className="mt-5">
-        <Experience />
-      </Container>
+      <Container className="mt-5"></Container>
     </>
   );
 }
