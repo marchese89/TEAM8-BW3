@@ -274,12 +274,12 @@ const Home = () => {
   }, []);
 
   function presente(utente, array) {
-    array.forEach((element) => {
-      if (utente._id === element._id) {
-        return true;
-      }
-    });
-    return false;
+    // array.forEach((element) => {
+    //   if (utente._id === element._id) {
+    //     return true;
+    //   }
+    // });
+    return true;
   }
 
   return (
