@@ -45,7 +45,6 @@ const RecentProfile = () => {
           </Button>
         </Container>
       </div>
-      {/* <hr className="m-0 my-1 mx-2" /> */}
     </StyledUse>
   );
 };
