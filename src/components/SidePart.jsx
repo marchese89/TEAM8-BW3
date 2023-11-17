@@ -1,15 +1,10 @@
 import { Card, CardSubtitle, Col, Container, Row } from "react-bootstrap";
-// import StyledH5 from "../StyledComponent/StyleSidePart";
-// import {Pen} from 'react-bootstrap-icons'
-// import StyledCardSub from "../StyledComponent/StyledSub";
+
 import "../StyledComponent/Side.css";
 import ModalLanguage from "./ModalLenguageChange";
 import CardLan from "./CardLanguage";
-// import Learn from "./Learn";
 import SectionLearn from "./SectionLearn";
 import styled from "styled-components";
-import Experience from "./Experience";
-
 const StyledSide = styled.div`
   @media screen and (max-width: 1000px) {
     display: none;
@@ -25,9 +20,7 @@ const SidePart = () => {
       <Col xl={8} lg={8} md={12} className={"mx-4"}>
         <CardLan />
         <SectionLearn />
-        <Experience />
       </Col>
-
       <ModalLanguage />
     </StyledSide>
   );

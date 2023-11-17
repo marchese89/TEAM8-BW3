@@ -17,11 +17,11 @@ function App() {
           <Route path="/jobs/" element={<Jobs />} />
           <Route path="in/me/" element={<Profile />} />
           <Route path="/rete" element={<RetePage />} />
-          {/* <Route
+          <Route
             path="in/me/details/experience/"
             element={<ExperienceToModify />}
-          /> */}
-          <Route path="in/me/details/esperienze" element={<Esperienzepage />} />
+          />
+          {/* <Route path="in/me/details/esperienze" element={<Esperienzepage />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

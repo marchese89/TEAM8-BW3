@@ -415,12 +415,12 @@ export default function ExperienceToModify() {
           </Modal>
         </div>
       </StyledDiv>
-      {/* {showAddExperience && (
+      {showAddExperience && (
         <AddExperience
           mostra={showAddExperience}
           set_mostra={setShowAddExperience}
         />
-      )} */}
+      )}
     </>
   );
 }
