@@ -196,7 +196,7 @@ function NavBar() {
           )}
 
           <Nav className="d-flex justify-content-center">
-            <Container fluid className="d-flex align-item-center">
+            <Container fluid className="d-flex align-items-center">
               <img
                 src={imguno}
                 alt="Logo Linkedin"
