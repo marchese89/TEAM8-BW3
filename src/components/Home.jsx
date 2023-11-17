@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import styled from "styled-components";
-import { HandThumbsUp, ChatText, Share, SendFill } from "react-bootstrap-icons";
+import {
+  HandThumbsUp,
+  ChatText,
+  Share,
+  SendFill,
+  CaretDown,
+} from "react-bootstrap-icons";
 import RecentProfile from "./recentlyProfile";
 import AddComment from "./AddComment";
 import NewPost from "./AddNewPost";
@@ -263,15 +269,18 @@ const Home = () => {
             <Col className="mt-2 d-none d-lg-block">
               <NewsCard />
               <Card>
-                <Card.Body className="py-0">
-                  <h6 className="mx-5">Altri profili consultati</h6>
+                <Card.Body className="">
+                  <h6>Altri profili consultati</h6>
                   <RecentProfile />
                   <RecentProfile />
                   <RecentProfile />
                   <RecentProfile />
                 </Card.Body>
-                <Card.Footer>
-                  <p>Vedi altro</p>
+                <Card.Footer className="d-flex justify-content-center">
+                  <Container className="d-flex align-items-center justify-content-center">
+                    <h6>Vedi altro</h6>
+                    <CaretDown className="mx-2" size={20} />
+                  </Container>
                 </Card.Footer>
               </Card>
             </Col>
