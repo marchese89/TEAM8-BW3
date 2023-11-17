@@ -74,6 +74,7 @@ const StyledDiv = styled.div`
     background-color: #edf3f8 !important;
     width: 13em;
     transition: width 0.3s linear;
+    border-radius: 4px !important;
   }
   .search-text:focus {
     border: 2px solid #3c3d3e !important;
@@ -83,6 +84,7 @@ const StyledDiv = styled.div`
   .search-text-alt {
     text-indent: 25px;
     background-color: #edf3f8 !important;
+    border-radius: 4px !important;
   }
   .search-text-alt:focus {
     border: 2px solid #3c3d3e !important;
