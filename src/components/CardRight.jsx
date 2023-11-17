@@ -58,7 +58,7 @@ const StyledCard = styled.div`
   }
   .roundedCamera {
     ${"" /* position: absolute; */}
-    z-index: 6;
+    ${"" /* z-index: 6; */}
   }
 `;
 

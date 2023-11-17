@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Form, FormControl } from "react-bootstrap";
+import { Row, Container, Col, Form, FormControl } from "react-bootstrap";
 import imguno from "../img/LogoLinkedin.jpg";
 import imgdue from "../img/icona-utente.jpg";
 import styled from "styled-components";
@@ -130,155 +130,185 @@ function NavBar() {
 
   return (
     <StyledDiv>
-      <Navbar
-        expand="lg"
-        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3 nav-bar"
-      >
-        <Navbar.Brand>
-          <img
-            src={imguno}
-            alt="Logo Linkedin"
-            width="35"
-            height="35"
-            style={{ marginLeft: "120px" }}
-            onClick={() => {
-              navigate("/");
-            }}
-            className="brand"
-          />
-        </Navbar.Brand>
-        <div
-          className={
-            location.pathname !== "/jobs"
-              ? "position-relative search-wrapper"
-              : "position-relative search-wrapper-alt"
-          }
+      <Col className="mb-3" lg={12}>
+        <Navbar
+          expand="lg"
+          // w-100
+          // nav-bar
+          className="bg-body-tertiary justify-content-end justify-content-md-start justify-content-lg-center position-fixed top-0 z-3 col-12 d-flex flex-nowrap"
         >
-          <Search className="position-absolute search-icon" />
-          <FormControl
-            type="search"
-            placeholder="Cerca"
+          <Navbar.Brand className="d-flex">
+            <img
+              src={imguno}
+              alt="Logo Linkedin"
+              width={30}
+              height={30}
+              // style={{ marginLeft: "120px" }}
+              // className="mx-2"
+              onClick={() => {
+                navigate("/");
+              }}
+              className="brand mx-1 d-none d-lg-flex"
+            />
+            {/* <div className="d-flex flex-column justify-content-center mx-3">
+                <Search
+                  className="d-none d-sm-flex d-lg-none d-flex "
+                  size={25}
+                />
+                <span className="textStyle">Cerca</span>
+              </div> */}
+          </Navbar.Brand>
+          <div
             className={
               location.pathname !== "/jobs"
-                ? "FormControlStyle me-2 search-text"
-                : "FormControlStyle me-2 search-text-alt"
+                ? "position-relative search-wrapper"
+                : "position-relative search-wrapper-alt"
             }
-            aria-label="Search"
-            onKeyDown={handleKeyPress}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        {location.pathname === "/jobs" && (
-          <Form.Select
-            className="select-search"
-            onChange={(e) => {
-              setsearchType(e.target.value);
-            }}
-            value={searchType}
           >
-            <option value={QUERY}>Ricerca Semplice</option>
-            <option value={COMPANY}>Azienda</option>
-            <option value={CATEGORY}>Categoria</option>
-          </Form.Select>
-        )}
-        <Nav className="d-flex justify-content-center">
-          <div className="d-flex">
-            <div
+            <Search className="position-absolute search-icon d-none d-lg-flex" />
+
+            <FormControl
+              type="search"
+              placeholder="Cerca"
               className={
-                location.pathname === "/"
-                  ? "navItemStyle selected"
-                  : "navItemStyle"
+                location.pathname !== "/jobs"
+                  ? "FormControlStyle me-2 search-text d-none d-lg-flex"
+                  : "FormControlStyle me-2 search-text-alt"
               }
+              aria-label="Search"
+              onKeyDown={handleKeyPress}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          {location.pathname === "/jobs" && (
+            <Form.Select
+              className="select-search"
+              onChange={(e) => {
+                setsearchType(e.target.value);
+              }}
+              value={searchType}
             >
-              <HouseDoorFill
+              <option value={QUERY}>Ricerca Semplice</option>
+              <option value={COMPANY}>Azienda</option>
+              <option value={CATEGORY}>Categoria</option>
+            </Form.Select>
+          )}
+
+          <Nav className="d-flex justify-content-center">
+            <Container fluid className="d-flex align-item-center">
+              <img
+                src={imguno}
+                alt="Logo Linkedin"
+                width={30}
+                height={30}
+                // style={{ marginLeft: "120px" }}
+                // className="mx-2"
                 onClick={() => {
                   navigate("/");
                 }}
+                className="mx-4 d-sm-flex d-lg-none"
               />
-
-              <span className="textStyle">Home</span>
-            </div>
-
-            <div
-              className={
-                location.pathname === "/rete"
-                  ? "navItemStyle selected"
-                  : "navItemStyle"
-              }
-              onClick={() => {
-                navigate("/rete");
-              }}
-            >
-              <PeopleFill />
-
-              <span className="textStyle">Rete</span>
-            </div>
-            <div
-              className={
-                location.pathname === "/jobs"
-                  ? "navItemStyle selected"
-                  : "navItemStyle"
-              }
-              onClick={() => {
-                navigate("/jobs");
-              }}
-            >
-              <i className="fas fa-suitcase"></i>
-
-              <span className="textStyle">Lavoro</span>
-            </div>
-            <div className="navItemStyle">
-              <ChatRightDotsFill />
-
-              <span className="textStyle">Messagistica</span>
-            </div>
-            <div className="navItemStyle">
-              <BellFill />
-
-              <span className="textStyle">Notifiche</span>
-            </div>
-            <div
-              className={
-                location.pathname === "/in/me"
-                  ? "navItemStyle selected"
-                  : "navItemStyle"
-              }
-            >
-              <span className="textStyle prof-img-cont d-flex flex-column align-items-center">
-                <img
-                  src={my_profileFromReduxStore.image}
-                  alt="profile"
-                  className="profile-img rounded-circle"
+              <div
+                className={
+                  location.pathname === "/"
+                    ? "navItemStyle selected"
+                    : "navItemStyle"
+                }
+              >
+                <HouseDoorFill
                   onClick={() => {
-                    dispatch(myProfileAction());
-                    navigate("/in/me");
+                    navigate("/");
                   }}
                 />
-                Tu
-              </span>
-            </div>
-            <div className="navItemStyle">
-              <Grid3x3GapFill />
 
-              <span className="textStyle">
-                Per le aziende <CaretDownFill />
-              </span>
-            </div>
-            <div className="navItemStyle">
-              <span
-                style={{
-                  color: "#915907",
-                  fontSize: "12px",
-                  textDecoration: "underline",
+                <span className="textStyle d-none d-md-block">Home</span>
+              </div>
+
+              <div
+                className={
+                  location.pathname === "/rete"
+                    ? "navItemStyle selected"
+                    : "navItemStyle"
+                }
+                onClick={() => {
+                  navigate("/rete");
                 }}
               >
-                Prova Premium per <br />0 EUR{" "}
-              </span>
-            </div>
-          </div>
-        </Nav>
-      </Navbar>
+                <PeopleFill />
+
+                <span className="textStyle d-none d-md-block">Rete</span>
+              </div>
+              <div
+                className={
+                  location.pathname === "/jobs"
+                    ? "navItemStyle selected"
+                    : "navItemStyle"
+                }
+                onClick={() => {
+                  navigate("/jobs");
+                }}
+              >
+                <i className="fas fa-suitcase"></i>
+
+                <span className="textStyle d-none d-md-block">Lavoro</span>
+              </div>
+              <div className="navItemStyle">
+                <ChatRightDotsFill />
+
+                <span className="textStyle d-none d-md-block">
+                  Messagistica
+                </span>
+              </div>
+              <div className="navItemStyle">
+                <BellFill />
+
+                <span className="textStyle d-none d-md-block">Notifiche</span>
+              </div>
+              <div
+                className={
+                  location.pathname === "/in/me"
+                    ? "navItemStyle selected"
+                    : "navItemStyle"
+                }
+              >
+                <span className="textStyle prof-img-cont d-flex flex-column align-items-center">
+                  <img
+                    src={my_profileFromReduxStore.image}
+                    alt="profile"
+                    className="profile-img rounded-circle"
+                    onClick={() => {
+                      dispatch(myProfileAction());
+                      navigate("/in/me");
+                    }}
+                  />
+                  Tu
+                </span>
+              </div>
+              <div className="d-none d-lg-flex">
+                <div className="navItemStyle">
+                  <Grid3x3GapFill />
+
+                  <span className="textStyle d-none d-lg-block">
+                    Per le aziende <CaretDownFill />
+                  </span>
+                </div>
+                <div className="navItemStyle">
+                  <span
+                    style={{
+                      color: "#915907",
+                      fontSize: "12px",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Prova Premium per <br />0 EUR{" "}
+                  </span>
+                </div>
+              </div>
+            </Container>
+          </Nav>
+        </Navbar>
+      </Col>
     </StyledDiv>
   );
 }
