@@ -188,7 +188,11 @@ const Home = () => {
     })
       .then((response) => {
         if (response.ok) {
-          fetchData();
+          if (selectedFile !== null) {
+            uploadPostImage(idPost);
+          } else {
+            fetchData();
+          }
         } else {
           throw new Error("Errore nella delete");
         }
@@ -196,6 +200,32 @@ const Home = () => {
       .catch((err) => {
         console.log("Errore ", err);
       });
+  }
+
+  function uploadPostImage(idPost) {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("post", selectedFile);
+      fetch(`https://striveschool-api.herokuapp.com/api/posts/${idPost}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) {
+            fetchData();
+          } else {
+            console.log("upload NO");
+            throw new Error("errore nell'upload'");
+          }
+        })
+        // .then(() => {
+
+        // })
+        .catch((err) => console.log("ERRORE!", err));
+    }
   }
 
   // Funzione per mostrare CommentArea
