@@ -31,6 +31,9 @@ span{
   font-weight:600;
   color:#626060;
 }
+.hover:hover{
+  cursor: pointer
+}
 `
 
 const NewPost = ({ onPost }) => {
@@ -84,9 +87,9 @@ const NewPost = ({ onPost }) => {
     </span>
 <input size="lg" type="text" placeholder="Avvia un post" className='commento' onClick={handleShow} />
 <div className='mt-3'>
-<ImageFill className='imgicon'/><span>Contenuti multimediali</span>
-<Calendar3 className='calendar'/><span>Evento</span>
-<Newspaper className='newspaper'/><span>Scrivi un articolo</span>
+<ImageFill className='imgicon hover'/><span className='hover'>Contenuti multimediali</span>
+<Calendar3 className='calendar hover'/><span className='hover'>Evento</span>
+<Newspaper className='newspaper hover'/><span className='hover'>Scrivi un articolo</span>
 </div>
 
 
