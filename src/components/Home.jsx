@@ -179,7 +179,7 @@ const Home = () => {
                     >
                       {" "}
                       <img
-                        src={post.image}
+                        src={post.user.image}
                         className="rounded-circle"
                         alt="avatar"
                         width={50 + "px"}
