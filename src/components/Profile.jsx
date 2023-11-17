@@ -28,6 +28,10 @@ const ProfileStyled = styled.div`
     background-color: #fff;
   }
 
+  .positionrelative {
+    position: relative;
+  }
+
   @media screen and (min-width: 1200px) {
     .marginesagerato {
       margin-top: 120px !important;
@@ -38,7 +42,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      position: relative;
+      
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -76,8 +80,8 @@ const ProfileStyled = styled.div`
       height: 170px;
       object-fit: cover;
 
-      bottom: 220px;
-      left: 35px;
+      bottom: -30px;
+      left: 30px;
     }
 
     .containercertification {
@@ -205,7 +209,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      position: relative;
+      
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -242,8 +246,8 @@ const ProfileStyled = styled.div`
       width: 170px;
       height: 170px;
       object-fit: cover;
-      bottom: 230px;
-      left: 35px;
+      bottom: -30px;
+      left: 30px;
     }
 
     .containercertification {
@@ -373,8 +377,7 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${
-    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${"" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -395,7 +398,7 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      position: relative;
+      
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -432,8 +435,8 @@ const ProfileStyled = styled.div`
       height: 140px;
       object-fit: cover;
 
-      bottom: 240px;
-      left: 35px;
+      bottom: -30px;
+      left: 30px;
     }
 
     .containercertification {
@@ -749,15 +752,19 @@ export default function Profile() {
         <Container className=" d-flex justify-content-center">
           <Col lg={8}>
             <div className="containermain">
-              <div className="containercover">
-                <Image src={astroCat} className="cover" />
+              <div className="positionrelative">
+                <div className="containercover">
+                  <Image src={astroCat} className="cover" />
+
+                </div>
+                <Image
+                  src={profileImage}
+                  className="avatar"
+                  style={!differentUser ? { cursor: "pointer" } : {}}
+                  onClick={!differentUser ? openModal : () => { }}
+                />
               </div>
-              <Image
-                src={profileImage}
-                className="avatar"
-                style={!differentUser ? { cursor: "pointer" } : {}}
-                onClick={!differentUser ? openModal : () => {}}
-              />
+
               {/* isOpen={} onRequestClose={closeModal} */}
               <Modal show={isModalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>
@@ -888,9 +895,11 @@ export default function Profile() {
                 </p>
               </Container>
             </div>
-            <div className="C">
-              <Experience />
-            </div>
+            <Row>
+              <div>
+                <Experience />
+              </div>
+            </Row>
           </Col>
 
           <Col lg={3}>
