@@ -7,16 +7,17 @@ import Profile from "./components/Profile";
 import ExperienceToModify from "./components/ExperienceToModify";
 import Esperienzepage from "./components/EsperienzePage";
 import Jobs from "./components/Jobs";
-import RetePage from "./components/Rete";
+import Rete from "./components/Rete";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/jobs/" element={<Jobs />} />
+          <Route path="jobs/" element={<Jobs />} />
           <Route path="in/me/" element={<Profile />} />
-          <Route path="/rete" element={<RetePage />} />
+          <Route path="profile/:idProfile" element={<Profile />} />
+          <Route path="rete/" element={<Rete />} />
           <Route
             path="in/me/details/experience/"
             element={<ExperienceToModify />}

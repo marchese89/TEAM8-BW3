@@ -57,12 +57,10 @@ const StyledCard = styled.div`
     margin: 0;
   }
   .roundedCamera {
+    position: absolute;
     z-index: 6;
-
-    ${
-      "" /* margin-left: 42%;
-    margin-top: -15%; */
-    }
+    margin-left: 37%;
+    margin-top: -22%;
   }
 `;
 
@@ -74,22 +72,17 @@ const CardRight = ({ shoModal }) => {
   };
 
   return (
-    <StyledCard>
+    <StyledCard className={"position-relative"}>
       <Card className={"rounded-bottom-2"}>
         <Col>
-          <Row className={"imgProfilee position-relative"}>
+          <Row className={"imgProfile"}>
             <img height={100} src={imgp} alt={"logo"} />
-
-            <div
-              className={
-                "roundedCamera  text-center position-absolute top-100 start-50 translate-middle "
-              }
-            >
-              <Camera size={50} onClick={goToProf} className={"camera"} />
-            </div>
           </Row>
         </Col>
         <Card.Body className={"px-0"}>
+          <div className={"roundedCamera "}>
+            <Camera size={50} onClick={goToProf} className={"camera"} />
+          </div>
           <Row>
             <h4 className="h4Modify text-center pt-4">
               {" "}

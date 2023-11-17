@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  allProfilesAction,
   myProfileAction,
   updateProfileAction,
   userProfileAction,
+  visitUserAction,
 } from "../redux/actions";
 import placeholder from "../img/img_placeholder.jpg";
 import React from "react";
@@ -13,411 +13,44 @@ import { Button, Form, FormControl, InputGroup, Modal } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
-import SidePart from "./SidePart";
 import { token } from "../redux/actions";
 import Experience from "./Experience";
+import { useParams } from "react-router-dom";
 
 const ProfileStyled = styled.div`
   @media screen and (min-width: 1200px) {
     .marginesagerato {
-      margin-top: 120px !important;
-    }
+    margin-top: 120px !important;
+  }
 
-    .paddingzero {
+  .paddingzero {
       padding: 0 !important;
     }
 
     .containermain {
-      ${"" /* position: relative; */}
+      position: relative;
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
-      width: 60%;
       background-color: #fff;
-    }
+  }
     .cover {
       object-fit: cover;
       object-position: 0;
       width: 100%;
     }
     .containercover {
-      height: 50%;
+      height: 400px;
       width: 100%;
       overflow: hidden;
     }
 
     .containerinfo {
       padding: 2em;
-      line-height: 16px;
-    }
-
-    .containerinfosmall {
-      line-height: 8px;
-      font-size: 0.8em;
-      color: rgb(134, 134, 134);
-    }
-
-    .avatar {
-      ${"" /* position: absolute; */}
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-
-      ${
-        "" /* bottom: 180px;
-      left: 26px; */
-      }
-    }
-
-    .containercertification {
-      padding-top: 2em;
-      padding-left: 4em;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .certificationinfo {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: normal;
-      margin-bottom: 12px;
-    }
-
-    .certificationinfoIMG {
-      width: 30px;
-      height: 30px;
-    }
-
-    .certificationinfoTEXT {
-      font-size: 0.9em;
-      font-weight: 600;
-      padding-left: 10px;
-      margin-bottom: 0;
-    }
-
-    /*TESTIINFORMAZIONI*/
-
-    .name {
-      font-size: 1.5em;
-      font-weight: 500;
-    }
-
-    .inlineblockp {
-      display: inline-block;
-    }
-
-    .bold {
-      font-weight: 500;
-    }
-
-    /*TUTTI I BOTTONI*/
-
-    .containerbutton {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-
-    .buttonfull {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 6px;
-      background-color: #016adb;
-      color: #fff;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-    }
-
-    .buttonfull:hover {
-      background-color: #014691;
-    }
-
-    .buttonfulltext {
-      font-weight: 600 !important;
-    }
-
-    .buttonoutlined {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 6px;
-      color: #016adb;
-      border: 1px solid #016adb;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonoutlined:hover {
-      background-color: #d1e6fd;
-    }
-
-    .buttonoutlinedtext {
-      font-weight: 500;
-    }
-
-    .buttonother {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 70px;
-      height: 30px;
-      padding-top: 6px;
-      color: #646464;
-      border: 1px solid #646464;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonother:hover {
-      background-color: #ebebeb;
-    }
-  }
-
-  .exp {
-    line-height: 100%;
-  }
-
-  @media screen and (min-width: 1000px) and (max-width: 1200px) {
-    .paddingzero {
-      padding: 0 !important;
-    }
-
-    .containermain {
-      ${"" /* position: relative; */}
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #dbdbdb;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: white;
-      width: 60%;
-    }
-    .cover {
-      object-fit: cover;
-      object-position: 0;
-      width: 100%;
-    }
-    .containercover {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .containerinfo {
-      padding: 2em;
-      line-height: 17px;
-    }
-
-    .containerinfosmall {
-      line-height: 8px;
-      font-size: 0.8em;
-      color: rgb(134, 134, 134);
-    }
-
-    .avatar {
-      ${"" /* position: absolute; */}
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      ${
-        "" /* bottom: 220px;
-      left: 30px; */
-      }
-    }
-
-    .containercertification {
-      padding-top: 2em;
-      padding-left: 4em;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .certificationinfo {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: normal;
-      margin-bottom: 12px;
-    }
-
-    .certificationinfoIMG {
-      width: 30px;
-      height: 30px;
-    }
-
-    .certificationinfoTEXT {
-      font-size: 0.9em;
-      font-weight: 600;
-      padding-left: 10px;
-      margin-bottom: 0;
-    }
-
-    /*TESTIINFORMAZIONI*/
-
-    .name {
-      font-size: 1.5em;
-      font-weight: 500;
-      margin-top: -11px;
-    }
-
-    .inlineblockp {
-      display: inline-block;
-    }
-
-    .bold {
-      font-weight: 500;
-    }
-
-    /*TUTTI I BOTTONI*/
-
-    .containerbutton {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-
-    .buttonfull {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 6px;
-      background-color: #016adb;
-      color: #fff;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-    }
-
-    .buttonfull:hover {
-      background-color: #014691;
-    }
-
-    .buttonfulltext {
-      font-weight: 600 !important;
-    }
-
-    .buttonoutlined {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 140px;
-      height: 30px;
-      padding-top: 5px;
-      color: #016adb;
-      border: 1px solid #016adb;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonoutlined:hover {
-      background-color: #d1e6fd;
-    }
-
-    .buttonoutlinedtext {
-      font-weight: 500;
-    }
-
-    .buttonother {
-      border-radius: 20px !important;
-      display: inline-block;
-      width: 70px;
-      height: 30px;
-      padding-top: 5px;
-      color: #646464;
-      border: 1px solid #646464;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background-color: #fff;
-    }
-
-    .buttonother:hover {
-      background-color: #ebebeb;
-    }
-
-    .buttonothertext {
-      font-weight: 500;
-    }
-
-    .exp {
-      line-height: 100%;
-    }
-  }
-
-  ${
-    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
-    .avatar {
-      position: absolute;
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-
-      bottom: 10px;
-      left: 35px;
-    }
-  } */
-  }
-
-  @media screen and (max-width: 999px) {
-    .paddingzero {
-      padding: 0 !important;
-    }
-
-    .containermain {
-      ${"" /* position: relative; */}
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #dbdbdb;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: white;
-      width: 100vw;
-    }
-    .cover {
-      object-fit: cover;
-      object-position: 0;
-      width: 100%;
-    }
-    .containercover {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .containerinfo {
-      padding: 2em;
-      line-height: 17px;
+      line-height: 18px;
     }
 
     .containerinfosmall {
@@ -427,17 +60,15 @@ const ProfileStyled = styled.div`
     }
 
     .avatar {
-      ${"" /* position: absolute; */}
+      position: absolute;
       border: 5px solid #fff;
       border-radius: 50%;
-      width: 140px;
-      height: 140px;
+      width: 170px;
+      height: 170px;
       object-fit: cover;
 
-      ${
-        "" /* bottom: 210px;
-      left: 30px; */
-      }
+      bottom: 220px;
+      left: 35px;
     }
 
     .containercertification {
@@ -474,8 +105,6 @@ const ProfileStyled = styled.div`
     .name {
       font-size: 1.5em;
       font-weight: 500;
-      line-height: 15px !important;
-      width: 100vw;
     }
 
     .inlineblockp {
@@ -547,7 +176,362 @@ const ProfileStyled = styled.div`
       display: inline-block;
       width: 70px;
       height: 30px;
+      padding-top: 5px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+
+  }
+
+  @media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .paddingzero {
+      padding: 0 !important;
+    }
+
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+    }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      height: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .containerinfo {
+      padding: 2em;
+      line-height: 10px;
+    }
+
+    .containerinfosmall {
+      line-height: 15px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      bottom: 210px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
       padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 8px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 8px;
+      color: #646464;
+      border: 1px solid #646464;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonother:hover {
+      background-color: #ebebeb;
+    }
+
+    .buttonothertext {
+      font-weight: 500;
+    }
+
+    .exp {
+      line-height: 100%;
+    }
+  }
+
+  ${'' /* @media screen and (min-width: 768px) and (max-width: 800px) {
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 100px;
+      left: 35px;
+    }
+  } */}
+
+  @media screen and (max-width: 999px) {
+    .paddingzero {
+      padding: 0 !important;
+    }
+
+    .containermain {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+    }
+    .cover {
+      object-fit: cover;
+      object-position: 0;
+      width: 100%;
+    }
+    .containercover {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .containerinfo {
+      padding: 2em;
+      line-height: 18px;
+    }
+
+    .containerinfosmall {
+      line-height: 15px;
+      font-size: 0.8em;
+      color: rgb(134, 134, 134);
+    }
+
+    .avatar {
+      position: absolute;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+
+      bottom: 240px;
+      left: 35px;
+    }
+
+    .containercertification {
+      padding-top: 2em;
+      padding-left: 4em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .certificationinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: normal;
+      margin-bottom: 12px;
+    }
+
+    .certificationinfoIMG {
+      width: 30px;
+      height: 30px;
+    }
+
+    .certificationinfoTEXT {
+      font-size: 0.9em;
+      font-weight: 600;
+      padding-left: 10px;
+      margin-bottom: 0;
+    }
+
+    /*TESTIINFORMAZIONI*/
+
+    .name {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+
+    .inlineblockp {
+      display: inline-block;
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+
+    /*TUTTI I BOTTONI*/
+
+    .containerbutton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .buttonfull {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 6px;
+      background-color: #016adb;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    .buttonfull:hover {
+      background-color: #014691;
+    }
+
+    .buttonfulltext {
+      font-weight: 600 !important;
+    }
+
+    .buttonoutlined {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 140px;
+      height: 30px;
+      padding-top: 5px;
+      color: #016adb;
+      border: 1px solid #016adb;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #fff;
+    }
+
+    .buttonoutlined:hover {
+      background-color: #d1e6fd;
+    }
+
+    .buttonoutlinedtext {
+      font-weight: 500;
+    }
+
+    .buttonother {
+      border-radius: 20px !important;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      padding-top: 5px;
       color: #646464;
       border: 1px solid #646464;
       border-radius: 15px;
@@ -610,26 +594,21 @@ const ProfileStyled = styled.div`
     left: 0.5em;
     top: 0.5em;
   }
-
-  @media screen and (max-width: 500px) {
-    .avatar {
-      ${"" /* position: absolute; */}
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-
-      ${
-        "" /* bottom: 240px;
-      left: 30px; */
-      }
-    }
-  }
 `;
 
 export default function Profile() {
   const dispatch = useDispatch();
+
+  const { idProfile } = useParams();
+  useEffect(() => {
+    if (idProfile !== undefined) {
+      dispatch(visitUserAction(idProfile));
+      console.log("ho chiamato visit user");
+      setDifferentUser(true);
+    } else {
+      setDifferentUser(false);
+    }
+  }, [idProfile]);
 
   const [show, setShow] = useState(false); //per il modale
   const handleClose = () => setShow(false); //chiusura modale
@@ -642,12 +621,7 @@ export default function Profile() {
   const [title, setTitle] = useState("");
   const [area, setArea] = useState("");
   const [profileImage, setProfileImage] = useState(placeholder);
-
-  useEffect(() => {
-    dispatch(allProfilesAction());
-    dispatch(myProfileAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [differentUser, setDifferentUser] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -661,11 +635,23 @@ export default function Profile() {
   );
 
   useEffect(() => {
-    if (Object.keys(my_profileFromReduxStore).length > 0) {
-      setProfileImage(my_profileFromReduxStore.image);
-      dispatch(userProfileAction(my_profileFromReduxStore._id));
+    if (Object.keys(current_profileFromReduxStore).length > 0) {
+      if (idProfile !== undefined) {
+        setDifferentUser(true);
+        dispatch(userProfileAction(idProfile));
+      } else {
+        setDifferentUser(false);
+        //   dispatch(userProfileAction(my_profileFromReduxStore._id));
+      }
     }
-  }, [my_profileFromReduxStore]);
+  }, []);
+
+  // useEffect(() => {
+  //   if (Object.keys(my_profileFromReduxStore).length > 0) {
+  //     setProfileImage(my_profileFromReduxStore.image);
+  //     dispatch(userProfileAction(my_profileFromReduxStore._id));
+  //   }
+  // }, [my_profileFromReduxStore]);
 
   useEffect(() => {
     if (Object.keys(current_profileFromReduxStore).length > 0) {
@@ -676,6 +662,7 @@ export default function Profile() {
       setBio(current_profileFromReduxStore.bio);
       setTitle(current_profileFromReduxStore.title);
       setArea(current_profileFromReduxStore.area);
+      setProfileImage(current_profileFromReduxStore.image);
     }
   }, [current_profileFromReduxStore]);
 
@@ -716,8 +703,9 @@ export default function Profile() {
         {
           method: "POST",
           body: formData,
-          mode: "no-cors",
-          Authorization: `Bearer ${token}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       )
         .then((response) => {
@@ -740,22 +728,20 @@ export default function Profile() {
   return (
     <>
       <ProfileStyled>
-        <Container className="mt-5 marginesagerato d-flex justify-content-center">
+        <Container className="mt-5 marginesagerato">
           <div className="containermain">
             <div className="containercover">
               <Image
                 src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="cover position-relative"
+                className="cover"
               />
             </div>
-            <Col className="position-absolute ">
-              <Image
-                src={profileImage}
-                className="avatar z-3"
-                style={{ cursor: "pointer" }}
-                onClick={openModal}
-              />
-            </Col>
+            <Image
+              src={profileImage}
+              className="avatar"
+              style={!differentUser ? { cursor: "pointer" } : {}}
+              onClick={!differentUser ? openModal : () => { }}
+            />
             {/* isOpen={} onRequestClose={closeModal} */}
             <Modal show={isModalOpen} onHide={closeModal}>
               <Modal.Header closeButton>
@@ -845,14 +831,16 @@ export default function Profile() {
                     <p className="certificationinfoTEXT mt-1">
                       Epicode Network
                     </p>
-                    <div className="icon pencil position-absolute">
-                      <i
-                        className="fas fa-pencil-alt position-absolute icon-inner"
-                        onClick={() => {
-                          setShow(true);
-                        }}
-                      ></i>
-                    </div>
+                    {!differentUser && (
+                      <div className="icon pencil position-absolute">
+                        <i
+                          className="fas fa-pencil-alt position-absolute icon-inner"
+                          onClick={() => {
+                            setShow(true);
+                          }}
+                        ></i>
+                      </div>
+                    )}
                   </div>
                   <div className="certificationinfo">
                     <Image
@@ -867,7 +855,6 @@ export default function Profile() {
               </Col>
             </Row>
           </div>
-          <SidePart />
         </Container>
       </ProfileStyled>
       <Modal show={show} onHide={handleClose} className="modal">
@@ -941,7 +928,9 @@ export default function Profile() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="d-flex flex-row justify-content-center my-5"></div>
+      <Container className="mt-5">
+        <Experience />
+      </Container>
     </>
   );
 }

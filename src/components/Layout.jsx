@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 // import Profile from "./Profile";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
@@ -18,10 +18,12 @@ const StyledLayout = styled.div`
 
 const Layout = () => {
   const dispatch = useDispatch();
-
+  const { idProfile } = useParams();
   useEffect(() => {
     dispatch(allProfilesAction());
-    dispatch(myProfileAction());
+    if (idProfile === undefined) {
+      dispatch(myProfileAction());
+    }
   }, []);
 
   return (

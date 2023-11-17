@@ -47,6 +47,15 @@ const WebcamComponent = () => {
 
   const save = () => {
     setPhoto(imgSrc);
+
+    // Imposta le dimensioni del canvas sulla base delle dimensioni del video
+
+    // Disegna l'immagine del fotogramma corrente sulla canvas
+
+    // Puoi utilizzare canvas.toDataURL() per ottenere l'URL dei dati dell'immagi
+
+    // Ora puoi utilizzare dataURL per creare un link di download o inviarlo al server
+    // Ad esempio, creare un link di download
     const a = document.createElement("a");
     a.href = imgSrc;
     a.download = "captured_image.png";

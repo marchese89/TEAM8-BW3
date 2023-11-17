@@ -13,7 +13,7 @@ const StyledLi = styled.div`
 
 const NewsCard = () => {
   return (
-    <Card className="mb-2 d-none d-lg-flex">
+    <Card className="mb-2">
       <Card.Body>
         <ul>
           <StyledLi>
