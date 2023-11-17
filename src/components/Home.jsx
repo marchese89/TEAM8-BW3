@@ -105,6 +105,9 @@ const Home = () => {
   const my_profileFromReduxStore = useSelector(
     (state) => state.profile.my_profile
   );
+
+  const usersFromReduxStore = useSelector((state) => state.profile.profiles);
+
   const [showDrop, setshowDrop] = useState(false);
   const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
 
@@ -270,6 +273,15 @@ const Home = () => {
     fetchData();
   }, []);
 
+  function presente(utente, array) {
+    array.forEach((element) => {
+      if (utente._id === element._id) {
+        return true;
+      }
+    });
+    return false;
+  }
+
   return (
     <>
       <ProfileStyled>
@@ -335,7 +347,9 @@ const Home = () => {
                           width={50 + "px"}
                           height={50 + "px"}
                           onClick={() => {
-                            navigate("/profile/" + post.user._id);
+                            if (presente(post.user, usersFromReduxStore)) {
+                              navigate("/profile/" + post.user._id);
+                            }
                           }}
                         />{" "}
                         {post.username}
