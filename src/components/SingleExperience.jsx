@@ -31,7 +31,9 @@ export default function SingleExperience({ handleShow, exp }) {
           <div>{exp.company}</div>
           <div>
             {format(new Date(exp.startDate), "MMM yyyy", { locale: it })} -{" "}
-            {format(new Date(exp.endDate), "MMM yyyy", { locale: it })} -{" "}
+            {exp.endDate !== undefined
+              ? format(new Date(exp.endDate), "MMM yyyy", { locale: it })
+              : "presente"}{" "}
             {Math.floor(
               differenceInMonths(
                 new Date(exp.endDate),
@@ -39,24 +41,24 @@ export default function SingleExperience({ handleShow, exp }) {
               ) / 12
             ) > 0
               ? Math.floor(
-                differenceInMonths(
-                  new Date(exp.endDate),
-                  new Date(exp.startDate)
-                ) / 12
-              ) + " anni e"
+                  differenceInMonths(
+                    new Date(exp.endDate),
+                    new Date(exp.startDate)
+                  ) / 12
+                ) + " anni e"
               : ""}{" "}
             {differenceInMonths(
               new Date(exp.endDate),
               new Date(exp.startDate)
             ) %
               12 >
-              0
+            0
               ? (differenceInMonths(
-                new Date(exp.endDate),
-                new Date(exp.startDate)
-              ) %
-                12) +
-              " mesi"
+                  new Date(exp.endDate),
+                  new Date(exp.startDate)
+                ) %
+                  12) +
+                " mesi"
               : ""}
           </div>
         </div>

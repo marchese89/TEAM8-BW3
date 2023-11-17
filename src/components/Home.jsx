@@ -7,7 +7,6 @@ import {
   Col,
   Container,
   Form,
-  FormControl,
   Image,
   InputGroup,
   Modal,
@@ -87,8 +86,8 @@ const ProfileStyled = styled.div`
       padding: 0;
     }
   }
-  .hover:hover{
-    cursor:pointer;
+  .hover:hover {
+    cursor: pointer;
   }
 `;
 
@@ -108,6 +107,10 @@ const Home = () => {
   );
   const [showDrop, setshowDrop] = useState(false);
   const [selectedPostIdDrop, setSelectedPostIdDrop] = useState();
+
+  const recently_visitedFromReduxStore = useSelector(
+    (state) => state.profile.recently_visited
+  );
 
   const fetchData = async (text, file) => {
     try {
@@ -214,7 +217,6 @@ const Home = () => {
       });
   }
 
-
   function uploadPostImage(idPost) {
     if (selectedFile) {
       const formData = new FormData();
@@ -312,10 +314,11 @@ const Home = () => {
                     // lg={{ offset: 1 }}
                   >
                     {/* Avatar + Nome Utente  */}
-                    <p  onClick={() => {
-                      console.log(post.user._id);
-                      navigate("/profile/" + post.user._id);
-                       }}
+                    <p
+                      onClick={() => {
+                        console.log(post.user._id);
+                        // navigate("/profile/" + post.user._id);
+                      }}
                       style={{
                         fontSize: 1 + "em",
                         fontWeight: "bold",
@@ -331,6 +334,9 @@ const Home = () => {
                           alt="avatar"
                           width={50 + "px"}
                           height={50 + "px"}
+                          onClick={() => {
+                            navigate("/profile/" + post.user._id);
+                          }}
                         />{" "}
                         {post.username}
                       </div>
@@ -467,10 +473,13 @@ const Home = () => {
               <Card>
                 <Card.Body className="">
                   <h6>Altri profili consultati</h6>
+                  {recently_visitedFromReduxStore.map((user, i) => {
+                    return <RecentProfile user={user} key={i} />;
+                  })}
+                  {/* <RecentProfile />
                   <RecentProfile />
                   <RecentProfile />
-                  <RecentProfile />
-                  <RecentProfile />
+                  <RecentProfile /> */}
                 </Card.Body>
               </Card>
             </Col>

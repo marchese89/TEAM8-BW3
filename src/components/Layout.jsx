@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Container } from "react-bootstrap";
 import { allProfilesAction, myProfileAction } from "../redux/actions";
 // import Experience from "./Experience";
 // import ExperienceModal from "./ExperienceModal";
@@ -29,9 +28,7 @@ const Layout = () => {
 
   return (
     <>
-      <Container fluid className="p-0">
-        <NavBar />
-      </Container>
+      <NavBar />
       <StyledLayout>
         <Outlet />
       </StyledLayout>
