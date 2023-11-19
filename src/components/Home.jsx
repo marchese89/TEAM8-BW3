@@ -29,7 +29,11 @@ import AddComment from "./AddComment";
 import NewPost from "./AddNewPost";
 import CardLeft from "./CardHomeRight";
 import NewsCard from "./Notizie";
-import { token, userProfileAction } from "../redux/actions";
+import {
+  getAllCommentsAction,
+  token,
+  userProfileAction,
+} from "../redux/actions";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import AllComments from "./AllComments";
@@ -115,6 +119,12 @@ const Home = () => {
   const recently_visitedFromReduxStore = useSelector(
     (state) => state.profile.recently_visited
   );
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    //prendiamo tutti i commenti
+    dispatch(getAllCommentsAction());
+  }, []);
 
   const fetchData = async (text, file) => {
     try {
@@ -327,7 +337,7 @@ const Home = () => {
                     // lg={{ offset: 1 }}
                   >
                     {/* Avatar + Nome Utente  */}
-                    <p
+                    <div
                       onClick={() => {
                         console.log(post.user._id);
                         // navigate("/profile/" + post.user._id);
@@ -402,7 +412,7 @@ const Home = () => {
                           </div>
                         )}
                       </div>
-                    </p>
+                    </div>
 
                     {/* Data di creazione del post con funzione per trasformare la stringa della data */}
                     <p style={{ fontSize: 0.7 + "em" }}>
@@ -427,7 +437,6 @@ const Home = () => {
                       Aggiornamento: {formatData(post.updatedAt)}
                     </p>
                     <hr />
-
                     <div className="d-flex flex-nowrap justify-content-center">
                       {/* Like  */}
                       <p
@@ -477,13 +486,13 @@ const Home = () => {
                     {post._id === selectedPostId && (
                       <>
                         <AddComment
-                          author={post.user.username}
                           postId={post._id}
+                          toggleCommentArea={toggleCommentArea}
                         />
                         {/* selectedPostId */}
                       </>
                     )}
-                    <AllComments author={post.user.username} />
+                    <AllComments postId={post._id} />
                   </Col>
                 </Row>
               ))}

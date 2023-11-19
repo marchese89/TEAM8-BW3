@@ -15,7 +15,7 @@ export const JOBS_LIST = "JOBS_LIST";
 export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
 export const SEARCH_BY_COMPANY = "SEARCH_BY_COMPANY";
 export const SEARCH_BY_CATEGORY = "SEARCH_BY_CATEGORY";
-
+export const GET_COMMENTS = "GET_COMMENTS";
 export const QUERY = "QUERY";
 export const COMPANY = "COMPANY";
 export const CATEGORY = "CATEGORY";
@@ -392,5 +392,31 @@ export const visitUserAction = (idUser) => {
   return {
     type: VISIT_USER,
     payload: idUser,
+  };
+};
+
+export const getAllCommentsAction = () => {
+  return async (dispatch) => {
+    fetch("https://striveschool-api.herokuapp.com/api/comments", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        // console.log("commenti dal reducer", data);
+        dispatch({
+          type: GET_COMMENTS,
+          payload: data,
+        });
+      })
+      .catch((err) => console.log("ERRORE!", err));
   };
 };
