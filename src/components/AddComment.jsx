@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { getAllCommentsAction } from "../redux/actions";
+import { getAllCommentsAction, token } from "../redux/actions";
 
 const ProfileStyled = styled.div`
   .commento {
@@ -46,8 +46,7 @@ const AddComment = ({ postId, toggleCommentArea }) => {
         {
           method: "POST",
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNDFhMmRkOTllZjAwMTlhMDkyZmUiLCJpYXQiOjE2OTk5NTUxMDYsImV4cCI6MTcwMTE2NDcwNn0.f58KFLVbD0YqxkSlMLUZlkjHQLFooaODPwT0pwQg4jQ",
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ ...comment, elementId: postId }),

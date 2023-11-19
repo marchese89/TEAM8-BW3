@@ -31,6 +31,7 @@ import CardLeft from "./CardHomeRight";
 import NewsCard from "./Notizie";
 import {
   getAllCommentsAction,
+  postListAction,
   token,
   userProfileAction,
 } from "../redux/actions";
@@ -97,7 +98,6 @@ const ProfileStyled = styled.div`
 `;
 
 const Home = () => {
-  const [postData, setPostData] = useState([]);
   const [selectedPostId, setSelectedPostId] = useState(false);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -120,41 +120,13 @@ const Home = () => {
     (state) => state.profile.recently_visited
   );
 
+  const postsFromReduxStore = useSelector((state) => state.posts.all_posts);
+
   const dispatch = useDispatch();
   useEffect(() => {
     //prendiamo tutti i commenti
     dispatch(getAllCommentsAction());
   }, []);
-
-  const fetchData = async (text, file) => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/",
-        {
-          method: "GET",
-
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMmVjZWM1NWU3ZTAwMThmODNjODUiLCJpYXQiOjE2OTk4ODQ3NTAsImV4cCI6MTcwMTA5NDM1MH0.JwqWWy93veTxrqjHXsB3_IFB9m9gO6IYG7BOf9uxVKQ",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Errore nella richiesta GET");
-      }
-
-      const data = await response.json();
-      setPostData(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Errore durante la richiesta GET:", error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const navigate = useNavigate();
 
@@ -179,7 +151,7 @@ const Home = () => {
       }
 
       // Dopo la creazione del post, rifetch dei dati
-      fetchData();
+      dispatch(postListAction());
       setShowModal(false);
     } catch (error) {
       console.error("Errore durante la creazione del post:", error.message);
@@ -196,7 +168,7 @@ const Home = () => {
     })
       .then((response) => {
         if (response.ok) {
-          fetchData();
+          dispatch(postListAction());
         } else {
           throw new Error("Errore nella delete");
         }
@@ -220,7 +192,7 @@ const Home = () => {
           if (selectedFile !== null) {
             uploadPostImage(idPost);
           } else {
-            fetchData();
+            dispatch(postListAction());
           }
         } else {
           throw new Error("Errore nella delete");
@@ -244,7 +216,7 @@ const Home = () => {
       })
         .then((response) => {
           if (response.ok) {
-            fetchData();
+            dispatch(postListAction());
           } else {
             console.log("upload NO");
             throw new Error("errore nell'upload'");
@@ -281,7 +253,7 @@ const Home = () => {
     setSelectedFile(file);
   };
   useEffect(() => {
-    fetchData();
+    dispatch(postListAction());
   }, []);
 
   function presente(utente, array) {
@@ -330,7 +302,7 @@ const Home = () => {
                 </Col>
               </Row>
               {/* Map dei post  */}
-              {postData.map((post) => (
+              {postsFromReduxStore.map((post) => (
                 <Row className="justify-content-center " key={post._id}>
                   <Col
                     className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2"
@@ -422,7 +394,7 @@ const Home = () => {
                     {/* Contenuto del post  */}
                     <div className="d-flex flex-wrap">
                       <p
-                        className="d-flex flex-wrap"
+                        className="d-flex flex-wrap text-break"
                         style={{ fontSize: 1 + "em" }}
                       >
                         {post.text}
