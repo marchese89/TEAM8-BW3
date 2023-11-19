@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Row, Spinner } from "react-bootstrap";
-import { Trash } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getAllCommentsAction, token } from "../redux/actions";
+import SingleComment from "./SingleComment";
 
 const StyledAllComments = styled.div`
   .trash {
@@ -16,11 +15,17 @@ const StyledAllComments = styled.div`
   .comment {
     padding: 1em;
   }
+  .pencil {
+    color: grey;
+  }
+  .pencil:hover {
+    cursor: pointer;
+    color: black;
+  }
 `;
 
 const AllComments = ({ postId }) => {
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(false);
   const commentsFromReduxStore = useSelector(
     (state) => state.comments.all_comments
   );
@@ -59,32 +64,17 @@ const AllComments = ({ postId }) => {
 
   return (
     <>
-      {loading && (
-        <Row className="mb-2 text-center justify-content-center">
-          <Spinner animation="border " variant="primary" />
-        </Row>
-      )}
       <StyledAllComments>
-        {comments.map((comment) => (
-          <div
-            key={comment._id}
-            className="d-flex justify-content-between comment"
-          >
-            <div className="text-break">{comment.comment}</div>
-            <div>
-              {comment.author === my_profileFromReduxStore.email ? (
-                <Trash
-                  className="trash"
-                  onClick={() => {
-                    deteteComment(comment._id);
-                  }}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-        ))}
+        {comments.map((comment) => {
+          return (
+            <SingleComment
+              comment={comment}
+              key={comment._id}
+              my_profileFromReduxStore={my_profileFromReduxStore}
+              deteteComment={deteteComment}
+            />
+          );
+        })}
       </StyledAllComments>
     </>
   );

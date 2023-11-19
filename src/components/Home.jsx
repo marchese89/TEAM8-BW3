@@ -302,172 +302,176 @@ const Home = () => {
                 </Col>
               </Row>
               {/* Map dei post  */}
-              {postsFromReduxStore.map((post) => (
-                <Row className="justify-content-center " key={post._id}>
-                  <Col
-                    className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2"
-                    // lg={{ offset: 1 }}
-                  >
-                    {/* Avatar + Nome Utente  */}
-                    <div
-                      onClick={() => {
-                        console.log(post.user._id);
-                        // navigate("/profile/" + post.user._id);
-                      }}
-                      style={{
-                        fontSize: 1 + "em",
-                        fontWeight: "bold",
-                        margin: 0.2 + "em",
-                      }}
-                      className="d-flex hover justify-content-between"
+              {postsFromReduxStore
+                .slice()
+                .reverse()
+                .map((post) => (
+                  <Row className="justify-content-center " key={post._id}>
+                    <Col
+                      className=" d-sm border mb-2 mt-2 bg-white rounded  pt-2"
+                      // lg={{ offset: 1 }}
                     >
-                      <div>
-                        {" "}
-                        <img
-                          src={post.user.image}
-                          className="rounded-circle"
-                          alt="avatar"
-                          width={50 + "px"}
-                          height={50 + "px"}
-                          onClick={() => {
-                            if (presente(post.user, usersFromReduxStore)) {
-                              navigate("/profile/" + post.user._id);
-                            }
-                          }}
-                        />{" "}
-                        {post.username}
-                      </div>
-                      <div className="position-relative">
-                        <ThreeDots
-                          className={
-                            my_profileFromReduxStore.username === post.username
-                              ? "three-dots"
-                              : "three-dots d-none"
-                          }
-                          onClick={() => {
-                            setshowDrop(!showDrop);
-                            setSelectedPostIdDrop(post._id);
-                          }}
-                        />
-                        {showDrop && selectedPostIdDrop === post._id && (
-                          <div
+                      {/* Avatar + Nome Utente  */}
+                      <div
+                        onClick={() => {
+                          console.log(post.user._id);
+                          // navigate("/profile/" + post.user._id);
+                        }}
+                        style={{
+                          fontSize: 1 + "em",
+                          fontWeight: "bold",
+                          margin: 0.2 + "em",
+                        }}
+                        className="d-flex hover justify-content-between"
+                      >
+                        <div>
+                          {" "}
+                          <img
+                            src={post.user.image}
+                            className="rounded-circle"
+                            alt="avatar"
+                            width={50 + "px"}
+                            height={50 + "px"}
+                            onClick={() => {
+                              if (presente(post.user, usersFromReduxStore)) {
+                                navigate("/profile/" + post.user._id);
+                              }
+                            }}
+                          />{" "}
+                          {post.username}
+                        </div>
+                        <div className="position-relative">
+                          <ThreeDots
                             className={
                               my_profileFromReduxStore.username ===
                               post.username
-                                ? "drop-down position-absolute"
-                                : "drop-down position-absolute d-none"
+                                ? "three-dots"
+                                : "three-dots d-none"
                             }
-                          >
-                            <ul className="list-unstyled d-flex flex-column mb-0">
-                              <li
-                                onClick={() => {
-                                  // setshowDrop(true);
-                                  setShowModPost(true);
-                                  setshowDrop(false);
-                                  setPost(post);
-                                  setPostText(post.text);
-                                  // setShowAddExperience(true);
-                                }}
-                              >
-                                <PencilFill className="me-2" />
-                                Modifica Post
-                              </li>
-                              <li
-                                onClick={() => {
-                                  deletePost(post._id);
-                                }}
-                              >
-                                <Trash3Fill className="me-2" />
-                                Elimina post
-                              </li>
-                            </ul>
-                          </div>
-                        )}
+                            onClick={() => {
+                              setshowDrop(!showDrop);
+                              setSelectedPostIdDrop(post._id);
+                            }}
+                          />
+                          {showDrop && selectedPostIdDrop === post._id && (
+                            <div
+                              className={
+                                my_profileFromReduxStore.username ===
+                                post.username
+                                  ? "drop-down position-absolute"
+                                  : "drop-down position-absolute d-none"
+                              }
+                            >
+                              <ul className="list-unstyled d-flex flex-column mb-0">
+                                <li
+                                  onClick={() => {
+                                    // setshowDrop(true);
+                                    setShowModPost(true);
+                                    setshowDrop(false);
+                                    setPost(post);
+                                    setPostText(post.text);
+                                    // setShowAddExperience(true);
+                                  }}
+                                >
+                                  <PencilFill className="me-2" />
+                                  Modifica Post
+                                </li>
+                                <li
+                                  onClick={() => {
+                                    deletePost(post._id);
+                                  }}
+                                >
+                                  <Trash3Fill className="me-2" />
+                                  Elimina post
+                                </li>
+                              </ul>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Data di creazione del post con funzione per trasformare la stringa della data */}
-                    <p style={{ fontSize: 0.7 + "em" }}>
-                      Creazione: {formatData(post.createdAt)}
-                    </p>
+                      {/* Data di creazione del post con funzione per trasformare la stringa della data */}
+                      <p style={{ fontSize: 0.7 + "em" }}>
+                        Creazione: {formatData(post.createdAt)}
+                      </p>
 
-                    {/* Contenuto del post  */}
-                    <div className="d-flex flex-wrap">
-                      <p
-                        className="d-flex flex-wrap text-break"
-                        style={{ fontSize: 1 + "em" }}
-                      >
-                        {post.text}
-                      </p>
-                    </div>
-                    <div className="foto">
-                      <img src={post.image} alt="" />
-                    </div>
+                      {/* Contenuto del post  */}
+                      <div className="d-flex flex-wrap">
+                        <p
+                          className="d-flex flex-wrap text-break"
+                          style={{ fontSize: 1 + "em" }}
+                        >
+                          {post.text}
+                        </p>
+                      </div>
+                      <div className="foto">
+                        <img src={post.image} alt="" />
+                      </div>
 
-                    {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
-                    <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
-                      Aggiornamento: {formatData(post.updatedAt)}
-                    </p>
-                    <hr />
-                    <div className="d-flex flex-nowrap justify-content-center">
-                      {/* Like  */}
-                      <p
-                        onClick={() => setLiked(!liked)}
-                        // *DA FIXARE* Al click pollice colorato
-                        className="d-none rounded d-lg-block align-items-start align-text-center me-3 interazioni p-1 pb-1"
-                      >
-                        <HandThumbsUp className="align-center me-1" />
-                        Consiglia
-                      </p>{" "}
-                      {/* Stato per mettere like */}
-                      <p className="d-lg-none ms-3 me-4">
-                        <HandThumbsUp className=" align-center me-1" />
+                      {/* Data di aggiornamento del post con funzione per trasformare la stringa della data */}
+                      <p style={{ fontSize: 0.7 + "em", margin: 0.2 + "em" }}>
+                        Aggiornamento: {formatData(post.updatedAt)}
                       </p>
-                      {/* Commenta  */}
-                      <p
-                        onClick={() => toggleCommentArea(post._id)}
-                        className="d-none rounded d-lg-block align-items-start align-text-center me-4 interazioni p-1 pb-1"
-                      >
-                        <ChatText className="align-center me-1" />
-                        Commenta
-                      </p>
-                      <p
-                        onClick={() => toggleCommentArea(post._id)}
-                        className="d-lg-none me-4 "
-                      >
-                        <ChatText className=" align-center me-1" />
-                      </p>
-                      {/* Condividi  */}
-                      <p className="d-none rounded d-lg-block align-items-start align-text-center me-3 interazioni p-1 pb-1 ">
-                        <Share className=" align-center me-1" />
-                        Diffondi il post
-                      </p>
-                      <p className="d-lg-none me-4 ">
-                        <Share className=" align-center me-1" />
-                      </p>
-                      {/* Invia  */}
-                      <p className="d-none rounded d-lg-block align-items-start align-text-center interazioni p-1 pb-1">
-                        <SendFill className="align-center me-1" />
-                        Invia
-                      </p>
-                      <p className="d-lg-none me-4 ">
-                        <SendFill className=" align-center me-1" />
-                      </p>
-                      {/* // Mostra il componente CommentArea selezionato */}
-                    </div>
-                    {post._id === selectedPostId && (
-                      <>
-                        <AddComment
-                          postId={post._id}
-                          toggleCommentArea={toggleCommentArea}
-                        />
-                        {/* selectedPostId */}
-                      </>
-                    )}
-                    <AllComments postId={post._id} />
-                  </Col>
-                </Row>
-              ))}
+                      <hr />
+                      <div className="d-flex flex-nowrap justify-content-center">
+                        {/* Like  */}
+                        <p
+                          onClick={() => setLiked(!liked)}
+                          // *DA FIXARE* Al click pollice colorato
+                          className="d-none rounded d-lg-block align-items-start align-text-center me-3 interazioni p-1 pb-1"
+                        >
+                          <HandThumbsUp className="align-center me-1" />
+                          Consiglia
+                        </p>{" "}
+                        {/* Stato per mettere like */}
+                        <p className="d-lg-none ms-3 me-4">
+                          <HandThumbsUp className=" align-center me-1" />
+                        </p>
+                        {/* Commenta  */}
+                        <p
+                          onClick={() => toggleCommentArea(post._id)}
+                          className="d-none rounded d-lg-block align-items-start align-text-center me-4 interazioni p-1 pb-1"
+                        >
+                          <ChatText className="align-center me-1" />
+                          Commenta
+                        </p>
+                        <p
+                          onClick={() => toggleCommentArea(post._id)}
+                          className="d-lg-none me-4 "
+                        >
+                          <ChatText className=" align-center me-1" />
+                        </p>
+                        {/* Condividi  */}
+                        <p className="d-none rounded d-lg-block align-items-start align-text-center me-3 interazioni p-1 pb-1 ">
+                          <Share className=" align-center me-1" />
+                          Diffondi il post
+                        </p>
+                        <p className="d-lg-none me-4 ">
+                          <Share className=" align-center me-1" />
+                        </p>
+                        {/* Invia  */}
+                        <p className="d-none rounded d-lg-block align-items-start align-text-center interazioni p-1 pb-1">
+                          <SendFill className="align-center me-1" />
+                          Invia
+                        </p>
+                        <p className="d-lg-none me-4 ">
+                          <SendFill className=" align-center me-1" />
+                        </p>
+                        {/* // Mostra il componente CommentArea selezionato */}
+                      </div>
+                      {post._id === selectedPostId && (
+                        <>
+                          <AddComment
+                            postId={post._id}
+                            toggleCommentArea={toggleCommentArea}
+                          />
+                          {/* selectedPostId */}
+                        </>
+                      )}
+                      <AllComments postId={post._id} />
+                    </Col>
+                  </Row>
+                ))}
             </Col>
             <Col className="mt-2 d-none d-lg-block">
               <NewsCard />
