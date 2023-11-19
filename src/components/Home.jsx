@@ -11,7 +11,6 @@ import {
   InputGroup,
   Modal,
   Row,
-  Spinner,
 } from "react-bootstrap";
 import styled from "styled-components";
 import {
@@ -22,21 +21,14 @@ import {
   ThreeDots,
   Trash3Fill,
   PencilFill,
-  CaretDown,
 } from "react-bootstrap-icons";
 import RecentProfile from "./recentlyProfile";
 import AddComment from "./AddComment";
 import NewPost from "./AddNewPost";
 import CardLeft from "./CardHomeRight";
 import NewsCard from "./Notizie";
-import {
-  getAllCommentsAction,
-  postListAction,
-  token,
-  userProfileAction,
-} from "../redux/actions";
+import { getAllCommentsAction, postListAction, token } from "../redux/actions";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import AllComments from "./AllComments";
 
 const ProfileStyled = styled.div`
@@ -100,7 +92,7 @@ const ProfileStyled = styled.div`
 const Home = () => {
   const [selectedPostId, setSelectedPostId] = useState(false);
   const [liked, setLiked] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModPost, setShowModPost] = useState(false);
@@ -126,6 +118,7 @@ const Home = () => {
   useEffect(() => {
     //prendiamo tutti i commenti
     dispatch(getAllCommentsAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useNavigate();
@@ -254,6 +247,7 @@ const Home = () => {
   };
   useEffect(() => {
     dispatch(postListAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function presente(utente, array) {
@@ -268,11 +262,11 @@ const Home = () => {
   return (
     <>
       <ProfileStyled>
-        {loading && (
+        {/* {loading && (
           <Row className="py-5 my-5 d-flex justify-content-center ">
             <Spinner animation="border " variant="primary" />
           </Row>
-        )}
+        )} */}
         {/* Contenitore  */}
         <Container className=" margine mt-5">
           {/* Colonna laterale profilo  */}
