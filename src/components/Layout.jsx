@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { allProfilesAction, myProfileAction } from "../redux/actions";
+
 // import Experience from "./Experience";
 // import ExperienceModal from "./ExperienceModal";
 

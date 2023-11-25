@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { allProfilesAction } from "../redux/actions";
+import { Container, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+
 import User from "./User";
 const RetePage = () => {
   // const dispatch = useDispatch();
@@ -14,20 +13,14 @@ const RetePage = () => {
 
   return (
     <>
-      <Container className="">
+      <Container>
         <Row className="justify-content-center d-flex w-100">
           {usersFromRedux.map((user) => {
             return (
               <>
-                <Col xs={3}></Col>
-                <Col
-                  key={user._id}
-                  xs={6}
-                  className="justify-content-center  mx-auto"
-                >
+                <Container key={user._id} className="flex-row">
                   <User user={user} />
-                </Col>
-                <Col xs={3}></Col>
+                </Container>
               </>
             );
           })}

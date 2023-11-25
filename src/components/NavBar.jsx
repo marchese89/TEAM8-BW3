@@ -132,7 +132,7 @@ function NavBar() {
     <StyledDiv>
       <Navbar
         expand="lg"
-        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3 nav-bar"
+        className="bg-body-tertiary justify-content-center position-fixed top-0 w-100 z-3  nav-bar"
       >
         <Navbar.Brand>
           <img

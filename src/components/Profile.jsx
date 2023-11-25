@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import astroCat from "../assets/astrocat.jpg";
@@ -42,7 +42,6 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -209,7 +208,6 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -377,7 +375,8 @@ const ProfileStyled = styled.div`
     }
   }
 
-  ${"" /* @media screen and (min-width: 768px) and (max-width: 800px) {
+  ${
+    "" /* @media screen and (min-width: 768px) and (max-width: 800px) {
     .avatar {
       position: absolute;
       border: 5px solid #fff;
@@ -398,7 +397,6 @@ const ProfileStyled = styled.div`
     }
 
     .containermain {
-      
       display: flex;
       flex-direction: column;
       border: 1px solid #dbdbdb;
@@ -755,13 +753,12 @@ export default function Profile() {
               <div className="positionrelative">
                 <div className="containercover">
                   <Image src={astroCat} className="cover" />
-
                 </div>
                 <Image
                   src={profileImage}
                   className="avatar"
                   style={!differentUser ? { cursor: "pointer" } : {}}
-                  onClick={!differentUser ? openModal : () => { }}
+                  onClick={!differentUser ? openModal : () => {}}
                 />
               </div>
 
@@ -783,6 +780,7 @@ export default function Profile() {
                         fluid
                       />
                     )}
+
                     <Form.Control type="file" onChange={handleImage} />
                   </div>
                   {/* <input type="file" onChange={handleImage} accept="image/*" /> */}
