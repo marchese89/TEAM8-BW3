@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {
+  Button,
   Col,
   Container,
   FormControl,
@@ -9,6 +10,9 @@ import {
 } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
 import { useState } from "react";
+import React from "react";
+import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 const StyledP = styled.p`
   font-size: 0.8em;
@@ -29,6 +33,14 @@ const ModalLanguage = () => {
   const [secondCol, setSecondCol] = useState(false);
   const [selected, setSelected] = useState(true);
   const [showChange, setShowChange] = useState(false);
+  const [lan, setLanSelected] = useState("");
+
+  const option = [
+    { value: "italiano", label: "Italiano" },
+    { value: "ceco", label: "Ceco" },
+    { value: "serbo", label: "Serbo" },
+    { value: "inglese", label: "Inglese" },
+  ];
 
   const showLan = () => {
     setShow(false);
@@ -38,6 +50,12 @@ const ModalLanguage = () => {
   const hidePage = () => {
     setSelected(false);
     setShowChange(true);
+  };
+
+  const onLanSub = () => {
+    setLanSelected("");
+    setShowChange(false);
+    setSelected(true);
   };
 
   return (
@@ -113,23 +131,24 @@ const ModalLanguage = () => {
               <Row className={"d-flex"}>
                 {selected && (
                   <Col xl={6}>
-                    <select
-                      onChange={hidePage}
-                      className="form-select"
+                    <Select
+                      options={option}
+                      onChange={(e) => {
+                        setLanSelected(e.value);
+                        hidePage();
+                      }}
                       aria-label="Default select example"
                     >
-                      <option>Choose a Language</option>
-                      <option value="italiano">Italiano</option>
-                      <option value="ceco">Ceco</option>
-                      <option value="Inglese">Inglese</option>
-                      <option value="Serbo">Serbo</option>
-                    </select>
+                      {option.map((op) => {
+                        return <option value={op.value}>{op.label}</option>;
+                      })}
+                    </Select>
                   </Col>
                 )}
                 {showChange && (
                   <Modal.Body className={"col-12"}>
                     <h5 className={"fs-6"}>
-                      Inizia a compilare il tuo profilo in Italiano
+                      Inizia a compilare il tuo profilo in {lan}
                     </h5>
                     <Col xl={12}>
                       <FormGroup className={"d-flex"}>
@@ -138,6 +157,17 @@ const ModalLanguage = () => {
                       </FormGroup>
                       <div className={"mt-3"}>
                         <FormControl as={"textarea"} rows={3} />
+                      </div>
+                      <div className="d-flex mt-3">
+                        <Button
+                          type="button"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                          onClick={onLanSub}
+                          className="rounded-pill ms-auto mx-3 fw-bold"
+                        >
+                          Salva Modifiche
+                        </Button>
                       </div>
                     </Col>
                   </Modal.Body>
